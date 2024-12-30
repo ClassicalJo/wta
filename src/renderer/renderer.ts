@@ -25,8 +25,16 @@
  *  });
  * ```
  */
+import { MainMessages } from '@/shared/messages/main-messages.enum';
+
 import './index.css';
 
-console.log(
-  '👋 This message is being logged by "renderer.ts", included via Vite',
-);
+const $button = document.querySelector('#button');
+
+$button?.addEventListener('click', () => {
+  window.electron.rendererMessage('Hello from renderer');
+});
+
+window.electron.onMainMessage(MainMessages.MAIN_MESSAGE, (payload) => {
+  console.log(payload);
+});
