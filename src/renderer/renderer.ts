@@ -27,6 +27,8 @@
  */
 import './index.css';
 
-console.log(
-  '👋 This message is being logged by "renderer.ts", included via Vite',
-);
+const $button = document.querySelector('#button');
+
+$button?.addEventListener('click', () => {
+  window.electron.rendererMessage('Hello from renderer');
+});
