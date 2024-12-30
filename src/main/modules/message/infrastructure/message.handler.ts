@@ -1,18 +1,11 @@
-import { RendererMessages } from '@/shared/messages/renderer-messages.enum';
-import { IRendererPayloads } from '@/shared/payloads/renderer-payloads.interface';
-
+import { IEventHandler } from '../../common/application/interfaces/event-handler.interface';
+import { IUseCase } from '../../common/application/interfaces/use-case.interface';
 import { IMessageService } from '../application/interfaces/message-service.interface';
+import { HandleRendererMessageUseCase } from '../application/use-cases/handle-renderer-message.use-case';
 
-export class MessageHandler {
+export class MessageHandler implements IEventHandler {
+  useCases: IUseCase[];
   constructor(public messagingService: IMessageService) {
-    this.messagingService.onMessage(
-      RendererMessages.RENDERER_MESSAGE,
-      this.onRendererMessage.bind(this),
-    );
-  }
-  onRendererMessage(
-    data: IRendererPayloads[RendererMessages.RENDERER_MESSAGE],
-  ): void {
-    console.log(RendererMessages.RENDERER_MESSAGE, data);
+    this.useCases = [new HandleRendererMessageUseCase(messagingService)];
   }
 }

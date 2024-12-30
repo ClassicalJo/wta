@@ -3,11 +3,7 @@ import { RendererMessages } from '@/shared/messages/renderer-messages.enum';
 import { IMainPayloads } from '@/shared/payloads/main-payloads.interface';
 import { IRendererPayloads } from '@/shared/payloads/renderer-payloads.interface';
 
-export interface IMessageAdapter {
-  sendMessage<T extends MainMessages>(
-    message: T,
-    payload?: IMainPayloads[T],
-  ): void;
+export interface IHandlerAdapter {
   onMessage<T extends RendererMessages>(
     type: T,
     callback: (payload: IRendererPayloads[T]) => void,
