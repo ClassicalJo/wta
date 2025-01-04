@@ -1,6 +1,7 @@
 {
     "singleQuote": true,
     "trailingComma": "all",
+    "jsxSingleQuote": true,
     "tabWidth": 2,
     "printWidth": 80,
     "endOfLine": "lf",
@@ -15,6 +16,7 @@
     "importOrderSeparation": true,
     "importOrderSortSpecifiers": true,
     "importOrderParserPlugins": [
+        "jsx",
         "typescript",
         "classProperties",
         "[\"decorators-legacy\", { \"decoratorsBeforeExport\": true }]"
