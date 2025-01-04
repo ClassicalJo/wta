@@ -1,0 +1,7 @@
+{
+  "editor.defaultFormatter": null,
+  "editor.formatOnPaste": false,
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+}
