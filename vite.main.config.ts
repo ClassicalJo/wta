@@ -10,4 +10,9 @@ export default defineConfig({
       '@/renderer': path.resolve(__dirname, './src/renderer'),
     },
   },
+  build: {
+    rollupOptions: {
+      external: ['sqlite3', 'typeorm'],
+    },
+  },
 });

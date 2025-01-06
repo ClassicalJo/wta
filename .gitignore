@@ -90,3 +90,7 @@ typings/
 
 # Electron-Forge
 out/
+
+#Databases
+wta.db
+reources/wta.db

@@ -1,3 +1,4 @@
 export enum MainMessages {
   MAIN_MESSAGE = 'MAIN_MESSAGE',
+  MAIN_EVENT_ERROR = 'MAIN_EVENT_ERROR',
 }
