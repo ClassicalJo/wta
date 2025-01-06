@@ -1,9 +1,7 @@
-import { OrmConfig } from '@/main/config/orm.config';
+import { DataSource } from 'typeorm';
 
 export class DatabaseModule {
-  constructor(public ormConfig: OrmConfig) {
-    ormConfig.dataSource
-      .initialize()
-      .then(() => console.log('Database connected!'));
+  constructor(public dataSource: DataSource) {
+    this.dataSource.initialize().then(() => console.log('Database connected!'));
   }
 }

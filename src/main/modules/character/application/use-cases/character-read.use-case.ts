@@ -3,12 +3,12 @@ import { IMessageService } from '@/main/modules/message/application/interfaces/m
 import { NotFoundException } from '@/shared/exceptions/not-found.exception';
 import { RendererMessages } from '@/shared/messages/renderer-messages.enum';
 
-import { CharacterRepository } from '../../infrastructure/database/character.repository';
+import { ICharacterRepository } from '../repository/character-repository.interface';
 
 export class CharacterReadUseCase implements IUseCase {
   constructor(
     public messageService: IMessageService,
-    public repositoryService: CharacterRepository,
+    public repositoryService: ICharacterRepository,
   ) {
     messageService.onMessage(
       RendererMessages.CHARACTER_READ,

@@ -4,12 +4,12 @@ import { NotFoundException } from '@/shared/exceptions/not-found.exception';
 import { RendererMessages } from '@/shared/messages/renderer-messages.enum';
 
 import { Character } from '../../domain/character.entity';
-import { CharacterRepository } from '../../infrastructure/database/character.repository';
+import { ICharacterRepository } from '../repository/character-repository.interface';
 
 export class CharacterUpdateUseCase implements IUseCase {
   constructor(
     public messageService: IMessageService,
-    public repositoryService: CharacterRepository,
+    public repositoryService: ICharacterRepository,
   ) {
     messageService.onMessage(
       RendererMessages.CHARACTER_UPDATE,

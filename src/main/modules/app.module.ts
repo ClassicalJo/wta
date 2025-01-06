@@ -8,9 +8,12 @@ import { MessageModule } from './message/message.module';
 
 export class AppModule {
   constructor(webContents: WebContents) {
-    const ormConfig = new OrmConfig([CharacterSchema]);
+    const databaseProvider = new OrmConfig([CharacterSchema]);
     const messageModule = new MessageModule(webContents);
-    new CharacterModule(ormConfig, messageModule.messageService);
-    new DatabaseModule(ormConfig);
+    new CharacterModule(
+      databaseProvider.dataSource,
+      messageModule.messageService,
+    );
+    new DatabaseModule(databaseProvider.dataSource);
   }
 }
