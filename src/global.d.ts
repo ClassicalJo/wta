@@ -1,3 +1,4 @@
+import { ICharacterExpose } from './main/modules/character/application/ipc/character-expose.interface';
 import { MainMessages } from './shared/messages/main-messages.enum';
 import { IMainPayloads } from './shared/payloads/main-payloads.interface';
 
@@ -10,6 +11,13 @@ declare global {
         type: T,
         callback: (payload: IMainPayloads[T]) => void,
       ) => void;
+      offMainMessage: <T extends MainMessages>(
+        type: T,
+        callback: (payload: IMainPayloads[T]) => void,
+      ) => void;
+      db: {
+        character: ICharacterExpose;
+      };
     };
   }
 }
