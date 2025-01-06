@@ -16,6 +16,8 @@
       "@/main/*": ["src/main/*"],
       "@/renderer/*": ["src/renderer/*"],
       "@/shared/*": ["src/shared/*"]
-    }
+    },
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true
   }
 }

@@ -1,17 +1,17 @@
 import { ipcMain } from 'electron';
 
+import { MainEventHandler } from '@/shared/interfaces/main-event-handler.interface';
 import { RendererMessages } from '@/shared/messages/renderer-messages.enum';
-import { IRendererPayloads } from '@/shared/payloads/renderer-payloads.interface';
 
 import { IHandlerAdapter } from '../../interfaces/message-adapter.interface';
 
 export class IpcService implements IHandlerAdapter {
   onMessage<T extends RendererMessages>(
     type: T,
-    callback: (payload: IRendererPayloads[T]) => void,
+    callback: MainEventHandler<T>,
   ): void {
-    ipcMain.on(type, (_, payload) => {
-      callback(payload);
+    ipcMain.on(type, async (_, payload) => {
+      await callback(payload);
     });
   }
 }
