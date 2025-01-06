@@ -2,7 +2,7 @@ import { BrowserWindow, app } from 'electron';
 import started from 'electron-squirrel-startup';
 import path from 'path';
 
-import { MessageModule } from './modules/message/message.module';
+import { AppModule } from './modules/app.module';
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (started) {
@@ -28,7 +28,7 @@ const createWindow = () => {
     );
   }
 
-  new MessageModule(mainWindow.webContents);
+  new AppModule(mainWindow.webContents);
 
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
