@@ -1,16 +1,15 @@
-import { Repository } from 'typeorm';
+import { DataSource, Repository } from 'typeorm';
 
-import { OrmConfig } from '@/main/config/orm.config';
 import { NotFoundException } from '@/shared/exceptions/not-found.exception';
 
 import { ICharacterRepository } from '../../application/repository/character-repository.interface';
 import { Character } from '../../domain/character.entity';
 import { CharacterSchema } from './character.schema';
 
-export class CharacterRepository implements ICharacterRepository {
+export class CharacterTypeormRepository implements ICharacterRepository {
   repository: Repository<Character>;
-  constructor(public ormConfig: OrmConfig) {
-    this.repository = ormConfig.dataSource.getRepository(CharacterSchema);
+  constructor(public dataSource: DataSource) {
+    this.repository = dataSource.getRepository(CharacterSchema);
   }
 
   async createOne(character: Character): Promise<Character> {
