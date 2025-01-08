@@ -7,6 +7,7 @@ import { ICharacterExpose } from './character-expose.interface';
 
 export const characterExpose: ICharacterExpose = {
   read: (id: number) => ipcRenderer.send(RendererMessages.CHARACTER_READ, id),
+  readAll: () => ipcRenderer.send(RendererMessages.CHARACTER_READ_ALL),
   update: (character: Character) =>
     ipcRenderer.send(RendererMessages.CHARACTER_UPDATE, character),
   create: (character: Character) =>

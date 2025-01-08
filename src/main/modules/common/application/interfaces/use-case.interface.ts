@@ -1,3 +1,3 @@
 export interface IUseCase {
-  execute(...args: unknown[]): void;
+  execute(...args: unknown[]): Promise<void>;
 }
