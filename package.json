@@ -56,9 +56,13 @@
   },
   "license": "MIT",
   "dependencies": {
+    "class-transformer": "^0.5.1",
     "electron-squirrel-startup": "^1.0.1",
+    "formik": "^2.4.6",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-router": "^7.1.1",
+    "react-toastify": "^11.0.2",
     "reflect-metadata": "^0.2.2",
     "sqlite3": "^5.1.7",
     "typeorm": "^0.3.20"

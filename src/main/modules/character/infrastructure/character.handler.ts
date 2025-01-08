@@ -4,6 +4,7 @@ import { IMessageService } from '../../message/application/interfaces/message-se
 import { ICharacterRepository } from '../application/repository/character-repository.interface';
 import { CharacterCreateUseCase } from '../application/use-cases/character-create.use-case';
 import { CharacterDeleteUseCase } from '../application/use-cases/character-delete.use-case';
+import { CharacterReadAllUseCase } from '../application/use-cases/character-read-all.use-case';
 import { CharacterReadUseCase } from '../application/use-cases/character-read.use-case';
 import { CharacterUpdateUseCase } from '../application/use-cases/character-update.use-case';
 
@@ -19,6 +20,7 @@ export class CharacterHandler implements IEventHandler {
       new CharacterReadUseCase(messageService, characterRepository),
       new CharacterUpdateUseCase(messageService, characterRepository),
       new CharacterDeleteUseCase(messageService, characterRepository),
+      new CharacterReadAllUseCase(messageService, characterRepository),
     ];
   }
 }

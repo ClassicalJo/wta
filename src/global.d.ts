@@ -10,7 +10,7 @@ declare global {
       onMainMessage: <T extends MainMessages>(
         type: T,
         callback: (payload: IMainPayloads[T]) => void,
-      ) => void;
+      ) => () => void;
       offMainMessage: <T extends MainMessages>(
         type: T,
         callback: (payload: IMainPayloads[T]) => void,

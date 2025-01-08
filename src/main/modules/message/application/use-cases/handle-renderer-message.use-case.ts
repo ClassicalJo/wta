@@ -12,7 +12,9 @@ export class HandleRendererMessageUseCase {
     );
   }
 
-  execute(data: IRendererPayloads[RendererMessages.RENDERER_MESSAGE]): void {
+  async execute(
+    data: IRendererPayloads[RendererMessages.RENDERER_MESSAGE],
+  ): Promise<void> {
     console.log(data);
     this.messageService.sendMessage(
       MainMessages.MAIN_MESSAGE,
