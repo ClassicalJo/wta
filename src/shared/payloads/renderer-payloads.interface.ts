@@ -8,4 +8,5 @@ export interface IRendererPayloads {
   [RendererMessages.CHARACTER_DELETE]: number;
   [RendererMessages.CHARACTER_UPDATE]: Character;
   [RendererMessages.CHARACTER_READ]: number;
+  [RendererMessages.CHARACTER_READ_ALL]: void;
 }
