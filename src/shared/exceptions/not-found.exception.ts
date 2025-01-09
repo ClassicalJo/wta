@@ -1,8 +1,8 @@
 import { BaseException } from './base.exception';
 
 export class NotFoundException extends BaseException {
-  constructor(message: string) {
-    super(message);
+  constructor(entityName: string, entityId: number) {
+    super(`${entityName} with id ${entityId} not found`);
     this.name = 'NotFoundException';
   }
 }
