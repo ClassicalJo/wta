@@ -15,9 +15,11 @@
     "paths": {
       "@/main/*": ["src/main/*"],
       "@/renderer/*": ["src/renderer/*"],
-      "@/shared/*": ["src/shared/*"]
+      "@/shared/*": ["src/shared/*"],
+      "@/resources/*": ["resources/*"]
     },
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true
-  }
+  },
+  "include": ["src", "src/custom.d.ts"]
 }

@@ -13,7 +13,7 @@ const root = createRoot(container);
 
 root.render(
   <>
-    <ToastContainer />
+    <ToastContainer limit={2} />
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<App />} />

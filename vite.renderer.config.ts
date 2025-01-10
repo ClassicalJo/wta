@@ -8,6 +8,7 @@ export default defineConfig({
       '@/main': path.resolve(__dirname, './src/main'),
       '@/shared': path.resolve(__dirname, './src/shared'),
       '@/renderer': path.resolve(__dirname, './src/renderer'),
+      '@/resources': path.resolve(__dirname, './resources'),
     },
   },
 });
