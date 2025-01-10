@@ -4,7 +4,6 @@ import { NotFoundException } from '@/shared/exceptions/not-found.exception';
 import { MainMessages } from '@/shared/messages/main-messages.enum';
 import { RendererMessages } from '@/shared/messages/renderer-messages.enum';
 
-import { Character } from '../../domain/character.entity';
 import { CharacterSchema } from '../../infrastructure/database/character.schema';
 import { UpdateCharacterDto } from '../dto/update-character.dto';
 import { ICharacterRepository } from '../repository/character-repository.interface';
@@ -28,7 +27,7 @@ export class CharacterUpdateUseCase implements IUseCase {
         characterDto.id,
       );
 
-    const character = new Character({ ...dbCharacter, ...characterDto });
+    const character = { ...dbCharacter, ...characterDto.character };
 
     const updatedCharacter = await this.repositoryService.updateOne(character);
 

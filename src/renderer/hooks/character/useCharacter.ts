@@ -17,14 +17,10 @@ export default function useCharacter(id: number) {
   }, [id]);
 
   const updateCharacter = useCallback(
-    (propertyName: keyof Character, propertyValue: string) => {
-      const updateCharacterDto = new UpdateCharacterDto({
-        ...character,
-        [propertyName]: propertyValue,
-      });
-
-      setCharacter({ ...character, [propertyName]: propertyValue });
-
+    (partial: Omit<Character, 'id'>) => {
+      const updatedCharacter = { ...character, ...partial };
+      const updateCharacterDto = new UpdateCharacterDto(character.id, partial);
+      setCharacter(updatedCharacter);
       characterService.update(updateCharacterDto);
     },
     [character, setCharacter],
@@ -49,10 +45,6 @@ export default function useCharacter(id: number) {
     [setCharacter],
   );
 
-  const handleUpdateCharacterResponse = useCallback(() => {
-    notificationService.success('Character updated');
-  }, []);
-
   const handleDeleteCharacterResponse = useCallback(() => {
     notificationService.success('Character deleted');
     navigate('/characters');
@@ -64,11 +56,6 @@ export default function useCharacter(id: number) {
     const readCallback = window.electron.onMainMessage(
       MainMessages.CHARACTER_READ_RESPONSE,
       handleReadCharacterResponse,
-    );
-
-    const updateCallback = window.electron.onMainMessage(
-      MainMessages.CHARACTER_UPDATE_RESPONSE,
-      handleUpdateCharacterResponse,
     );
 
     const deleteCallback = window.electron.onMainMessage(
@@ -83,11 +70,6 @@ export default function useCharacter(id: number) {
       );
 
       window.electron.offMainMessage(
-        MainMessages.CHARACTER_UPDATE_RESPONSE,
-        updateCallback,
-      );
-
-      window.electron.offMainMessage(
         MainMessages.CHARACTER_DELETE_RESPONSE,
         deleteCallback,
       );
@@ -96,7 +78,6 @@ export default function useCharacter(id: number) {
     id,
     fetchCharacter,
     handleReadCharacterResponse,
-    handleUpdateCharacterResponse,
     handleDeleteCharacterResponse,
   ]);
 

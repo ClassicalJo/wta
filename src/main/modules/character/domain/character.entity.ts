@@ -1,10 +1,18 @@
-import { IEntity } from '../../common/application/interfaces/entity.interface';
+import { BaseEntity } from '../../common/domain/base.entity';
 
-export class Character implements IEntity {
-  id: number;
-  name: string;
+export class Character extends BaseEntity {
+  name?: string;
+  strength?: number;
+  dexterity?: number;
+  stamina?: number;
+  charisma?: number;
+  manipulation?: number;
+  appearance?: number;
+  perception?: number;
+  intelligence?: number;
+  wits?: number;
   constructor(data?: { id?: number; name?: string }) {
-    this.id = data?.id;
+    super({ id: data?.id });
     this.name = data?.name;
   }
 }

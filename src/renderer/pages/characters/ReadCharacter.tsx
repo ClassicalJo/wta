@@ -1,10 +1,15 @@
 import React from 'react';
 import { useParams } from 'react-router';
 
-import { Character } from '@/main/modules/character/domain/character.entity';
+import {
+  IMentalAttributes,
+  IPhysicalAttributes,
+  ISocialAttributes,
+} from '@/main/modules/character/application/interfaces/attributes.interface';
 import ButtonLink, {
   ButtonLinkType,
 } from '@/renderer/components/common/ButtonLink';
+import CharacterAttributeColumn from '@/renderer/components/common/characters/CharacterAttributeColumn';
 import CharacterDelete from '@/renderer/components/common/characters/CharacterDelete';
 import CharacterInput from '@/renderer/components/common/characters/CharacterInput';
 import useReadCharacter from '@/renderer/hooks/character/useCharacter';
@@ -18,7 +23,28 @@ export default function ReadCharacter() {
     cancelDeleteCharacter,
     confirmDelete,
   } = useReadCharacter(parseInt(params.characterId));
-  const { id, ...rest } = character;
+  const { id, name } = character;
+  const { strength, dexterity, stamina } = character;
+  const { charisma, manipulation, appearance } = character;
+  const { perception, intelligence, wits } = character;
+
+  const physicalAttributes: IPhysicalAttributes = {
+    strength,
+    dexterity,
+    stamina,
+  };
+
+  const mentalAttributes: IMentalAttributes = {
+    perception,
+    intelligence,
+    wits,
+  };
+  const socialAttributes: ISocialAttributes = {
+    charisma,
+    manipulation,
+    appearance,
+  };
+
   return (
     <div>
       <ButtonLink to='/characters' type={ButtonLinkType.TEXT} color='darkred'>
@@ -32,14 +58,44 @@ export default function ReadCharacter() {
             {id}
           </p>
         </div>
-        {Object.keys(rest).map((key: keyof Omit<Character, 'id'>) => (
-          <CharacterInput
-            key={key}
-            propertyName={key}
-            propertyValue={rest[key]}
-            update={updateCharacter}
-          />
-        ))}
+        <CharacterInput partial={{ name }} update={updateCharacter} />
+
+        <p className='pt-8'>Character attributes:</p>
+        <div className='flex justify-between'>
+          <CharacterAttributeColumn>
+            {Object.keys(physicalAttributes).map(
+              (key: keyof IPhysicalAttributes) => (
+                <CharacterInput
+                  key={key}
+                  partial={{ [key]: physicalAttributes[key] }}
+                  update={updateCharacter}
+                />
+              ),
+            )}
+          </CharacterAttributeColumn>
+          <CharacterAttributeColumn>
+            {Object.keys(socialAttributes).map(
+              (key: keyof ISocialAttributes) => (
+                <CharacterInput
+                  key={key}
+                  partial={{ [key]: socialAttributes[key] }}
+                  update={updateCharacter}
+                />
+              ),
+            )}
+          </CharacterAttributeColumn>
+          <CharacterAttributeColumn>
+            {Object.keys(mentalAttributes).map(
+              (key: keyof IMentalAttributes) => (
+                <CharacterInput
+                  key={key}
+                  partial={{ [key]: mentalAttributes[key] }}
+                  update={updateCharacter}
+                />
+              ),
+            )}
+          </CharacterAttributeColumn>
+        </div>
       </div>
 
       <CharacterDelete
