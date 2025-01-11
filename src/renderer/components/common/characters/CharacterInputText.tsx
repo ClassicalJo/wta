@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Character } from '@/main/modules/character/domain/character.entity';
-import accept from '@/resources/icons/accept.svg';
-import cancel from '@/resources/icons/cancel.svg';
+import { useClickOutside } from '@/renderer/hooks/character/useClickOutside';
+import { useKey } from '@/renderer/hooks/character/useKey';
 import edit from '@/resources/icons/edit.svg';
-
-import CharacterIcon from './CharacterIcon';
+import { capitalizeCamelCase } from '@/shared/utils/capitalize';
 
 type Props = {
   propertyName: string;
@@ -20,46 +19,46 @@ export default function CharacterInputText({
   const [updating, setUpdating] = useState<boolean>(false);
   const [value, setValue] = useState<string>('');
 
+  useEffect(() => {
+    setValue(propertyValue ?? '');
+  }, [propertyValue]);
+
   const onUpdate = () => {
-    update({ [propertyName]: value });
+    setUpdating(false);
+    if (value === propertyValue) return;
+    else update({ [propertyName]: value });
   };
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
   };
 
+  const { ref } = useClickOutside(onUpdate);
+  useKey('Enter', ref, onUpdate);
+
   if (updating)
     return (
       <div className='flex flex-col gap-2'>
-        <p className='text-xs'>
-          {propertyName.charAt(0).toUpperCase() + propertyName.slice(1)}
-        </p>
-        <div className='flex bg-slate-100 rounded-sm px-5 py-1'>
+        <p className='text-xs'>{capitalizeCamelCase(propertyName)}</p>
+        <div className='flex bg-slate-100 rounded-sm p-2'>
           <input
+            ref={ref}
             className='flex flex-1  focus:bg-slate-50'
             type='text'
             onChange={onChange}
-            value={value}
+            value={value ?? ''}
             placeholder={propertyValue}
+            autoFocus
           />
-          <span className='flex gap-1'>
-            <button onClick={onUpdate}>
-              <CharacterIcon src={accept} className='h-6 w-6' />
-            </button>
-            <button onClick={() => setUpdating(false)}>
-              <CharacterIcon src={cancel} className='h-6 w-6' />
-            </button>
-          </span>
         </div>
       </div>
     );
 
   return (
     <div className='flex flex-col gap-2'>
-      <p className='text-xs'>
-        {propertyName.charAt(0).toUpperCase() + propertyName.slice(1)}
-      </p>
-      <div className='flex flex-1 bg-slate-100 rounded-sm px-5 py-1 focus:bg-slate-50'>
+      <p className='text-xs'>{capitalizeCamelCase(propertyName)}</p>
+
+      <div className='flex flex-1 bg-slate-100 rounded-sm p-2 focus:bg-slate-50'>
         <p className='flex-1'>{propertyValue}</p>
         <button className='h-5 w-5' onClick={() => setUpdating(true)}>
           <img src={edit} />
