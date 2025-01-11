@@ -2,17 +2,30 @@ import React from 'react';
 import { useParams } from 'react-router';
 
 import {
+  IKnowledges,
+  ISkills,
+  ITalents,
+} from '@/main/modules/character/domain/interfaces/abilities.interface';
+import {
+  IRenown,
+  ISelf,
+} from '@/main/modules/character/domain/interfaces/advantages.interface';
+import {
   IMentalAttributes,
   IPhysicalAttributes,
   ISocialAttributes,
-} from '@/main/modules/character/application/interfaces/attributes.interface';
+} from '@/main/modules/character/domain/interfaces/attributes.interface';
+import { IDetails } from '@/main/modules/character/domain/interfaces/details.interface';
 import ButtonLink, {
   ButtonLinkType,
 } from '@/renderer/components/common/ButtonLink';
 import CharacterAttributeColumn from '@/renderer/components/common/characters/CharacterAttributeColumn';
 import CharacterDelete from '@/renderer/components/common/characters/CharacterDelete';
+import CharacterGrid from '@/renderer/components/common/characters/CharacterGrid';
 import CharacterInput from '@/renderer/components/common/characters/CharacterInput';
+import CharacterTitle from '@/renderer/components/common/characters/CharacterTitle';
 import useReadCharacter from '@/renderer/hooks/character/useCharacter';
+import { useCharacterStats } from '@/renderer/hooks/character/useCharacterStats';
 
 export default function ReadCharacter() {
   const params = useParams<'characterId'>();
@@ -23,46 +36,59 @@ export default function ReadCharacter() {
     cancelDeleteCharacter,
     confirmDelete,
   } = useReadCharacter(parseInt(params.characterId));
-  const { id, name } = character;
-  const { strength, dexterity, stamina } = character;
-  const { charisma, manipulation, appearance } = character;
-  const { perception, intelligence, wits } = character;
-
-  const physicalAttributes: IPhysicalAttributes = {
-    strength,
-    dexterity,
-    stamina,
-  };
-
-  const mentalAttributes: IMentalAttributes = {
-    perception,
-    intelligence,
-    wits,
-  };
-  const socialAttributes: ISocialAttributes = {
-    charisma,
-    manipulation,
-    appearance,
-  };
-
+  const {
+    userDetails,
+    wolfDetails,
+    restDetails,
+    physicalAttributes,
+    socialAttributes,
+    mentalAttributes,
+    talents,
+    skills,
+    knowledges,
+    renown,
+    self,
+  } = useCharacterStats(character);
   return (
     <div>
       <ButtonLink to='/characters' type={ButtonLinkType.TEXT} color='darkred'>
         Back
       </ButtonLink>
-      <h1 className='text-2xl mb-4'>Read character</h1>
-      <div className='flex flex-col gap-2'>
-        <div>
-          <p className='text-xs'>Id</p>
-          <p className='flex-1 bg-slate-100 rounded-sm px-5 py-1 focus:bg-slate-50'>
-            {id}
-          </p>
-        </div>
-        <CharacterInput partial={{ name }} update={updateCharacter} />
-
-        <p className='pt-8'>Character attributes:</p>
-        <div className='flex justify-between'>
+      <div className='flex flex-col'>
+        <CharacterTitle>Werewolf</CharacterTitle>
+        <CharacterGrid>
           <CharacterAttributeColumn>
+            {Object.keys(userDetails).map((key: keyof IDetails) => (
+              <CharacterInput
+                key={key}
+                partial={{ [key]: userDetails[key] }}
+                update={updateCharacter}
+              />
+            ))}
+          </CharacterAttributeColumn>
+          <CharacterAttributeColumn>
+            {Object.keys(wolfDetails).map((key: keyof IDetails) => (
+              <CharacterInput
+                key={key}
+                partial={{ [key]: wolfDetails[key] }}
+                update={updateCharacter}
+              />
+            ))}
+          </CharacterAttributeColumn>
+          <CharacterAttributeColumn>
+            {Object.keys(restDetails).map((key: keyof IDetails) => (
+              <CharacterInput
+                key={key}
+                partial={{ [key]: restDetails[key] }}
+                update={updateCharacter}
+              />
+            ))}
+          </CharacterAttributeColumn>
+        </CharacterGrid>
+        <CharacterTitle>Attributes</CharacterTitle>
+        <div className='grid grid-cols-3 gap-4'>
+          <CharacterAttributeColumn>
+            <p>Physical</p>
             {Object.keys(physicalAttributes).map(
               (key: keyof IPhysicalAttributes) => (
                 <CharacterInput
@@ -74,6 +100,7 @@ export default function ReadCharacter() {
             )}
           </CharacterAttributeColumn>
           <CharacterAttributeColumn>
+            <p>Social</p>
             {Object.keys(socialAttributes).map(
               (key: keyof ISocialAttributes) => (
                 <CharacterInput
@@ -85,6 +112,7 @@ export default function ReadCharacter() {
             )}
           </CharacterAttributeColumn>
           <CharacterAttributeColumn>
+            <p>Mental</p>
             {Object.keys(mentalAttributes).map(
               (key: keyof IMentalAttributes) => (
                 <CharacterInput
@@ -97,7 +125,60 @@ export default function ReadCharacter() {
           </CharacterAttributeColumn>
         </div>
       </div>
-
+      <CharacterTitle>Character abilities:</CharacterTitle>
+      <CharacterGrid>
+        <CharacterAttributeColumn>
+          <p>Talents</p>
+          {Object.keys(talents).map((key: keyof ITalents) => (
+            <CharacterInput
+              key={key}
+              partial={{ [key]: talents[key] }}
+              update={updateCharacter}
+            />
+          ))}
+        </CharacterAttributeColumn>
+        <CharacterAttributeColumn>
+          <p>Skills</p>
+          {Object.keys(skills).map((key: keyof ISkills) => (
+            <CharacterInput
+              key={key}
+              partial={{ [key]: skills[key] }}
+              update={updateCharacter}
+            />
+          ))}
+        </CharacterAttributeColumn>
+        <CharacterAttributeColumn>
+          <p>Knowledges</p>
+          {Object.keys(knowledges).map((key: keyof IKnowledges) => (
+            <CharacterInput
+              key={key}
+              partial={{ [key]: knowledges[key] }}
+              update={updateCharacter}
+            />
+          ))}
+        </CharacterAttributeColumn>
+      </CharacterGrid>
+      <CharacterTitle>Advantages</CharacterTitle>
+      <CharacterGrid>
+        <CharacterAttributeColumn>
+          {Object.keys(renown).map((key: keyof IRenown) => (
+            <CharacterInput
+              key={key}
+              partial={{ [key]: renown[key] }}
+              update={updateCharacter}
+            />
+          ))}
+        </CharacterAttributeColumn>
+        <CharacterAttributeColumn>
+          {Object.keys(self).map((key: keyof ISelf) => (
+            <CharacterInput
+              key={key}
+              partial={{ [key]: self[key] }}
+              update={updateCharacter}
+            />
+          ))}
+        </CharacterAttributeColumn>
+      </CharacterGrid>
       <CharacterDelete
         showConfirmation={confirmDelete}
         deleteCharacter={deleteCharacter}

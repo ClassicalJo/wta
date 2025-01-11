@@ -1,0 +1,7 @@
+export enum Auspice {
+  RAGABASH = 'RAGABASH',
+  THEURGE = 'THEURGE',
+  PHILODOX = 'PHILODOX',
+  GALLIARD = 'GALLIARD',
+  AHROUN = 'AHROUN',
+}
