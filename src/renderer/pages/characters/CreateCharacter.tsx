@@ -12,9 +12,6 @@ export default function CreateCharacter() {
 
   return (
     <div>
-      <ButtonLink to='/characters' type={ButtonLinkType.TEXT} color='darkred'>
-        Back
-      </ButtonLink>
       <h1 className='text-2xl mb-4'>Create character</h1>
       <Formik
         initialValues={{
