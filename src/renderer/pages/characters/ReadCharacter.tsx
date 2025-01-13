@@ -26,6 +26,7 @@ import CharacterInput from '@/renderer/components/common/characters/CharacterInp
 import CharacterTitle from '@/renderer/components/common/characters/CharacterTitle';
 import useReadCharacter from '@/renderer/hooks/character/useCharacter';
 import { useCharacterStats } from '@/renderer/hooks/character/useCharacterStats';
+import Breadcrumbs from '@/renderer/hooks/common/Breadcrumbs';
 
 export default function ReadCharacter() {
   const params = useParams<'characterId'>();
@@ -51,9 +52,6 @@ export default function ReadCharacter() {
   } = useCharacterStats(character);
   return (
     <div>
-      <ButtonLink to='/characters' type={ButtonLinkType.TEXT} color='darkred'>
-        Back
-      </ButtonLink>
       <div className='flex flex-col'>
         <CharacterTitle>Werewolf</CharacterTitle>
         <CharacterGrid>
