@@ -1,8 +1,9 @@
+import { CreateDto } from '@/main/modules/common/application/dto/create.dto';
+
 import { Character } from '../../domain/character.entity';
 
-export class CreateCharacterDto implements Omit<Character, 'id'> {
-  name: string;
+export class CreateCharacterDto extends CreateDto<Character> {
   constructor(character: Omit<Character, 'id'>) {
-    this.name = character.name;
+    super(character);
   }
 }

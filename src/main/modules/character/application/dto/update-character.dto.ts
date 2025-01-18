@@ -1,10 +1,9 @@
+import { UpdateDto } from '@/main/modules/common/application/dto/update.dto';
+
 import { Character } from '../../domain/character.entity';
 
-export class UpdateCharacterDto implements Partial<Character> {
-  id: number;
-  character: Omit<Character, 'id'>;
+export class UpdateCharacterDto extends UpdateDto<Character> {
   constructor(id: number, character: Omit<Character, 'id'>) {
-    this.id = id;
-    this.character = character;
+    super(id, character);
   }
 }
