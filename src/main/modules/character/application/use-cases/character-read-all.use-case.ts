@@ -1,26 +1,25 @@
 import { IUseCase } from '@/main/modules/common/application/interfaces/use-case.interface';
+import { ReadAllUseCase } from '@/main/modules/common/application/use-cases/read-all.use-case';
 import { IMessageService } from '@/main/modules/message/application/interfaces/message-service.interface';
 import { MainMessages } from '@/shared/messages/main-messages.enum';
 import { RendererMessages } from '@/shared/messages/renderer-messages.enum';
 
+import { Character } from '../../domain/character.entity';
 import { ICharacterRepository } from '../repository/character-repository.interface';
 
-export class CharacterReadAllUseCase implements IUseCase {
+export class CharacterReadAllUseCase
+  extends ReadAllUseCase<Character>
+  implements IUseCase
+{
   constructor(
-    public messageService: IMessageService,
-    public repositoryService: ICharacterRepository,
+    public readonly messageService: IMessageService,
+    public readonly characterRepository: ICharacterRepository,
   ) {
-    messageService.onMessage(
+    super(
       RendererMessages.CHARACTER_READ_ALL,
-      this.execute.bind(this),
-    );
-  }
-  public async execute() {
-    const characters = await this.repositoryService.readAll();
-
-    this.messageService.sendMessage(
       MainMessages.CHARACTER_READ_ALL_RESPONSE,
-      characters,
+      messageService,
+      characterRepository,
     );
   }
 }

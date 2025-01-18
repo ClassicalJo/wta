@@ -1,33 +1,25 @@
 import { IUseCase } from '@/main/modules/common/application/interfaces/use-case.interface';
+import { DeleteUseCase } from '@/main/modules/common/application/use-cases/delete.use-case';
 import { IMessageService } from '@/main/modules/message/application/interfaces/message-service.interface';
-import { NotFoundException } from '@/shared/exceptions/not-found.exception';
 import { MainMessages } from '@/shared/messages/main-messages.enum';
 import { RendererMessages } from '@/shared/messages/renderer-messages.enum';
 
-import { CharacterSchema } from '../../infrastructure/database/character.schema';
+import { Character } from '../../domain/character.entity';
 import { ICharacterRepository } from '../repository/character-repository.interface';
 
-export class CharacterDeleteUseCase implements IUseCase {
+export class CharacterDeleteUseCase
+  extends DeleteUseCase<Character>
+  implements IUseCase
+{
   constructor(
-    public messageService: IMessageService,
-    public characterRepository: ICharacterRepository,
+    public readonly messageService: IMessageService,
+    public readonly characterRepository: ICharacterRepository,
   ) {
-    this.messageService.onMessage(
+    super(
       RendererMessages.CHARACTER_DELETE,
-      this.execute.bind(this),
-    );
-  }
-  public async execute(id: number): Promise<void> {
-    const dbCharacter = await this.characterRepository.readOne(id);
-
-    if (!dbCharacter)
-      throw new NotFoundException(CharacterSchema.options.name, id);
-
-    await this.characterRepository.deleteOne(id);
-
-    this.messageService.sendMessage(
       MainMessages.CHARACTER_DELETE_RESPONSE,
-      dbCharacter,
+      messageService,
+      characterRepository,
     );
   }
 }

@@ -1,31 +1,25 @@
 import { IUseCase } from '@/main/modules/common/application/interfaces/use-case.interface';
+import { ReadUseCase } from '@/main/modules/common/application/use-cases/read.use-case';
 import { IMessageService } from '@/main/modules/message/application/interfaces/message-service.interface';
-import { NotFoundException } from '@/shared/exceptions/not-found.exception';
 import { MainMessages } from '@/shared/messages/main-messages.enum';
 import { RendererMessages } from '@/shared/messages/renderer-messages.enum';
 
-import { CharacterSchema } from '../../infrastructure/database/character.schema';
+import { Character } from '../../domain/character.entity';
 import { ICharacterRepository } from '../repository/character-repository.interface';
 
-export class CharacterReadUseCase implements IUseCase {
+export class CharacterReadUseCase
+  extends ReadUseCase<Character>
+  implements IUseCase
+{
   constructor(
     public messageService: IMessageService,
     public repositoryService: ICharacterRepository,
   ) {
-    messageService.onMessage(
+    super(
       RendererMessages.CHARACTER_READ,
-      this.execute.bind(this),
-    );
-  }
-  public async execute(id: number) {
-    const dbCharacter = await this.repositoryService.readOne(id);
-
-    if (!dbCharacter)
-      throw new NotFoundException(CharacterSchema.options.name, id);
-
-    this.messageService.sendMessage(
       MainMessages.CHARACTER_READ_RESPONSE,
-      dbCharacter,
+      messageService,
+      repositoryService,
     );
   }
 }
