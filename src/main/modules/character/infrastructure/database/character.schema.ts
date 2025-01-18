@@ -1,5 +1,7 @@
 import { EntitySchema } from 'typeorm';
 
+import { withBaseSchemaColumns } from '@/main/modules/common/infrastructure/database/base.schema';
+
 import { Auspice } from '../../domain/auspice.enum';
 import { Breed } from '../../domain/breed.enum';
 import { Character } from '../../domain/character.entity';
@@ -8,12 +10,7 @@ export const CharacterSchema = new EntitySchema<Character>({
   name: 'Character',
   target: Character,
   tableName: 'character',
-  columns: {
-    id: {
-      type: Number,
-      primary: true,
-      generated: 'increment',
-    },
+  columns: withBaseSchemaColumns({
     name: {
       type: String,
       nullable: true,
@@ -277,5 +274,5 @@ export const CharacterSchema = new EntitySchema<Character>({
       default: 0,
       nullable: false,
     },
-  },
+  }),
 });
