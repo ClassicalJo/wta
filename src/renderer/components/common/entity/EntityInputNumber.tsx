@@ -5,15 +5,15 @@ import less from '@/resources/icons/minus.svg';
 import more from '@/resources/icons/plus.svg';
 import { capitalizeCamelCase } from '@/shared/utils/capitalize';
 
-import CharacterDots from './CharacterDots';
-import CharacterIcon from './CharacterIcon';
+import EntityDots from './EntityDots';
+import EntityIcon from './EntityIcon';
 
 type Props = {
   propertyName: string;
   propertyValue: number;
   update: (partial: Omit<Character, 'id'>) => void;
 };
-export default function CharacterInputNumber({
+export default function EntityInputNumber({
   propertyName,
   propertyValue,
   update,
@@ -44,11 +44,11 @@ export default function CharacterInputNumber({
           {capitalizeCamelCase(propertyName)}
         </span>
         <button className='px-2' onClick={() => onUpdate(-1)}>
-          <CharacterIcon src={less} />
+          <EntityIcon src={less} />
         </button>
-        <CharacterDots maxDots={maxDots} currentValue={value} />
+        <EntityDots maxDots={maxDots} currentValue={value} />
         <button className='px-2' onClick={() => onUpdate(1)}>
-          <CharacterIcon src={more} />
+          <EntityIcon src={more} />
         </button>
       </div>
     </div>

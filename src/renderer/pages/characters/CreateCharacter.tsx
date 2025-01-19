@@ -1,10 +1,9 @@
 import { Form, Formik } from 'formik';
 import React from 'react';
 
-import ButtonLink, {
-  ButtonLinkType,
-} from '@/renderer/components/common/ButtonLink';
-import CharacterField from '@/renderer/components/common/characters/CharacterField';
+import { Character } from '@/main/modules/character/domain/character.entity';
+import EntityFormField from '@/renderer/components/common/entity/EntityFormField';
+import EntityFormSubmit from '@/renderer/components/common/entity/EntityFormSubmit';
 import { useCreateCharacter } from '@/renderer/hooks/character/useCreateCharacter';
 
 export default function CreateCharacter() {
@@ -20,16 +19,8 @@ export default function CreateCharacter() {
         onSubmit={onSubmit}
       >
         <Form className='flex flex-col gap-2'>
-          <CharacterField propertyName='name' placeholder='John' />
-
-          <div className='flex mt-4'>
-            <button
-              className='flex-1 rounded-full bg-purple-500 text-white text-lg px-5 py-1'
-              type='submit'
-            >
-              Submit
-            </button>
-          </div>
+          <EntityFormField<Character> propertyName='name' placeholder='John' />
+          <EntityFormSubmit />
         </Form>
       </Formik>
     </div>

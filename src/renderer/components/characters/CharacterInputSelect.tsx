@@ -22,7 +22,7 @@ export default function CharacterInputSelect({
   const [value, setValue] = useState<string>(propertyValue ?? '');
 
   useEffect(() => {
-    setValue(propertyValue);
+    setValue(propertyValue ?? '');
   }, [propertyValue]);
 
   function onChange(e: React.ChangeEvent<HTMLSelectElement>) {

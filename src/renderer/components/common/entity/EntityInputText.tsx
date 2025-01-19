@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
 import { Character } from '@/main/modules/character/domain/character.entity';
-import { useClickOutside } from '@/renderer/hooks/character/useClickOutside';
-import { useKey } from '@/renderer/hooks/character/useKey';
+import { useClickOutside } from '@/renderer/hooks/common/useClickOutside';
+import { useKey } from '@/renderer/hooks/common/useKey';
 import edit from '@/resources/icons/edit.svg';
 import { capitalizeCamelCase } from '@/shared/utils/capitalize';
 
@@ -11,7 +11,7 @@ type Props = {
   propertyValue: string;
   update: (partial: Omit<Character, 'id'>) => void;
 };
-export default function CharacterInputText({
+export default function EntityInputText({
   propertyName,
   propertyValue,
   update,

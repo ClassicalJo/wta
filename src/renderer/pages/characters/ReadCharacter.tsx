@@ -16,27 +16,24 @@ import {
   ISocialAttributes,
 } from '@/main/modules/character/domain/interfaces/attributes.interface';
 import { IDetails } from '@/main/modules/character/domain/interfaces/details.interface';
-import ButtonLink, {
-  ButtonLinkType,
-} from '@/renderer/components/common/ButtonLink';
-import CharacterAttributeColumn from '@/renderer/components/common/characters/CharacterAttributeColumn';
-import CharacterDelete from '@/renderer/components/common/characters/CharacterDelete';
-import CharacterGrid from '@/renderer/components/common/characters/CharacterGrid';
-import CharacterInput from '@/renderer/components/common/characters/CharacterInput';
-import CharacterTitle from '@/renderer/components/common/characters/CharacterTitle';
-import useReadCharacter from '@/renderer/hooks/character/useCharacter';
-import { useCharacterStats } from '@/renderer/hooks/character/useCharacterStats';
-import Breadcrumbs from '@/renderer/hooks/common/Breadcrumbs';
+import { CHARACTER_ENTITY_NAME } from '@/main/modules/character/infrastructure/database/character.schema';
+import CharacterInput from '@/renderer/components/characters/CharacterInput';
+import EntityAttributeColumn from '@/renderer/components/common/entity/EntityAttributeColumn';
+import EntityDelete from '@/renderer/components/common/entity/EntityDelete';
+import EntityGrid from '@/renderer/components/common/entity/EntityGrid';
+import EntityTitle from '@/renderer/components/common/entity/EntityTitle';
+import { useCharacter } from '@/renderer/hooks/character/useCharacter';
+import { useCharacterSections } from '@/renderer/hooks/character/useCharacterStats';
 
 export default function ReadCharacter() {
   const params = useParams<'characterId'>();
   const {
-    character,
-    updateCharacter,
-    deleteCharacter,
-    cancelDeleteCharacter,
+    entity,
+    updateEntity,
+    deleteEntity,
+    cancelDeleteEntity,
     confirmDelete,
-  } = useReadCharacter(parseInt(params.characterId));
+  } = useCharacter(parseInt(params.characterId));
   const {
     userDetails,
     wolfDetails,
@@ -49,138 +46,139 @@ export default function ReadCharacter() {
     knowledges,
     renown,
     self,
-  } = useCharacterStats(character);
+  } = useCharacterSections(entity);
   return (
     <div>
       <div className='flex flex-col'>
-        <CharacterTitle>Werewolf</CharacterTitle>
-        <CharacterGrid>
-          <CharacterAttributeColumn>
+        <EntityTitle>Werewolf</EntityTitle>
+        <EntityGrid>
+          <EntityAttributeColumn>
             {Object.keys(userDetails).map((key: keyof IDetails) => (
               <CharacterInput
                 key={key}
                 partial={{ [key]: userDetails[key] }}
-                update={updateCharacter}
+                update={updateEntity}
               />
             ))}
-          </CharacterAttributeColumn>
-          <CharacterAttributeColumn>
+          </EntityAttributeColumn>
+          <EntityAttributeColumn>
             {Object.keys(wolfDetails).map((key: keyof IDetails) => (
               <CharacterInput
                 key={key}
                 partial={{ [key]: wolfDetails[key] }}
-                update={updateCharacter}
+                update={updateEntity}
               />
             ))}
-          </CharacterAttributeColumn>
-          <CharacterAttributeColumn>
+          </EntityAttributeColumn>
+          <EntityAttributeColumn>
             {Object.keys(restDetails).map((key: keyof IDetails) => (
               <CharacterInput
                 key={key}
                 partial={{ [key]: restDetails[key] }}
-                update={updateCharacter}
+                update={updateEntity}
               />
             ))}
-          </CharacterAttributeColumn>
-        </CharacterGrid>
-        <CharacterTitle>Attributes</CharacterTitle>
+          </EntityAttributeColumn>
+        </EntityGrid>
+        <EntityTitle>Attributes</EntityTitle>
         <div className='grid grid-cols-3 gap-4'>
-          <CharacterAttributeColumn>
+          <EntityAttributeColumn>
             <p>Physical</p>
             {Object.keys(physicalAttributes).map(
               (key: keyof IPhysicalAttributes) => (
                 <CharacterInput
                   key={key}
                   partial={{ [key]: physicalAttributes[key] }}
-                  update={updateCharacter}
+                  update={updateEntity}
                 />
               ),
             )}
-          </CharacterAttributeColumn>
-          <CharacterAttributeColumn>
+          </EntityAttributeColumn>
+          <EntityAttributeColumn>
             <p>Social</p>
             {Object.keys(socialAttributes).map(
               (key: keyof ISocialAttributes) => (
                 <CharacterInput
                   key={key}
                   partial={{ [key]: socialAttributes[key] }}
-                  update={updateCharacter}
+                  update={updateEntity}
                 />
               ),
             )}
-          </CharacterAttributeColumn>
-          <CharacterAttributeColumn>
+          </EntityAttributeColumn>
+          <EntityAttributeColumn>
             <p>Mental</p>
             {Object.keys(mentalAttributes).map(
               (key: keyof IMentalAttributes) => (
                 <CharacterInput
                   key={key}
                   partial={{ [key]: mentalAttributes[key] }}
-                  update={updateCharacter}
+                  update={updateEntity}
                 />
               ),
             )}
-          </CharacterAttributeColumn>
+          </EntityAttributeColumn>
         </div>
       </div>
-      <CharacterTitle>Character abilities:</CharacterTitle>
-      <CharacterGrid>
-        <CharacterAttributeColumn>
+      <EntityTitle>Character abilities:</EntityTitle>
+      <EntityGrid>
+        <EntityAttributeColumn>
           <p>Talents</p>
           {Object.keys(talents).map((key: keyof ITalents) => (
             <CharacterInput
               key={key}
               partial={{ [key]: talents[key] }}
-              update={updateCharacter}
+              update={updateEntity}
             />
           ))}
-        </CharacterAttributeColumn>
-        <CharacterAttributeColumn>
+        </EntityAttributeColumn>
+        <EntityAttributeColumn>
           <p>Skills</p>
           {Object.keys(skills).map((key: keyof ISkills) => (
             <CharacterInput
               key={key}
               partial={{ [key]: skills[key] }}
-              update={updateCharacter}
+              update={updateEntity}
             />
           ))}
-        </CharacterAttributeColumn>
-        <CharacterAttributeColumn>
+        </EntityAttributeColumn>
+        <EntityAttributeColumn>
           <p>Knowledges</p>
           {Object.keys(knowledges).map((key: keyof IKnowledges) => (
             <CharacterInput
               key={key}
               partial={{ [key]: knowledges[key] }}
-              update={updateCharacter}
+              update={updateEntity}
             />
           ))}
-        </CharacterAttributeColumn>
-      </CharacterGrid>
-      <CharacterTitle>Advantages</CharacterTitle>
-      <CharacterGrid>
-        <CharacterAttributeColumn>
+        </EntityAttributeColumn>
+      </EntityGrid>
+      <EntityTitle>Advantages</EntityTitle>
+      <EntityGrid>
+        <EntityAttributeColumn>
           {Object.keys(renown).map((key: keyof IRenown) => (
             <CharacterInput
               key={key}
               partial={{ [key]: renown[key] }}
-              update={updateCharacter}
+              update={updateEntity}
             />
           ))}
-        </CharacterAttributeColumn>
-        <CharacterAttributeColumn>
+        </EntityAttributeColumn>
+        <EntityAttributeColumn>
           {Object.keys(self).map((key: keyof ISelf) => (
             <CharacterInput
               key={key}
               partial={{ [key]: self[key] }}
-              update={updateCharacter}
+              update={updateEntity}
             />
           ))}
-        </CharacterAttributeColumn>
-      </CharacterGrid>
-      <CharacterDelete
+        </EntityAttributeColumn>
+      </EntityGrid>
+      <EntityDelete
+        entityName={CHARACTER_ENTITY_NAME}
         showConfirmation={confirmDelete}
-        deleteCharacter={deleteCharacter}
-        cancelDeleteCharacter={cancelDeleteCharacter}
+        deleteEntity={deleteEntity}
+        cancelDelete={cancelDeleteEntity}
       />
     </div>
   );
