@@ -28,7 +28,7 @@ export function makeReadAllEntitiesHook<T extends IEntity>({
       );
 
       return () => window.electron.offMainMessage(onResponse, callback);
-    }, [fetchEntities, onResponse]);
+    }, [fetchEntities]);
 
     return { entities, fetchEntities };
   };

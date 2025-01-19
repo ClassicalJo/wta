@@ -29,7 +29,7 @@ export function makeUseEntityHook<T extends IEntity>({
 
     const fetchEntity = useCallback(() => {
       entityService.read(id);
-    }, [id, entityService]);
+    }, [id]);
 
     const updateEntity = useCallback(
       (partial: T) => {
@@ -47,7 +47,7 @@ export function makeUseEntityHook<T extends IEntity>({
       } else {
         entityService.delete(id);
       }
-    }, [id, confirmDelete, entityService, setConfirmDelete]);
+    }, [id, confirmDelete, setConfirmDelete]);
 
     const cancelDeleteEntity = useCallback(() => {
       setConfirmDelete(false);
@@ -63,7 +63,7 @@ export function makeUseEntityHook<T extends IEntity>({
     const handleDeleteEntityResponse = useCallback(() => {
       notificationService.success('Entity deleted');
       navigate(`/${entityName}`);
-    }, [navigate, notificationService]);
+    }, [navigate]);
 
     useEffect(() => {
       fetchEntity();
