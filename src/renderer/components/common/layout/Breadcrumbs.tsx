@@ -1,7 +1,7 @@
 import React from 'react';
 
+import useNavBar from '../../../hooks/common/useNavbar';
 import Breadcrumb from './Breadcrumb';
-import useNavBar from './useNavbar';
 
 export default function Breadcrumbs() {
   const { paths } = useNavBar();

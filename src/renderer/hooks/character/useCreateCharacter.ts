@@ -1,36 +1,14 @@
-import { useCallback, useEffect } from 'react';
-import { useNavigate } from 'react-router';
-
 import { CreateCharacterDto } from '@/main/modules/character/application/dto/create-character.dto';
 import { Character } from '@/main/modules/character/domain/character.entity';
+import { CHARACTER_ENTITY_NAME } from '@/main/modules/character/infrastructure/database/character.schema';
 import { characterService } from '@/renderer/services/character.service';
 import { MainMessages } from '@/shared/messages/main-messages.enum';
 
-import { notificationService } from '../../services/notification.service';
+import { makeCreateEntityHook } from '../common/makeCreateEntityHook';
 
-export function useCreateCharacter() {
-  const navigator = useNavigate();
-  const onSubmit = useCallback((values: Omit<Character, 'id'>) => {
-    const createCharacterDto = new CreateCharacterDto(values);
-    characterService.create(createCharacterDto);
-  }, []);
-
-  const onCreateSuccess = useCallback(() => {
-    notificationService.success('Character created');
-    navigator('/characters');
-  }, [navigator]);
-
-  useEffect(() => {
-    const callback = window.electron.onMainMessage(
-      MainMessages.CHARACTER_CREATE_RESPONSE,
-      onCreateSuccess,
-    );
-
-    return () =>
-      window.electron.offMainMessage(
-        MainMessages.CHARACTER_CREATE_RESPONSE,
-        callback,
-      );
-  }, [onCreateSuccess]);
-  return { onSubmit };
-}
+export const useCreateCharacter = makeCreateEntityHook<Character>({
+  createDto: CreateCharacterDto,
+  entityName: CHARACTER_ENTITY_NAME,
+  entityService: characterService,
+  mainMessage: MainMessages.CHARACTER_CREATE_RESPONSE,
+});

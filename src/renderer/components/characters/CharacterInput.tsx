@@ -4,9 +4,9 @@ import { Auspice } from '@/main/modules/character/domain/auspice.enum';
 import { Breed } from '@/main/modules/character/domain/breed.enum';
 import { Character } from '@/main/modules/character/domain/character.entity';
 
-import CharacterInputNumber from './CharacterInputNumber';
+import EntityInputNumber from '../common/entity/EntityInputNumber';
+import EntityInputText from '../common/entity/EntityInputText';
 import CharacterInputSelect from './CharacterInputSelect';
-import CharacterInputText from './CharacterInputText';
 
 type Props = {
   partial: Omit<Character, 'id'>;
@@ -23,7 +23,7 @@ export default function CharacterInput({ update, partial }: Props) {
       case 'packTotem':
       case 'concept':
         return (
-          <CharacterInputText
+          <EntityInputText
             key={key}
             propertyName={key}
             propertyValue={partial[key]}
@@ -50,9 +50,11 @@ export default function CharacterInput({ update, partial }: Props) {
             list={Object.values(Breed)}
           />
         );
+      case 'gifts':
+        return <div>Gifts</div>;
       default:
         return (
-          <CharacterInputNumber
+          <EntityInputNumber
             key={key}
             update={update}
             propertyName={key}

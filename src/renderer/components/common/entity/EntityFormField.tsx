@@ -1,14 +1,17 @@
 import { Field } from 'formik';
 import React from 'react';
 
-import { Character } from '@/main/modules/character/domain/character.entity';
+import { IEntity } from '@/main/modules/common/application/interfaces/entity.interface';
 
-type Props = {
-  propertyName: keyof Character;
+type Props<T extends IEntity> = {
+  propertyName: Extract<keyof T, string>;
   placeholder?: string;
 };
 
-export default function CharacterField({ propertyName, placeholder }: Props) {
+export default function EntityFormField<T extends IEntity>({
+  propertyName,
+  placeholder,
+}: Props<T>) {
   return (
     <div className='flex flex-col'>
       <label htmlFor={propertyName} className='text-xs'>

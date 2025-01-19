@@ -15,7 +15,7 @@ import {
 } from '@/main/modules/character/domain/interfaces/attributes.interface';
 import { IDetails } from '@/main/modules/character/domain/interfaces/details.interface';
 
-export function useCharacterStats(character: Character) {
+export function useCharacterSections(character: Character) {
   const {
     id,
     name,

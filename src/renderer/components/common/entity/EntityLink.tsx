@@ -5,7 +5,7 @@ type Props = {
   link: string;
   text: string;
 };
-export default function CharacterLink({ link, text }: Props) {
+export default function EntityLink({ link, text }: Props) {
   return (
     <Link to={link}>
       <div className='aspect-square rounded-lg border-slate-500 border-2 flex justify-center items-center'>
