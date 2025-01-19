@@ -1,15 +1,24 @@
 import { EntitySchema } from 'typeorm';
 
 import { withBaseSchemaColumns } from '@/main/modules/common/infrastructure/database/base.schema';
+import { capitalize } from '@/shared/utils/capitalize';
 
 import { Auspice } from '../../domain/auspice.enum';
 import { Breed } from '../../domain/breed.enum';
 import { Character } from '../../domain/character.entity';
 
+export const CHARACTER_ENTITY_NAME = 'character';
 export const CharacterSchema = new EntitySchema<Character>({
-  name: 'Character',
+  name: capitalize(CHARACTER_ENTITY_NAME),
   target: Character,
-  tableName: 'character',
+  tableName: CHARACTER_ENTITY_NAME,
+  relations: {
+    gifts: {
+      type: 'one-to-many',
+      target: 'Gift',
+      inverseSide: 'character',
+    },
+  },
   columns: withBaseSchemaColumns({
     name: {
       type: String,
@@ -51,47 +60,47 @@ export const CharacterSchema = new EntitySchema<Character>({
     },
     strength: {
       type: Number,
-      default: 0,
+      default: 1,
       nullable: false,
     },
     dexterity: {
       type: Number,
-      default: 0,
+      default: 1,
       nullable: false,
     },
     stamina: {
       type: Number,
-      default: 0,
+      default: 1,
       nullable: false,
     },
     charisma: {
       type: Number,
-      default: 0,
+      default: 1,
       nullable: false,
     },
     manipulation: {
       type: Number,
-      default: 0,
+      default: 1,
       nullable: false,
     },
     appearance: {
       type: Number,
-      default: 0,
+      default: 1,
       nullable: false,
     },
     perception: {
       type: Number,
-      default: 0,
+      default: 1,
       nullable: false,
     },
     intelligence: {
       type: Number,
-      default: 0,
+      default: 1,
       nullable: false,
     },
     wits: {
       type: Number,
-      default: 0,
+      default: 1,
       nullable: false,
     },
     alertness: {

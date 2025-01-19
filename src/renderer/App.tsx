@@ -18,8 +18,8 @@ export default function App() {
   }, []);
   return (
     <>
-      <h1 className='text-3xl font-bold underline'>Hello world!</h1>
-      <Link to={'/characters'}>Characters</Link>
+      <Link to={'/character'}>Characters</Link>
+      <Link to={'/gift'}>Gifts</Link>
     </>
   );
 }

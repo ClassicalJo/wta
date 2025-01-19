@@ -7,6 +7,7 @@ import { RendererMessages } from '@/shared/messages/renderer-messages.enum';
 import { IMainPayloads } from '@/shared/payloads/main-payloads.interface';
 
 import { characterExpose } from './modules/character/application/ipc/character-expose.ipc';
+import { giftExpose } from './modules/gift/application/ipc/gift-expose.ipc';
 
 contextBridge.exposeInMainWorld('electron', {
   rendererMessage: (data: string) =>
@@ -28,5 +29,6 @@ contextBridge.exposeInMainWorld('electron', {
   ) => ipcRenderer.off(type, callback),
   db: {
     character: characterExpose,
+    gift: giftExpose,
   },
 });
