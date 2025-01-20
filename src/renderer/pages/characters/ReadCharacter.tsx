@@ -1,6 +1,9 @@
 import React from 'react';
 import { useParams } from 'react-router';
 
+import { Auspice } from '@/main/modules/character/domain/auspice.enum';
+import { Breed } from '@/main/modules/character/domain/breed.enum';
+import { Character } from '@/main/modules/character/domain/character.entity';
 import {
   IKnowledges,
   ISkills,
@@ -17,13 +20,18 @@ import {
 } from '@/main/modules/character/domain/interfaces/attributes.interface';
 import { IDetails } from '@/main/modules/character/domain/interfaces/details.interface';
 import { CHARACTER_ENTITY_NAME } from '@/main/modules/character/infrastructure/database/character.schema';
-import CharacterInput from '@/renderer/components/characters/CharacterInput';
+import { Gift } from '@/main/modules/gift/domain/gift.entity';
 import EntityAttributeColumn from '@/renderer/components/common/entity/EntityAttributeColumn';
 import EntityDelete from '@/renderer/components/common/entity/EntityDelete';
 import EntityGrid from '@/renderer/components/common/entity/EntityGrid';
+import EntityInputNumber from '@/renderer/components/common/entity/EntityInputNumber';
+import EntityInputSelect from '@/renderer/components/common/entity/EntityInputSelect';
+import EntityInputText from '@/renderer/components/common/entity/EntityInputText';
+import EntityModalSelectEntity from '@/renderer/components/common/entity/EntityModalSelectEntity';
 import EntityTitle from '@/renderer/components/common/entity/EntityTitle';
 import { useCharacter } from '@/renderer/hooks/character/useCharacter';
 import { useCharacterSections } from '@/renderer/hooks/character/useCharacterStats';
+import { useReadAllGifts } from '@/renderer/hooks/gift/useReadAllGifts';
 
 export default function ReadCharacter() {
   const params = useParams<'characterId'>();
@@ -46,49 +54,67 @@ export default function ReadCharacter() {
     knowledges,
     renown,
     self,
+    advantages,
   } = useCharacterSections(entity);
+
+  const { entities: gifts } = useReadAllGifts();
   return (
-    <div>
-      <div className='flex flex-col'>
+    <div className='flex flex-col gap-8'>
+      <div>
         <EntityTitle>Werewolf</EntityTitle>
         <EntityGrid>
           <EntityAttributeColumn>
             {Object.keys(userDetails).map((key: keyof IDetails) => (
-              <CharacterInput
+              <EntityInputText
                 key={key}
-                partial={{ [key]: userDetails[key] }}
+                propertyName={key}
+                propertyValue={userDetails[key]}
                 update={updateEntity}
               />
             ))}
           </EntityAttributeColumn>
           <EntityAttributeColumn>
-            {Object.keys(wolfDetails).map((key: keyof IDetails) => (
-              <CharacterInput
-                key={key}
-                partial={{ [key]: wolfDetails[key] }}
-                update={updateEntity}
-              />
-            ))}
+            <EntityInputSelect
+              list={Object.values(Breed)}
+              propertyName='breed'
+              propertyValue={wolfDetails.breed}
+              update={updateEntity}
+            />
+            <EntityInputSelect
+              list={Object.values(Auspice)}
+              propertyName='auspice'
+              propertyValue={wolfDetails.auspice}
+              update={updateEntity}
+            />
+            <EntityInputText
+              propertyName='tribe'
+              propertyValue={wolfDetails.tribe}
+              update={updateEntity}
+            />
           </EntityAttributeColumn>
           <EntityAttributeColumn>
             {Object.keys(restDetails).map((key: keyof IDetails) => (
-              <CharacterInput
+              <EntityInputText
                 key={key}
-                partial={{ [key]: restDetails[key] }}
+                propertyName={key}
+                propertyValue={userDetails[key]}
                 update={updateEntity}
               />
             ))}
           </EntityAttributeColumn>
         </EntityGrid>
+      </div>
+      <div>
         <EntityTitle>Attributes</EntityTitle>
-        <div className='grid grid-cols-3 gap-4'>
+        <EntityGrid>
           <EntityAttributeColumn>
             <p>Physical</p>
             {Object.keys(physicalAttributes).map(
               (key: keyof IPhysicalAttributes) => (
-                <CharacterInput
+                <EntityInputNumber
                   key={key}
-                  partial={{ [key]: physicalAttributes[key] }}
+                  propertyName={key}
+                  propertyValue={physicalAttributes[key]}
                   update={updateEntity}
                 />
               ),
@@ -98,9 +124,10 @@ export default function ReadCharacter() {
             <p>Social</p>
             {Object.keys(socialAttributes).map(
               (key: keyof ISocialAttributes) => (
-                <CharacterInput
+                <EntityInputNumber
                   key={key}
-                  partial={{ [key]: socialAttributes[key] }}
+                  propertyName={key}
+                  propertyValue={socialAttributes[key]}
                   update={updateEntity}
                 />
               ),
@@ -110,76 +137,104 @@ export default function ReadCharacter() {
             <p>Mental</p>
             {Object.keys(mentalAttributes).map(
               (key: keyof IMentalAttributes) => (
-                <CharacterInput
+                <EntityInputNumber
                   key={key}
-                  partial={{ [key]: mentalAttributes[key] }}
+                  propertyName={key}
+                  propertyValue={mentalAttributes[key]}
                   update={updateEntity}
                 />
               ),
             )}
           </EntityAttributeColumn>
-        </div>
+        </EntityGrid>
       </div>
-      <EntityTitle>Character abilities:</EntityTitle>
-      <EntityGrid>
-        <EntityAttributeColumn>
-          <p>Talents</p>
-          {Object.keys(talents).map((key: keyof ITalents) => (
-            <CharacterInput
-              key={key}
-              partial={{ [key]: talents[key] }}
+      <div>
+        <EntityTitle>Abilities:</EntityTitle>
+        <EntityGrid>
+          <EntityAttributeColumn>
+            <p>Talents</p>
+            {Object.keys(talents).map((key: keyof ITalents) => (
+              <EntityInputNumber
+                key={key}
+                propertyName={key}
+                propertyValue={talents[key]}
+                update={updateEntity}
+              />
+            ))}
+          </EntityAttributeColumn>
+          <EntityAttributeColumn>
+            <p>Skills</p>
+            {Object.keys(skills).map((key: keyof ISkills) => (
+              <EntityInputNumber
+                key={key}
+                propertyName={key}
+                propertyValue={skills[key]}
+                update={updateEntity}
+              />
+            ))}
+          </EntityAttributeColumn>
+          <EntityAttributeColumn>
+            <p>Knowledges</p>
+            {Object.keys(knowledges).map((key: keyof IKnowledges) => (
+              <EntityInputNumber
+                key={key}
+                propertyName={key}
+                propertyValue={knowledges[key]}
+                update={updateEntity}
+              />
+            ))}
+          </EntityAttributeColumn>
+        </EntityGrid>
+      </div>
+      <div>
+        <EntityTitle>Advantages</EntityTitle>
+        <EntityGrid columns={2}>
+          <EntityAttributeColumn>
+            {Object.keys(renown).map((key: keyof IRenown) => (
+              <EntityInputNumber
+                key={key}
+                maxDots={10}
+                propertyName={key}
+                propertyValue={renown[key]}
+                update={updateEntity}
+              />
+            ))}
+          </EntityAttributeColumn>
+          <EntityAttributeColumn>
+            {Object.keys(self).map((key: keyof ISelf) => (
+              <EntityInputNumber
+                key={key}
+                maxDots={10}
+                propertyName={key}
+                propertyValue={self[key]}
+                update={updateEntity}
+              />
+            ))}
+          </EntityAttributeColumn>
+        </EntityGrid>
+      </div>
+      <div>
+        <EntityGrid columns={2}>
+          <EntityAttributeColumn>
+            <p>Backgrounds</p>
+          </EntityAttributeColumn>
+          <EntityAttributeColumn>
+            <p>Gifts</p>
+            <EntityModalSelectEntity<Character, Gift>
+              propertyName='gifts'
+              allEntities={gifts}
+              selectedEntities={advantages.gifts ?? []}
               update={updateEntity}
             />
-          ))}
-        </EntityAttributeColumn>
-        <EntityAttributeColumn>
-          <p>Skills</p>
-          {Object.keys(skills).map((key: keyof ISkills) => (
-            <CharacterInput
-              key={key}
-              partial={{ [key]: skills[key] }}
-              update={updateEntity}
-            />
-          ))}
-        </EntityAttributeColumn>
-        <EntityAttributeColumn>
-          <p>Knowledges</p>
-          {Object.keys(knowledges).map((key: keyof IKnowledges) => (
-            <CharacterInput
-              key={key}
-              partial={{ [key]: knowledges[key] }}
-              update={updateEntity}
-            />
-          ))}
-        </EntityAttributeColumn>
-      </EntityGrid>
-      <EntityTitle>Advantages</EntityTitle>
-      <EntityGrid>
-        <EntityAttributeColumn>
-          {Object.keys(renown).map((key: keyof IRenown) => (
-            <CharacterInput
-              key={key}
-              partial={{ [key]: renown[key] }}
-              update={updateEntity}
-            />
-          ))}
-        </EntityAttributeColumn>
-        <EntityAttributeColumn>
-          {Object.keys(self).map((key: keyof ISelf) => (
-            <CharacterInput
-              key={key}
-              partial={{ [key]: self[key] }}
-              update={updateEntity}
-            />
-          ))}
-        </EntityAttributeColumn>
-      </EntityGrid>
-      <EntityDelete
-        entityName={CHARACTER_ENTITY_NAME}
-        showConfirmation={confirmDelete}
-        deleteEntity={deleteEntity}
-        cancelDelete={cancelDeleteEntity}
-      />
+          </EntityAttributeColumn>
+        </EntityGrid>
+        <EntityDelete
+          entityName={CHARACTER_ENTITY_NAME}
+          showConfirmation={confirmDelete}
+          deleteEntity={deleteEntity}
+          cancelDelete={cancelDeleteEntity}
+        />
+      </div>
     </div>
   );
 }

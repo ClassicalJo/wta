@@ -3,7 +3,6 @@ import { EntitySchema } from 'typeorm';
 import { withBaseSchemaColumns } from '@/main/modules/common/infrastructure/database/base.schema';
 import { capitalize } from '@/shared/utils/capitalize';
 
-import { GiftSource } from '../../domain/gift-source.enum';
 import { Gift } from '../../domain/gift.entity';
 
 export const GIFT_ENTITY_NAME = 'gift';
@@ -30,7 +29,6 @@ export const GiftSchema = new EntitySchema<Gift>({
     },
     giftSource: {
       type: 'simple-array',
-      enum: GiftSource,
       nullable: true,
     },
     dataSource: {
