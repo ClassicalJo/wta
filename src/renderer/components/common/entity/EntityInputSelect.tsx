@@ -1,24 +1,25 @@
 import React, { useEffect, useState } from 'react';
 
-import { Character } from '@/main/modules/character/domain/character.entity';
+import { IEntity } from '@/main/modules/common/application/interfaces/entity.interface';
 import {
   capitalizeCamelCase,
   capitalizeEachWord,
 } from '@/shared/utils/capitalize';
 import { removeUnderline } from '@/shared/utils/removeUnderline';
 
-type Props = {
+type Props<T extends IEntity> = {
   propertyName: string;
   propertyValue: string;
-  update: (partial: Omit<Character, 'id'>) => void;
+  update: (partial: Omit<T, 'id'>) => void;
   list: string[];
 };
-export default function CharacterInputSelect({
+
+export default function EntityInputSelect<T extends IEntity>({
   list,
   propertyName,
   propertyValue,
   update,
-}: Props) {
+}: Props<T>) {
   const [value, setValue] = useState<string>(propertyValue ?? '');
 
   useEffect(() => {
@@ -28,7 +29,7 @@ export default function CharacterInputSelect({
   function onChange(e: React.ChangeEvent<HTMLSelectElement>) {
     if (e.target.value === propertyValue) return;
     setValue(e.target.value);
-    update({ [propertyName]: e.target.value });
+    update({ [propertyName]: e.target.value } as Omit<T, 'id'>);
   }
 
   return (
@@ -37,7 +38,7 @@ export default function CharacterInputSelect({
       <div className='flex bg-slate-100 rounded-sm p-2 items-center'>
         <select className='flex-1' onChange={onChange} value={value}>
           {list.map((item, index) => (
-            <option key={`character-options-${index}`} value={item}>
+            <option key={`entity-options-${index}`} value={item}>
               {capitalizeEachWord(removeUnderline(item))}
             </option>
           ))}

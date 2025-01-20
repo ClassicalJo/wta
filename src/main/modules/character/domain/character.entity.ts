@@ -1,4 +1,5 @@
 import { BaseEntity } from '../../common/domain/base.entity';
+import { Gift } from '../../gift/domain/gift.entity';
 import { Auspice } from './auspice.enum';
 import { Breed } from './breed.enum';
 
@@ -72,6 +73,9 @@ export class Character extends BaseEntity {
   rage?: number;
   gnosis?: number;
   willpower?: number;
+
+  //Advantages
+  gifts?: Gift[];
 
   constructor(data?: {
     id?: number;

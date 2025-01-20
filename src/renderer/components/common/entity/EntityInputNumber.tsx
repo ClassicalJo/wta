@@ -11,16 +11,17 @@ import EntityIcon from './EntityIcon';
 type Props = {
   propertyName: string;
   propertyValue: number;
+  maxDots?: number;
   update: (partial: Omit<Character, 'id'>) => void;
 };
 export default function EntityInputNumber({
   propertyName,
   propertyValue,
+  maxDots = 5,
   update,
 }: Props) {
   const [value, setValue] = useState<number>(0);
 
-  const maxDots = 5;
   const minDots = 0;
 
   useEffect(() => {

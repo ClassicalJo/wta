@@ -11,7 +11,7 @@ type Props<T extends IEntity> = {
   propertyValue: string;
   update: (partial: Omit<T, 'id'>) => void;
 };
-export default function EntityInputText<T extends IEntity>({
+export default function EntityInputTextArea<T extends IEntity>({
   propertyName,
   propertyValue,
   update,
@@ -29,7 +29,7 @@ export default function EntityInputText<T extends IEntity>({
     else update({ [propertyName]: value } as Omit<T, 'id'>);
   };
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setValue(e.target.value);
   };
 
@@ -41,10 +41,9 @@ export default function EntityInputText<T extends IEntity>({
       <div className='flex flex-col gap-2'>
         <p className='text-xs'>{capitalizeCamelCase(propertyName)}</p>
         <div className='flex bg-slate-100 rounded-sm p-2'>
-          <input
+          <textarea
             ref={ref}
-            className='flex flex-1  focus:bg-slate-50'
-            type='text'
+            className='flex flex-1 focus:bg-slate-50 min-h-32'
             onChange={onChange}
             value={value ?? ''}
             placeholder={propertyValue}
@@ -57,8 +56,7 @@ export default function EntityInputText<T extends IEntity>({
   return (
     <div className='flex flex-col gap-2'>
       <p className='text-xs'>{capitalizeCamelCase(propertyName)}</p>
-
-      <div className='flex flex-1 bg-slate-100 rounded-sm p-2 focus:bg-slate-50'>
+      <div className='flex flex-1 bg-slate-100 rounded-sm p-2 focus:bg-slate-50 gap-2 min-h-32'>
         <p className='flex-1'>{propertyValue}</p>
         <button className='h-5 w-5' onClick={() => setUpdating(true)}>
           <img src={edit} />

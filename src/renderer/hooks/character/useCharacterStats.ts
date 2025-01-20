@@ -5,6 +5,7 @@ import {
   ITalents,
 } from '@/main/modules/character/domain/interfaces/abilities.interface';
 import {
+  IAdvantages,
   IRenown,
   ISelf,
 } from '@/main/modules/character/domain/interfaces/advantages.interface';
@@ -70,6 +71,7 @@ export function useCharacterSections(character: Character) {
   const { glory, honor, wisdom } = character;
   const { rage, gnosis, willpower } = character;
 
+  const { gifts } = character;
   const userDetails: Partial<IDetails> = {
     name,
     playerName,
@@ -154,6 +156,9 @@ export function useCharacterSections(character: Character) {
     willpower,
   };
 
+  const advantages: IAdvantages = {
+    gifts,
+  };
   return {
     id,
     userDetails,
@@ -167,5 +172,6 @@ export function useCharacterSections(character: Character) {
     knowledges,
     renown,
     self,
+    advantages,
   };
 }

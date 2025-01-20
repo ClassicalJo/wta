@@ -16,7 +16,7 @@ export default function EntityDelete({
     return (
       <div className='flex h-20 items-end mt-4'>
         <input
-          className='flex-1 bg-red-500 border-2 border-red-500 text-white rounded-full px-5 py-1 font-bold'
+          className='flex-1 bg-red-500 border-2 border-red-500 hover:bg-red-400 hover:border-red-400 text-white rounded-full px-5 py-1 font-bold cursor-pointer'
           type='button'
           value='Delete'
           onClick={deleteEntity}
@@ -33,13 +33,13 @@ export default function EntityDelete({
         </div>
         <div className='flex gap-4'>
           <input
-            className='flex-1 bg-red-500 border-2 border-red-500 text-white rounded-full px-5 py-1 font-bold'
+            className='flex-1 bg-red-500 border-2 border-red-500 hover:bg-red-400 hover:border-red-400 text-white rounded-full px-5 py-1 font-bold cursor-pointer'
             type='button'
             value='Delete'
             onClick={deleteEntity}
           />
           <input
-            className='flex-1 border-red-500 border-2 rounded-full px-5 py-1 text-red-500 font-bold'
+            className='flex-1 border-red-500 border-2 rounded-full px-5 py-1 text-red-500 hover:text-red-400 hover:border-red-400 font-bold cursor-pointer'
             type='button'
             value='Cancel'
             onClick={cancelDelete}
