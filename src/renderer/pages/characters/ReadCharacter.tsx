@@ -27,7 +27,7 @@ import EntityGrid from '@/renderer/components/common/entity/EntityGrid';
 import EntityInputNumber from '@/renderer/components/common/entity/EntityInputNumber';
 import EntityInputSelect from '@/renderer/components/common/entity/EntityInputSelect';
 import EntityInputText from '@/renderer/components/common/entity/EntityInputText';
-import EntityModalSelectEntity from '@/renderer/components/common/entity/EntityModalSelectEntity';
+import EntityModalList from '@/renderer/components/common/entity/EntityModalList';
 import EntityTitle from '@/renderer/components/common/entity/EntityTitle';
 import { useCharacter } from '@/renderer/hooks/character/useCharacter';
 import { useCharacterSections } from '@/renderer/hooks/character/useCharacterStats';
@@ -58,6 +58,15 @@ export default function ReadCharacter() {
   } = useCharacterSections(entity);
 
   const { entities: gifts } = useReadAllGifts();
+
+  const handleUpdate = <T extends keyof Character>(
+    propertyName: string,
+    propertyValue: Character[T],
+  ) => {
+    updateEntity({
+      [propertyName]: propertyValue,
+    });
+  };
   return (
     <div className='flex flex-col gap-8'>
       <div>
@@ -69,7 +78,7 @@ export default function ReadCharacter() {
                 key={key}
                 propertyName={key}
                 propertyValue={userDetails[key]}
-                update={updateEntity}
+                update={handleUpdate}
               />
             ))}
           </EntityAttributeColumn>
@@ -78,18 +87,18 @@ export default function ReadCharacter() {
               list={Object.values(Breed)}
               propertyName='breed'
               propertyValue={wolfDetails.breed}
-              update={updateEntity}
+              update={handleUpdate}
             />
             <EntityInputSelect
               list={Object.values(Auspice)}
               propertyName='auspice'
               propertyValue={wolfDetails.auspice}
-              update={updateEntity}
+              update={handleUpdate}
             />
             <EntityInputText
               propertyName='tribe'
               propertyValue={wolfDetails.tribe}
-              update={updateEntity}
+              update={handleUpdate}
             />
           </EntityAttributeColumn>
           <EntityAttributeColumn>
@@ -98,7 +107,7 @@ export default function ReadCharacter() {
                 key={key}
                 propertyName={key}
                 propertyValue={userDetails[key]}
-                update={updateEntity}
+                update={handleUpdate}
               />
             ))}
           </EntityAttributeColumn>
@@ -115,7 +124,7 @@ export default function ReadCharacter() {
                   key={key}
                   propertyName={key}
                   propertyValue={physicalAttributes[key]}
-                  update={updateEntity}
+                  update={handleUpdate}
                 />
               ),
             )}
@@ -128,7 +137,7 @@ export default function ReadCharacter() {
                   key={key}
                   propertyName={key}
                   propertyValue={socialAttributes[key]}
-                  update={updateEntity}
+                  update={handleUpdate}
                 />
               ),
             )}
@@ -141,7 +150,7 @@ export default function ReadCharacter() {
                   key={key}
                   propertyName={key}
                   propertyValue={mentalAttributes[key]}
-                  update={updateEntity}
+                  update={handleUpdate}
                 />
               ),
             )}
@@ -158,7 +167,7 @@ export default function ReadCharacter() {
                 key={key}
                 propertyName={key}
                 propertyValue={talents[key]}
-                update={updateEntity}
+                update={handleUpdate}
               />
             ))}
           </EntityAttributeColumn>
@@ -169,7 +178,7 @@ export default function ReadCharacter() {
                 key={key}
                 propertyName={key}
                 propertyValue={skills[key]}
-                update={updateEntity}
+                update={handleUpdate}
               />
             ))}
           </EntityAttributeColumn>
@@ -180,7 +189,7 @@ export default function ReadCharacter() {
                 key={key}
                 propertyName={key}
                 propertyValue={knowledges[key]}
-                update={updateEntity}
+                update={handleUpdate}
               />
             ))}
           </EntityAttributeColumn>
@@ -196,7 +205,7 @@ export default function ReadCharacter() {
                 maxDots={10}
                 propertyName={key}
                 propertyValue={renown[key]}
-                update={updateEntity}
+                update={handleUpdate}
               />
             ))}
           </EntityAttributeColumn>
@@ -207,7 +216,7 @@ export default function ReadCharacter() {
                 maxDots={10}
                 propertyName={key}
                 propertyValue={self[key]}
-                update={updateEntity}
+                update={handleUpdate}
               />
             ))}
           </EntityAttributeColumn>
@@ -220,11 +229,11 @@ export default function ReadCharacter() {
           </EntityAttributeColumn>
           <EntityAttributeColumn>
             <p>Gifts</p>
-            <EntityModalSelectEntity<Character, Gift>
+            <EntityModalList<Gift>
+              allValues={gifts}
+              selectedValues={advantages.gifts || []}
               propertyName='gifts'
-              allEntities={gifts}
-              selectedEntities={advantages.gifts ?? []}
-              update={updateEntity}
+              update={handleUpdate}
             />
           </EntityAttributeColumn>
         </EntityGrid>
