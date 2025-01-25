@@ -2,6 +2,8 @@ import { CreateCharacterDto } from '@/main/modules/character/application/dto/cre
 import { UpdateCharacterDto } from '@/main/modules/character/application/dto/update-character.dto';
 import { CreateGiftDto } from '@/main/modules/gift/application/dto/create-gift.dto';
 import { UpdateGiftDto } from '@/main/modules/gift/application/dto/update-gift.dto';
+import { CreateRitualDto } from '@/main/modules/ritual/application/dto/create-ritual.dto';
+import { UpdateRitualDto } from '@/main/modules/ritual/application/dto/update-ritual.dto';
 
 import { RendererMessages } from '../messages/renderer-messages.enum';
 
@@ -18,4 +20,10 @@ export interface IRendererPayloads {
   [RendererMessages.GIFT_UPDATE]: UpdateGiftDto;
   [RendererMessages.GIFT_READ]: number;
   [RendererMessages.GIFT_READ_ALL]: void;
+
+  [RendererMessages.RITUAL_CREATE]: CreateRitualDto;
+  [RendererMessages.RITUAL_DELETE]: number;
+  [RendererMessages.RITUAL_UPDATE]: UpdateRitualDto;
+  [RendererMessages.RITUAL_READ]: number;
+  [RendererMessages.RITUAL_READ_ALL]: void;
 }

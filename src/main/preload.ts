@@ -8,6 +8,7 @@ import { IMainPayloads } from '@/shared/payloads/main-payloads.interface';
 
 import { characterExpose } from './modules/character/application/ipc/character-expose.ipc';
 import { giftExpose } from './modules/gift/application/ipc/gift-expose.ipc';
+import { ritualExpose } from './modules/ritual/application/ipc/ritual-expose.ipc';
 
 contextBridge.exposeInMainWorld('electron', {
   rendererMessage: (data: string) =>
@@ -30,5 +31,6 @@ contextBridge.exposeInMainWorld('electron', {
   db: {
     character: characterExpose,
     gift: giftExpose,
+    ritual: ritualExpose,
   },
 });

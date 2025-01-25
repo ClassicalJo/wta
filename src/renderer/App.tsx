@@ -20,6 +20,7 @@ export default function App() {
     <>
       <Link to={'/character'}>Characters</Link>
       <Link to={'/gift'}>Gifts</Link>
+      <Link to={'/ritual'}>Rituals</Link>
     </>
   );
 }

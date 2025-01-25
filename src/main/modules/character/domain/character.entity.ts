@@ -1,5 +1,6 @@
 import { BaseEntity } from '../../common/domain/base.entity';
 import { Gift } from '../../gift/domain/gift.entity';
+import { Ritual } from '../../ritual/domain/ritual.entity';
 import { Auspice } from './auspice.enum';
 import { Breed } from './breed.enum';
 
@@ -76,6 +77,7 @@ export class Character extends BaseEntity {
 
   //Advantages
   gifts?: Gift[];
+  rites?: Ritual[];
 
   constructor(data?: {
     id?: number;

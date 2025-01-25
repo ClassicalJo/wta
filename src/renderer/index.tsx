@@ -11,6 +11,9 @@ import ReadCharacter from './pages/characters/ReadCharacter';
 import CreateGift from './pages/gifts/CreateGift';
 import Gifts from './pages/gifts/Gifts';
 import ReadGift from './pages/gifts/ReadGift';
+import CreateRitual from './pages/rituals/CreateRitual';
+import ReadRitual from './pages/rituals/ReadRitual';
+import Rituals from './pages/rituals/Rituals';
 
 const container = document.getElementById('root');
 const root = createRoot(container);
@@ -31,6 +34,11 @@ root.render(
             <Route index element={<Gifts />} />
             <Route path='create' element={<CreateGift />} />
             <Route path=':giftId' element={<ReadGift />} />
+          </Route>
+          <Route path='/ritual'>
+            <Route index element={<Rituals />} />
+            <Route path='create' element={<CreateRitual />} />
+            <Route path=':ritualId' element={<ReadRitual />} />
           </Route>
         </Route>
       </Routes>
