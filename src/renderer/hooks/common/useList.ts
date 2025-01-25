@@ -12,7 +12,7 @@ export function useList<T extends IEntity | string>(
   removeEntity: (entity: T) => void;
 } {
   const [entityList, setEntityList] = useState<T[]>([]);
-  const [availableEntityList, setAvailableEntityList] = useState([]);
+  const [availableEntityList, setAvailableEntityList] = useState<T[]>([]);
 
   function addEntity(entity: T) {
     setEntityList([...entityList, entity]);
@@ -20,8 +20,6 @@ export function useList<T extends IEntity | string>(
   }
 
   function removeEntity(entity: T) {
-    console.log('removing');
-    console.log(entity, entityList);
     setEntityList(entityList.filter((e) => e !== entity));
     setAvailableEntityList([...availableEntityList, entity]);
   }
@@ -29,7 +27,16 @@ export function useList<T extends IEntity | string>(
   useEffect(() => {
     setEntityList(selectedEntities);
     setAvailableEntityList(
-      allEntities.filter((entity) => !selectedEntities.includes(entity)),
+      allEntities.filter(
+        (entity) =>
+          !selectedEntities.some(
+            (selectedEntity) =>
+              (typeof entity === 'string' && entity === selectedEntity) ||
+              (typeof entity !== 'string' &&
+                typeof selectedEntity !== 'string' &&
+                entity.id === selectedEntity.id),
+          ),
+      ),
     );
   }, [allEntities, selectedEntities]);
 
