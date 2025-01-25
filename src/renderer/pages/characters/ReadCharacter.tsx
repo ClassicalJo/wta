@@ -21,6 +21,7 @@ import {
 import { IDetails } from '@/main/modules/character/domain/interfaces/details.interface';
 import { CHARACTER_ENTITY_NAME } from '@/main/modules/character/infrastructure/database/character.schema';
 import { Gift } from '@/main/modules/gift/domain/gift.entity';
+import { Ritual } from '@/main/modules/ritual/domain/ritual.entity';
 import EntityAttributeColumn from '@/renderer/components/common/entity/EntityAttributeColumn';
 import EntityDelete from '@/renderer/components/common/entity/EntityDelete';
 import EntityGrid from '@/renderer/components/common/entity/EntityGrid';
@@ -32,6 +33,7 @@ import EntityTitle from '@/renderer/components/common/entity/EntityTitle';
 import { useCharacter } from '@/renderer/hooks/character/useCharacter';
 import { useCharacterSections } from '@/renderer/hooks/character/useCharacterStats';
 import { useReadAllGifts } from '@/renderer/hooks/gift/useReadAllGifts';
+import { useReadAllRituals } from '@/renderer/hooks/ritual/useReadAllRituals';
 
 export default function ReadCharacter() {
   const params = useParams<'characterId'>();
@@ -58,6 +60,7 @@ export default function ReadCharacter() {
   } = useCharacterSections(entity);
 
   const { entities: gifts } = useReadAllGifts();
+  const { entities: rituals } = useReadAllRituals();
 
   const handleUpdate = <T extends keyof Character>(
     propertyName: string,
@@ -225,7 +228,13 @@ export default function ReadCharacter() {
       <div>
         <EntityGrid columns={2}>
           <EntityAttributeColumn>
-            <p>Backgrounds</p>
+            <p>Rituals</p>
+            <EntityModalList<Ritual>
+              allValues={rituals}
+              selectedValues={advantages.rites || []}
+              propertyName='rites'
+              update={handleUpdate}
+            />
           </EntityAttributeColumn>
           <EntityAttributeColumn>
             <p>Gifts</p>

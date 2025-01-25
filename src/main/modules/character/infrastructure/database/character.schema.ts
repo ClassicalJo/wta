@@ -19,6 +19,12 @@ export const CharacterSchema = new EntitySchema<Character>({
       target: 'Gift',
       eager: true,
     },
+    rites: {
+      type: 'many-to-many',
+      joinTable: true,
+      target: 'Ritual',
+      eager: true,
+    },
   },
   columns: withBaseSchemaColumns({
     name: {

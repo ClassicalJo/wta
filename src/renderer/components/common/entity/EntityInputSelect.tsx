@@ -28,7 +28,7 @@ export default function EntityInputSelect({
   function onChange(e: React.ChangeEvent<HTMLSelectElement>) {
     if (e.target.value === propertyValue) return;
     setValue(e.target.value);
-    update(propertyName, propertyValue);
+    update(propertyName, e.target.value);
   }
 
   return (

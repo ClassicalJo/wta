@@ -1,5 +1,6 @@
 import { ICharacterExpose } from './main/modules/character/application/ipc/character-expose.interface';
 import { IGiftExpose } from './main/modules/gift/application/ipc/gift-expose.interface';
+import { IRitualExpose } from './main/modules/ritual/application/ipc/ritual-expose.interface';
 import { MainMessages } from './shared/messages/main-messages.enum';
 import { IMainPayloads } from './shared/payloads/main-payloads.interface';
 
@@ -19,6 +20,7 @@ declare global {
       db: {
         character: ICharacterExpose;
         gift: IGiftExpose;
+        ritual: IRitualExpose;
       };
     };
   }

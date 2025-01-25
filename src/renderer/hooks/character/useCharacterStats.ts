@@ -71,7 +71,7 @@ export function useCharacterSections(character: Character) {
   const { glory, honor, wisdom } = character;
   const { rage, gnosis, willpower } = character;
 
-  const { gifts } = character;
+  const { gifts, rites } = character;
   const userDetails: Partial<IDetails> = {
     name,
     playerName,
@@ -158,6 +158,7 @@ export function useCharacterSections(character: Character) {
 
   const advantages: IAdvantages = {
     gifts,
+    rites,
   };
   return {
     id,
