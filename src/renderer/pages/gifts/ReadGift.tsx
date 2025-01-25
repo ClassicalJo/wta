@@ -9,7 +9,7 @@ import EntityGrid from '@/renderer/components/common/entity/EntityGrid';
 import EntityInputNumber from '@/renderer/components/common/entity/EntityInputNumber';
 import EntityInputText from '@/renderer/components/common/entity/EntityInputText';
 import EntityInputTextArea from '@/renderer/components/common/entity/EntityInputTextArea';
-import EntitySelectModalText from '@/renderer/components/common/entity/EntityModalSelectText';
+import EntityModalList from '@/renderer/components/common/entity/EntityModalList';
 import EntityTitle from '@/renderer/components/common/entity/EntityTitle';
 import { useGift } from '@/renderer/hooks/gift/useGift';
 
@@ -23,6 +23,12 @@ export default function ReadGift() {
     confirmDelete,
   } = useGift(parseInt(params.giftId));
   const { id, ...gift } = entity;
+  const updateGift = <T extends keyof Gift>(
+    propertyName: T,
+    propertyValue: Gift[T],
+  ) => {
+    updateEntity({ [propertyName]: propertyValue });
+  };
   return (
     <div>
       <div className='flex flex-col gap-4'>
@@ -30,38 +36,40 @@ export default function ReadGift() {
         <EntityInputText
           propertyName='name'
           propertyValue={gift.name}
-          update={updateEntity}
+          update={updateGift}
         />
         <EntityInputNumber
           propertyName='level'
+          type='number'
+          fontSize='text-md'
           maxDots={10}
           propertyValue={gift.level}
-          update={updateEntity}
+          update={updateGift}
         />
         <EntityGrid columns={2}>
           <EntityInputTextArea
             propertyName='description'
             propertyValue={gift.description}
-            update={updateEntity}
+            update={updateGift}
           />
           <EntityInputTextArea
             propertyName='system'
             propertyValue={gift.system}
-            update={updateEntity}
+            update={updateGift}
           />
         </EntityGrid>
         <EntityInputText
           propertyName='dataSource'
           propertyValue={gift.dataSource}
-          update={updateEntity}
+          update={updateGift}
         />
         <p>Gift Source</p>
         <EntityGrid columns={2}>
-          <EntitySelectModalText<Gift>
+          <EntityModalList<GiftSource>
             propertyName='giftSource'
             selectedValues={gift.giftSource ?? []}
             allValues={Object.values(GiftSource)}
-            update={updateEntity}
+            update={updateGift}
           />
         </EntityGrid>
       </div>

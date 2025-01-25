@@ -1,35 +1,34 @@
 import React, { useEffect, useState } from 'react';
 
-import { IEntity } from '@/main/modules/common/application/interfaces/entity.interface';
 import {
   capitalizeCamelCase,
   capitalizeEachWord,
 } from '@/shared/utils/capitalize';
 import { removeUnderline } from '@/shared/utils/removeUnderline';
 
-type Props<T extends IEntity> = {
+type Props = {
   propertyName: string;
   propertyValue: string;
-  update: (partial: Omit<T, 'id'>) => void;
   list: string[];
+  update: (propertyName: string, propertyValue: string) => void;
 };
 
-export default function EntityInputSelect<T extends IEntity>({
+export default function EntityInputSelect({
   list,
   propertyName,
   propertyValue,
   update,
-}: Props<T>) {
-  const [value, setValue] = useState<string>(propertyValue ?? '');
+}: Props) {
+  const [value, setValue] = useState<string>(String(propertyValue) ?? '');
 
   useEffect(() => {
-    setValue(propertyValue ?? '');
+    setValue(String(propertyValue) ?? '');
   }, [propertyValue]);
 
   function onChange(e: React.ChangeEvent<HTMLSelectElement>) {
     if (e.target.value === propertyValue) return;
     setValue(e.target.value);
-    update({ [propertyName]: e.target.value } as Omit<T, 'id'>);
+    update(propertyName, propertyValue);
   }
 
   return (

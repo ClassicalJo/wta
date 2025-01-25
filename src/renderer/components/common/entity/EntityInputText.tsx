@@ -1,21 +1,20 @@
 import React, { useEffect, useState } from 'react';
 
-import { IEntity } from '@/main/modules/common/application/interfaces/entity.interface';
 import { useClickOutside } from '@/renderer/hooks/common/useClickOutside';
 import { useKey } from '@/renderer/hooks/common/useKey';
 import edit from '@/resources/icons/edit.svg';
 import { capitalizeCamelCase } from '@/shared/utils/capitalize';
 
-type Props<T extends IEntity> = {
+type Props = {
   propertyName: string;
   propertyValue: string;
-  update: (partial: Omit<T, 'id'>) => void;
+  update: (propertyName: string, propertyValue: string) => void;
 };
-export default function EntityInputText<T extends IEntity>({
+export default function EntityInputText({
   propertyName,
   propertyValue,
   update,
-}: Props<T>) {
+}: Props) {
   const [updating, setUpdating] = useState<boolean>(false);
   const [value, setValue] = useState<string>('');
 
@@ -26,7 +25,7 @@ export default function EntityInputText<T extends IEntity>({
   const onUpdate = () => {
     setUpdating(false);
     if (value === propertyValue) return;
-    else update({ [propertyName]: value } as Omit<T, 'id'>);
+    else update(propertyName, value);
   };
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
