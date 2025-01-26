@@ -15,7 +15,7 @@ import EntityTitle from '../common/entity/EntityTitle';
 type Props = {
   formTitle: string;
   fight: Omit<Fight, 'id'>;
-  update: <T extends string | number | Character[]>(
+  update: <T extends Fight[keyof Fight]>(
     propertyName: string,
     value: T,
   ) => void;

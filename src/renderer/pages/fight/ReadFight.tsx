@@ -16,8 +16,6 @@ export default function ReadFight() {
     cancelDeleteEntity,
     confirmDelete,
   } = useFight(parseInt(params.fightId));
-  const { id, ...fight } = entity;
-  console.log(id);
   const updateFight = <T extends keyof Fight>(
     propertyName: T,
     propertyValue: Fight[T],
@@ -27,8 +25,8 @@ export default function ReadFight() {
   return (
     <div className='flex flex-col gap-8'>
       <FightForm
-        formTitle={`Fight #${id}`}
-        fight={fight}
+        formTitle={`Fight #${params.fightId}`}
+        fight={entity}
         update={updateFight}
       />
       <EntityDelete

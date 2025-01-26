@@ -22,7 +22,7 @@ const reducer = <T extends IEntity>(
 });
 
 export const useEntityReducer = <T extends IEntity>(
-  entity: T,
+  entity: T = {} as T,
 ): [State<T>, (action: EntityReducerAction<T>) => void] => {
   const [state, dispatch] = useReducer(reducer, {
     entity,
