@@ -6,6 +6,7 @@ import { capitalizeCamelCase } from '@/shared/utils/capitalize';
 
 import EntityIcon from './EntityIcon';
 import EntityInputNumberSwitch from './EntityInputNumberSwitch';
+import EntityTag from './EntityTag';
 
 type Props = {
   propertyName: string;
@@ -13,6 +14,7 @@ type Props = {
   maxDots?: number;
   type?: 'dots' | 'number';
   fontSize?: 'text-xs' | 'text-sm' | 'text-md' | 'text-lg' | 'text-xl';
+  hide?: boolean;
   update: (propertyName: string, propertyValue: number) => void;
 };
 export default function EntityInputNumber({
@@ -21,6 +23,7 @@ export default function EntityInputNumber({
   maxDots = 5,
   type = 'dots',
   fontSize = 'text-xs',
+  hide = false,
   update,
 }: Props) {
   const [value, setValue] = useState<number>(0);
@@ -44,9 +47,9 @@ export default function EntityInputNumber({
   return (
     <div className='flex flex-col gap-2'>
       <div className='flex bg-slate-100 rounded-sm p-2 items-center'>
-        <span className={fontSize + ' flex-1'}>
+        <EntityTag className={`${fontSize} ${hide ? 'hidden' : ''}`}>
           {capitalizeCamelCase(propertyName)}
-        </span>
+        </EntityTag>
         <button className='px-2' onClick={() => onUpdate(-1)}>
           <EntityIcon src={less} />
         </button>

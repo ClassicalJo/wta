@@ -6,6 +6,8 @@ import {
 } from '@/shared/utils/capitalize';
 import { removeUnderline } from '@/shared/utils/removeUnderline';
 
+import EntityTag from './EntityTag';
+
 type Props = {
   propertyName: string;
   propertyValue: string;
@@ -33,9 +35,13 @@ export default function EntityInputSelect({
 
   return (
     <div className='flex flex-col gap-2'>
-      <p className='text-xs'>{capitalizeCamelCase(propertyName)}</p>
-      <div className='flex bg-slate-100 rounded-sm p-2 items-center'>
-        <select className='flex-1' onChange={onChange} value={value}>
+      <EntityTag>{capitalizeCamelCase(propertyName)}</EntityTag>
+      <div className='flex bg-slate-100 rounded-sm p-2 items-center h-9'>
+        <select
+          className='flex-1 bg-transparent'
+          onChange={onChange}
+          value={value}
+        >
           {list.map((item, index) => (
             <option key={`entity-options-${index}`} value={item}>
               {capitalizeEachWord(removeUnderline(item))}

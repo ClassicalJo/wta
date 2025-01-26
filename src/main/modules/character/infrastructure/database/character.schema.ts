@@ -25,6 +25,13 @@ export const CharacterSchema = new EntitySchema<Character>({
       target: 'Ritual',
       eager: true,
     },
+    backgrounds: {
+      type: 'one-to-many',
+      cascade: ['remove', 'insert', 'update'],
+      target: 'Background',
+      inverseSide: 'character',
+      eager: true,
+    },
   },
   columns: withBaseSchemaColumns({
     name: {

@@ -1,6 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router';
 
+import { Background } from '@/main/modules/background/domain/background.entity';
 import { Auspice } from '@/main/modules/character/domain/auspice.enum';
 import { Breed } from '@/main/modules/character/domain/breed.enum';
 import { Character } from '@/main/modules/character/domain/character.entity';
@@ -22,6 +23,7 @@ import { IDetails } from '@/main/modules/character/domain/interfaces/details.int
 import { CHARACTER_ENTITY_NAME } from '@/main/modules/character/infrastructure/database/character.schema';
 import { Gift } from '@/main/modules/gift/domain/gift.entity';
 import { Ritual } from '@/main/modules/ritual/domain/ritual.entity';
+import CharacterBackgroundModal from '@/renderer/components/character/CharacterBackgroundModal';
 import EntityAttributeColumn from '@/renderer/components/common/entity/EntityAttributeColumn';
 import EntityDelete from '@/renderer/components/common/entity/EntityDelete';
 import EntityGrid from '@/renderer/components/common/entity/EntityGrid';
@@ -225,6 +227,11 @@ export default function ReadCharacter() {
           </EntityAttributeColumn>
         </EntityGrid>
       </div>
+      <p>Backgrounds</p>
+      <CharacterBackgroundModal
+        backgrounds={advantages.backgrounds ?? []}
+        update={(e: Background[]) => handleUpdate('backgrounds', e)}
+      />
       <div>
         <EntityGrid columns={2}>
           <EntityAttributeColumn>
