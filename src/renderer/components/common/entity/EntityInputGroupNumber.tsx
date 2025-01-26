@@ -10,7 +10,7 @@ type Props = {
   propertyValue: number;
   maxDots?: number;
   type?: 'dots' | 'number';
-  update: (propertyName: string, propertyValue: number) => void;
+  update: (propertyValue: number) => void;
 };
 export default function EntityInputGroupNumber({
   propertyName,
@@ -30,7 +30,6 @@ export default function EntityInputGroupNumber({
             maxDots={maxDots}
             type={type}
             propertyValue={propertyValue}
-            propertyName={propertyName}
             update={update}
           />
         </div>

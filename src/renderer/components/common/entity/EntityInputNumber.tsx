@@ -7,14 +7,12 @@ import EntityIcon from './EntityIcon';
 import EntityInputNumberSwitch from './EntityInputNumberSwitch';
 
 type Props = {
-  propertyName: string;
   propertyValue: number;
   maxDots?: number;
   type?: 'dots' | 'number';
-  update: (propertyName: string, propertyValue: number) => void;
+  update: (propertyValue: number) => void;
 };
 export default function EntityInputNumber({
-  propertyName,
   propertyValue,
   maxDots = 5,
   type = 'dots',
@@ -34,7 +32,7 @@ export default function EntityInputNumber({
     const newValue = value > 0 ? max : min;
     if (newValue !== value) {
       setValue(newValue);
-      update(propertyName, newValue);
+      update(newValue);
     }
   };
 

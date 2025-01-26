@@ -24,6 +24,7 @@ export default function App() {
         <Link to={'/character'}>Characters</Link>
         <Link to={'/gift'}>Gifts</Link>
         <Link to={'/ritual'}>Rituals</Link>
+        <Link to={'/fight'}>Fight!</Link>
       </div>
     </div>
   );
