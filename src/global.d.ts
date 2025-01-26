@@ -1,4 +1,5 @@
 import { ICharacterExpose } from './main/modules/character/application/ipc/character-expose.interface';
+import { IFightExpose } from './main/modules/fight/application/ipc/fight-expose.interface';
 import { IGiftExpose } from './main/modules/gift/application/ipc/gift-expose.interface';
 import { IRitualExpose } from './main/modules/ritual/application/ipc/ritual-expose.interface';
 import { MainMessages } from './shared/messages/main-messages.enum';
@@ -21,6 +22,7 @@ declare global {
         character: ICharacterExpose;
         gift: IGiftExpose;
         ritual: IRitualExpose;
+        fight: IFightExpose;
       };
     };
   }

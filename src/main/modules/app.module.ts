@@ -5,6 +5,8 @@ import { BackgroundSchema } from './background/infrastructure/database/backgroun
 import { CharacterModule } from './character/character.module';
 import { CharacterSchema } from './character/infrastructure/database/character.schema';
 import { DatabaseModule } from './database/database.module';
+import { FightModule } from './fight/fight.module';
+import { FightSchema } from './fight/infrastructure/database/fight.schema';
 import { GiftModule } from './gift/gift.module';
 import { GiftSchema } from './gift/infrastructure/database/gift.schema';
 import { MessageModule } from './message/message.module';
@@ -13,19 +15,18 @@ import { RitualModule } from './ritual/ritual.module';
 
 export class AppModule {
   constructor(webContents: WebContents) {
-    const databaseProvider = new OrmConfig([
+    const { dataSource } = new OrmConfig([
       CharacterSchema,
       GiftSchema,
       RitualSchema,
       BackgroundSchema,
+      FightSchema,
     ]);
     const messageModule = new MessageModule(webContents);
-    new CharacterModule(
-      databaseProvider.dataSource,
-      messageModule.messageService,
-    );
-    new GiftModule(databaseProvider.dataSource, messageModule.messageService);
-    new RitualModule(databaseProvider.dataSource, messageModule.messageService);
-    new DatabaseModule(databaseProvider.dataSource);
+    new CharacterModule(dataSource, messageModule.messageService);
+    new GiftModule(dataSource, messageModule.messageService);
+    new RitualModule(dataSource, messageModule.messageService);
+    new FightModule(dataSource, messageModule.messageService);
+    new DatabaseModule(dataSource);
   }
 }

@@ -1,5 +1,7 @@
 import { CreateCharacterDto } from '@/main/modules/character/application/dto/create-character.dto';
 import { UpdateCharacterDto } from '@/main/modules/character/application/dto/update-character.dto';
+import { CreateFightDto } from '@/main/modules/fight/application/dto/create-fight.dto';
+import { UpdateFightDto } from '@/main/modules/fight/application/dto/update-fight.dto';
 import { CreateGiftDto } from '@/main/modules/gift/application/dto/create-gift.dto';
 import { UpdateGiftDto } from '@/main/modules/gift/application/dto/update-gift.dto';
 import { CreateRitualDto } from '@/main/modules/ritual/application/dto/create-ritual.dto';
@@ -26,4 +28,10 @@ export interface IRendererPayloads {
   [RendererMessages.RITUAL_UPDATE]: UpdateRitualDto;
   [RendererMessages.RITUAL_READ]: number;
   [RendererMessages.RITUAL_READ_ALL]: void;
+
+  [RendererMessages.FIGHT_CREATE]: CreateFightDto;
+  [RendererMessages.FIGHT_DELETE]: number;
+  [RendererMessages.FIGHT_UPDATE]: UpdateFightDto;
+  [RendererMessages.FIGHT_READ]: number;
+  [RendererMessages.FIGHT_READ_ALL]: void;
 }
