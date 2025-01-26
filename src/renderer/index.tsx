@@ -9,6 +9,9 @@ import { BackgroundProvider } from './context/BackgroundPosition';
 import Characters from './pages/characters/Characters';
 import CreateCharacter from './pages/characters/CreateCharacter';
 import ReadCharacter from './pages/characters/ReadCharacter';
+import CreateFight from './pages/fight/CreateFight';
+import Fights from './pages/fight/Fights';
+import ReadFight from './pages/fight/ReadFight';
 import CreateGift from './pages/gifts/CreateGift';
 import Gifts from './pages/gifts/Gifts';
 import ReadGift from './pages/gifts/ReadGift';
@@ -41,6 +44,11 @@ root.render(
               <Route index element={<Rituals />} />
               <Route path='create' element={<CreateRitual />} />
               <Route path=':ritualId' element={<ReadRitual />} />
+            </Route>
+            <Route path='/fight'>
+              <Route index element={<Fights />} />
+              <Route path=':fightId' element={<ReadFight />} />
+              <Route path='create' element={<CreateFight />} />
             </Route>
           </Route>
         </Routes>

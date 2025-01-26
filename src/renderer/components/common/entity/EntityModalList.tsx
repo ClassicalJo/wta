@@ -13,7 +13,7 @@ type Props<T> = {
   allValues: T[];
   selectedValues: T[];
   propertyName: string;
-  update: (propertyName: string, propertyValues: T[]) => void;
+  update: (propertyValues: T[]) => void;
 };
 export default function EntityModalList<T>({
   allValues,
@@ -29,15 +29,12 @@ export default function EntityModalList<T>({
 
   const addValue = (value: T) => {
     addEntity(value);
-    update(propertyName, [...entityList, value]);
+    update([...entityList, value]);
   };
 
   const removeValue = (value: T) => {
     removeEntity(value);
-    update(
-      propertyName,
-      entityList.filter((e) => e !== value),
-    );
+    update(entityList.filter((e) => e !== value));
   };
 
   return (

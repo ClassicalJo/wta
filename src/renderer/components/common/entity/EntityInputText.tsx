@@ -5,19 +5,14 @@ import icon from '@/resources/icons/edit.svg';
 import EditableInputText from '../ui/EditableInputText';
 
 type Props = {
-  propertyName: string;
   propertyValue: string;
-  update: (propertyName: string, propertyValue: string) => void;
+  update: (propertyValue: string) => void;
 };
-export default function EntityInputText({
-  propertyName,
-  propertyValue,
-  update,
-}: Props) {
+export default function EntityInputText({ propertyValue, update }: Props) {
   const [edit, setEdit] = useState<boolean>(false);
   const handleSubmit = (value: string) => {
     setEdit(false);
-    update(propertyName, value);
+    update(value);
   };
   return (
     <div className='flex h-9 rounded-sm items-center'>

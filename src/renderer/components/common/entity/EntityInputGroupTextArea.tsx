@@ -8,7 +8,7 @@ import EntityTag from './EntityTag';
 type Props = {
   propertyName: string;
   propertyValue: string;
-  update: (propertyName: string, propertyValue: string) => void;
+  update: (propertyValue: string) => void;
 };
 export default function EntityInputGroupTextArea({
   propertyName,
@@ -21,11 +21,7 @@ export default function EntityInputGroupTextArea({
         {capitalizeCamelCase(propertyName)}
       </EntityTag>
 
-      <EntityInputTextArea
-        propertyName={propertyName}
-        propertyValue={propertyValue}
-        update={update}
-      />
+      <EntityInputTextArea propertyValue={propertyValue} update={update} />
     </div>
   );
 }

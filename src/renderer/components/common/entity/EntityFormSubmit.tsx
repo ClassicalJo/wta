@@ -1,13 +1,17 @@
 import React from 'react';
 
-export default function EntityFormSubmit() {
+type Props = {
+  children: React.ReactNode;
+  onClick: () => void;
+};
+export default function EntityFormSubmit({ children, onClick }: Props) {
   return (
     <div className='flex mt-4'>
       <button
         className='flex-1 rounded-full bg-purple-500 text-white text-lg px-5 py-1'
-        type='submit'
+        onClick={onClick}
       >
-        Submit
+        {children}
       </button>
     </div>
   );

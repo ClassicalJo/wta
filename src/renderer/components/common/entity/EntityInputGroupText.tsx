@@ -8,7 +8,7 @@ import EntityTag from './EntityTag';
 type Props = {
   propertyName: string;
   propertyValue: string;
-  update: (propertyName: string, propertyValue: string) => void;
+  update: (propertyValue: string) => void;
 };
 export default function EntityInputGroupText({
   propertyName,
@@ -21,11 +21,7 @@ export default function EntityInputGroupText({
         {capitalizeCamelCase(propertyName)}
       </EntityTag>
       <div className='bg-white/25 rounded-sm'>
-        <EntityInputText
-          propertyName={propertyName}
-          propertyValue={propertyValue}
-          update={update}
-        />
+        <EntityInputText propertyValue={propertyValue} update={update} />
       </div>
     </div>
   );

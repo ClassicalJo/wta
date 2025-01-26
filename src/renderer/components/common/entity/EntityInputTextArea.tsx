@@ -5,19 +5,14 @@ import icon from '@/resources/icons/edit.svg';
 import EditableInputTextArea from '../ui/EditableInputTextArea';
 
 type Props = {
-  propertyName: string;
   propertyValue: string;
-  update: (propertyName: string, propertyValue: string) => void;
+  update: (propertyValue: string) => void;
 };
-export default function EntityInputTextArea({
-  propertyName,
-  propertyValue,
-  update,
-}: Props) {
+export default function EntityInputTextArea({ propertyValue, update }: Props) {
   const [edit, setEdit] = useState<boolean>(false);
   const handleUpdate = (value: string) => {
     setEdit(false);
-    update(propertyName, value);
+    update(value);
   };
   return (
     <EditableInputTextArea

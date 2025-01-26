@@ -8,6 +8,7 @@ import { MainMessages } from '@/shared/messages/main-messages.enum';
 import { capitalize } from '@/shared/utils/capitalize';
 
 import { notificationService } from '../../services/notification.service';
+import { useEntityReducer } from './useEntityReducer';
 
 type Props<T extends IEntity> = {
   createDto: new (values: Omit<T, 'id'>) => CreateDto<T>;
@@ -34,6 +35,17 @@ export function makeCreateEntityHook<T extends IEntity>({
       navigator(`/${entityName}`);
     }, [navigator]);
 
+    const [state, dispatch] = useEntityReducer<T>();
+    const handleSubmit = () => onSubmit(state.entity);
+    const handleUpdate = <K extends keyof T>(
+      propertyName: string,
+      propertyValue: T[K],
+    ) =>
+      dispatch({
+        property: propertyName,
+        value: propertyValue,
+      });
+
     useEffect(() => {
       const callback = window.electron.onMainMessage(
         mainMessage,
@@ -42,6 +54,6 @@ export function makeCreateEntityHook<T extends IEntity>({
 
       return () => window.electron.offMainMessage(mainMessage, callback);
     }, [onCreateSuccess]);
-    return { onSubmit };
+    return { handleSubmit, handleUpdate, state };
   };
 }

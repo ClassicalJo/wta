@@ -41,7 +41,9 @@ export default function EditableInputText({
     return (
       <input
         ref={ref}
-        className={'flex flex-1 focus:bg-slate-50 h-full px-2 ' + className}
+        className={
+          'flex flex-1 focus:bg-slate-50 h-full px-2 text-black ' + className
+        }
         type='text'
         onChange={onChange}
         value={value}
