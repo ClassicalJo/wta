@@ -34,60 +34,58 @@ export default function ReadGift() {
     updateEntity({ [propertyName]: propertyValue });
   };
   return (
-    <Main>
-      <div className='flex flex-col flex-1 w-full gap-8'>
-        <EntityTitle>{`Gift #${id}`}</EntityTitle>
-        <EntityInputGroupText
-          propertyName='name'
-          propertyValue={gift.name}
-          update={updateGift}
-        />
-        <EntityLevel
-          propertyName='level'
-          propertyValue={gift.level}
-          update={updateGift}
-        />
-        <EntityGrid columns={2}>
-          <EntityAttributeColumn>
-            <EntityTag>{capitalizeCamelCase('description')}</EntityTag>
+    <div className='flex flex-col flex-1 w-full gap-8'>
+      <EntityTitle>{`Gift #${id}`}</EntityTitle>
+      <EntityInputGroupText
+        propertyName='name'
+        propertyValue={gift.name}
+        update={updateGift}
+      />
+      <EntityLevel
+        propertyName='level'
+        propertyValue={gift.level}
+        update={updateGift}
+      />
+      <EntityGrid columns={2}>
+        <EntityAttributeColumn>
+          <EntityTag>{capitalizeCamelCase('description')}</EntityTag>
 
-            <EntityInputTextArea
-              propertyName='description'
-              propertyValue={gift.description}
-              update={updateGift}
-            />
-          </EntityAttributeColumn>
-          <EntityAttributeColumn>
-            <EntityTag>{capitalizeCamelCase('system')}</EntityTag>
-
-            <EntityInputTextArea
-              propertyName='system'
-              propertyValue={gift.system}
-              update={updateGift}
-            />
-          </EntityAttributeColumn>
-        </EntityGrid>
-        <EntityInputGroupText
-          propertyName='dataSource'
-          propertyValue={gift.dataSource}
-          update={updateGift}
-        />
-        <p>Gift Source</p>
-        <EntityGrid columns={2}>
-          <EntityModalList<GiftSource>
-            propertyName='giftSource'
-            selectedValues={gift.giftSource ?? []}
-            allValues={Object.values(GiftSource)}
+          <EntityInputTextArea
+            propertyName='description'
+            propertyValue={gift.description}
             update={updateGift}
           />
-        </EntityGrid>
-      </div>
+        </EntityAttributeColumn>
+        <EntityAttributeColumn>
+          <EntityTag>{capitalizeCamelCase('system')}</EntityTag>
+
+          <EntityInputTextArea
+            propertyName='system'
+            propertyValue={gift.system}
+            update={updateGift}
+          />
+        </EntityAttributeColumn>
+      </EntityGrid>
+      <EntityInputGroupText
+        propertyName='dataSource'
+        propertyValue={gift.dataSource}
+        update={updateGift}
+      />
+      <p>Gift Source</p>
+      <EntityGrid columns={2}>
+        <EntityModalList<GiftSource>
+          propertyName='giftSource'
+          selectedValues={gift.giftSource ?? []}
+          allValues={Object.values(GiftSource)}
+          update={updateGift}
+        />
+      </EntityGrid>
       <EntityDelete
         entityName={GIFT_ENTITY_NAME}
         showConfirmation={confirmDelete}
         deleteEntity={deleteEntity}
         cancelDelete={cancelDeleteEntity}
       />
-    </Main>
+    </div>
   );
 }

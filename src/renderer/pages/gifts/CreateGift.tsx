@@ -11,25 +11,23 @@ export default function CreateGift() {
   const { onSubmit } = useCreateGift();
 
   return (
-    <Main>
-      <div className='flex flex-col flex-1 w-full gap-8'>
-        <h1 className='text-2xl mb-4'>Create gift</h1>
-        <Formik
-          initialValues={{
-            name: '',
-          }}
-          onSubmit={onSubmit}
-        >
-          <Form className='flex flex-col gap-2'>
-            <EntityFormField<Gift>
-              propertyName='name'
-              placeholder='Blessing of the Moon'
-            />
+    <div className='flex flex-col flex-1 w-full gap-8'>
+      <h1 className='text-2xl mb-4'>Create gift</h1>
+      <Formik
+        initialValues={{
+          name: '',
+        }}
+        onSubmit={onSubmit}
+      >
+        <Form className='flex flex-col gap-2'>
+          <EntityFormField<Gift>
+            propertyName='name'
+            placeholder='Blessing of the Moon'
+          />
 
-            <EntityFormSubmit />
-          </Form>
-        </Formik>
-      </div>
-    </Main>
+          <EntityFormSubmit />
+        </Form>
+      </Formik>
+    </div>
   );
 }

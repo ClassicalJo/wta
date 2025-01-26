@@ -11,24 +11,19 @@ export default function CreateCharacter() {
   const { onSubmit } = useCreateCharacter();
 
   return (
-    <Main>
-      <div className='flex flex-col flex-1 w-full gap-8'>
-        <h1 className='text-2xl mb-4'>Create character</h1>
-        <Formik
-          initialValues={{
-            name: '',
-          }}
-          onSubmit={onSubmit}
-        >
-          <Form className='flex flex-col gap-2'>
-            <EntityFormField<Character>
-              propertyName='name'
-              placeholder='John'
-            />
-            <EntityFormSubmit />
-          </Form>
-        </Formik>
-      </div>
-    </Main>
+    <div className='flex flex-col flex-1 w-full gap-8'>
+      <h1 className='text-2xl mb-4'>Create character</h1>
+      <Formik
+        initialValues={{
+          name: '',
+        }}
+        onSubmit={onSubmit}
+      >
+        <Form className='flex flex-col gap-2'>
+          <EntityFormField<Character> propertyName='name' placeholder='John' />
+          <EntityFormSubmit />
+        </Form>
+      </Formik>
+    </div>
   );
 }

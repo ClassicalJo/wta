@@ -74,200 +74,198 @@ export default function ReadCharacter() {
     });
   };
   return (
-    <Main>
-      <div className='flex flex-col flex-1 w-full gap-8'>
-        <div>
-          <EntityTitle>Werewolf</EntityTitle>
-          <EntityGrid>
-            <EntityAttributeColumn>
-              {Object.keys(userDetails).map((key: keyof IDetails) => (
-                <EntityInputGroupText
-                  key={key}
-                  propertyName={key}
-                  propertyValue={userDetails[key]}
-                  update={handleUpdate}
-                />
-              ))}
-            </EntityAttributeColumn>
-            <EntityAttributeColumn>
-              <EntityInputSelect
-                list={Object.values(Breed)}
-                propertyName='breed'
-                propertyValue={wolfDetails.breed}
-                update={handleUpdate}
-              />
-              <EntityInputSelect
-                list={Object.values(Auspice)}
-                propertyName='auspice'
-                propertyValue={wolfDetails.auspice}
-                update={handleUpdate}
-              />
-              <EntityInputGroupText
-                propertyName='tribe'
-                propertyValue={wolfDetails.tribe}
-                update={handleUpdate}
-              />
-            </EntityAttributeColumn>
-            <EntityAttributeColumn>
-              {Object.keys(restDetails).map((key: keyof IDetails) => (
-                <EntityInputGroupText
-                  key={key}
-                  propertyName={key}
-                  propertyValue={userDetails[key]}
-                  update={handleUpdate}
-                />
-              ))}
-            </EntityAttributeColumn>
-          </EntityGrid>
-        </div>
-        <div>
-          <EntityTitle>Attributes</EntityTitle>
-          <EntityGrid>
-            <EntityAttributeColumn>
-              <p>Physical</p>
-              {Object.keys(physicalAttributes).map(
-                (key: keyof IPhysicalAttributes) => (
-                  <EntityInputGroupNumber
-                    key={key}
-                    propertyName={key}
-                    propertyValue={physicalAttributes[key]}
-                    update={handleUpdate}
-                  />
-                ),
-              )}
-            </EntityAttributeColumn>
-            <EntityAttributeColumn>
-              <p>Social</p>
-              {Object.keys(socialAttributes).map(
-                (key: keyof ISocialAttributes) => (
-                  <EntityInputGroupNumber
-                    key={key}
-                    propertyName={key}
-                    propertyValue={socialAttributes[key]}
-                    update={handleUpdate}
-                  />
-                ),
-              )}
-            </EntityAttributeColumn>
-            <EntityAttributeColumn>
-              <p>Mental</p>
-              {Object.keys(mentalAttributes).map(
-                (key: keyof IMentalAttributes) => (
-                  <EntityInputGroupNumber
-                    key={key}
-                    propertyName={key}
-                    propertyValue={mentalAttributes[key]}
-                    update={handleUpdate}
-                  />
-                ),
-              )}
-            </EntityAttributeColumn>
-          </EntityGrid>
-        </div>
-        <div>
-          <EntityTitle>Abilities:</EntityTitle>
-          <EntityGrid>
-            <EntityAttributeColumn>
-              <p>Talents</p>
-              {Object.keys(talents).map((key: keyof ITalents) => (
-                <EntityInputGroupNumber
-                  key={key}
-                  propertyName={key}
-                  propertyValue={talents[key]}
-                  update={handleUpdate}
-                />
-              ))}
-            </EntityAttributeColumn>
-            <EntityAttributeColumn>
-              <p>Skills</p>
-              {Object.keys(skills).map((key: keyof ISkills) => (
-                <EntityInputGroupNumber
-                  key={key}
-                  propertyName={key}
-                  propertyValue={skills[key]}
-                  update={handleUpdate}
-                />
-              ))}
-            </EntityAttributeColumn>
-            <EntityAttributeColumn>
-              <p>Knowledges</p>
-              {Object.keys(knowledges).map((key: keyof IKnowledges) => (
-                <EntityInputGroupNumber
-                  key={key}
-                  propertyName={key}
-                  propertyValue={knowledges[key]}
-                  update={handleUpdate}
-                />
-              ))}
-            </EntityAttributeColumn>
-          </EntityGrid>
-        </div>
-        <div>
-          <EntityTitle>Advantages</EntityTitle>
+    <div className='flex flex-col flex-1 w-full gap-8'>
+      <div>
+        <EntityTitle>Werewolf</EntityTitle>
+        <EntityGrid>
           <EntityAttributeColumn>
-            <p>Renown</p>
-            <EntityGrid columns={2}>
-              <EntityAttributeColumn>
-                {Object.keys(renown).map((key: keyof IRenown) => (
-                  <EntityInputGroupNumber
-                    key={key}
-                    maxDots={10}
-                    propertyName={key}
-                    propertyValue={renown[key]}
-                    update={handleUpdate}
-                  />
-                ))}
-              </EntityAttributeColumn>
-              <EntityAttributeColumn>
-                {Object.keys(self).map((key: keyof ISelf) => (
-                  <EntityInputGroupNumber
-                    key={key}
-                    maxDots={10}
-                    propertyName={key}
-                    propertyValue={self[key]}
-                    update={handleUpdate}
-                  />
-                ))}
-              </EntityAttributeColumn>
-            </EntityGrid>
+            {Object.keys(userDetails).map((key: keyof IDetails) => (
+              <EntityInputGroupText
+                key={key}
+                propertyName={key}
+                propertyValue={userDetails[key]}
+                update={handleUpdate}
+              />
+            ))}
           </EntityAttributeColumn>
-        </div>
+          <EntityAttributeColumn>
+            <EntityInputSelect
+              list={Object.values(Breed)}
+              propertyName='breed'
+              propertyValue={wolfDetails.breed}
+              update={handleUpdate}
+            />
+            <EntityInputSelect
+              list={Object.values(Auspice)}
+              propertyName='auspice'
+              propertyValue={wolfDetails.auspice}
+              update={handleUpdate}
+            />
+            <EntityInputGroupText
+              propertyName='tribe'
+              propertyValue={wolfDetails.tribe}
+              update={handleUpdate}
+            />
+          </EntityAttributeColumn>
+          <EntityAttributeColumn>
+            {Object.keys(restDetails).map((key: keyof IDetails) => (
+              <EntityInputGroupText
+                key={key}
+                propertyName={key}
+                propertyValue={userDetails[key]}
+                update={handleUpdate}
+              />
+            ))}
+          </EntityAttributeColumn>
+        </EntityGrid>
+      </div>
+      <div>
+        <EntityTitle>Attributes</EntityTitle>
+        <EntityGrid>
+          <EntityAttributeColumn>
+            <p>Physical</p>
+            {Object.keys(physicalAttributes).map(
+              (key: keyof IPhysicalAttributes) => (
+                <EntityInputGroupNumber
+                  key={key}
+                  propertyName={key}
+                  propertyValue={physicalAttributes[key]}
+                  update={handleUpdate}
+                />
+              ),
+            )}
+          </EntityAttributeColumn>
+          <EntityAttributeColumn>
+            <p>Social</p>
+            {Object.keys(socialAttributes).map(
+              (key: keyof ISocialAttributes) => (
+                <EntityInputGroupNumber
+                  key={key}
+                  propertyName={key}
+                  propertyValue={socialAttributes[key]}
+                  update={handleUpdate}
+                />
+              ),
+            )}
+          </EntityAttributeColumn>
+          <EntityAttributeColumn>
+            <p>Mental</p>
+            {Object.keys(mentalAttributes).map(
+              (key: keyof IMentalAttributes) => (
+                <EntityInputGroupNumber
+                  key={key}
+                  propertyName={key}
+                  propertyValue={mentalAttributes[key]}
+                  update={handleUpdate}
+                />
+              ),
+            )}
+          </EntityAttributeColumn>
+        </EntityGrid>
+      </div>
+      <div>
+        <EntityTitle>Abilities:</EntityTitle>
+        <EntityGrid>
+          <EntityAttributeColumn>
+            <p>Talents</p>
+            {Object.keys(talents).map((key: keyof ITalents) => (
+              <EntityInputGroupNumber
+                key={key}
+                propertyName={key}
+                propertyValue={talents[key]}
+                update={handleUpdate}
+              />
+            ))}
+          </EntityAttributeColumn>
+          <EntityAttributeColumn>
+            <p>Skills</p>
+            {Object.keys(skills).map((key: keyof ISkills) => (
+              <EntityInputGroupNumber
+                key={key}
+                propertyName={key}
+                propertyValue={skills[key]}
+                update={handleUpdate}
+              />
+            ))}
+          </EntityAttributeColumn>
+          <EntityAttributeColumn>
+            <p>Knowledges</p>
+            {Object.keys(knowledges).map((key: keyof IKnowledges) => (
+              <EntityInputGroupNumber
+                key={key}
+                propertyName={key}
+                propertyValue={knowledges[key]}
+                update={handleUpdate}
+              />
+            ))}
+          </EntityAttributeColumn>
+        </EntityGrid>
+      </div>
+      <div>
+        <EntityTitle>Advantages</EntityTitle>
         <EntityAttributeColumn>
-          <p>Backgrounds</p>
-          <CharacterBackgroundModal
-            backgrounds={advantages.backgrounds ?? []}
-            update={(e: Background[]) => handleUpdate('backgrounds', e)}
-          />
-        </EntityAttributeColumn>
-        <div>
+          <p>Renown</p>
           <EntityGrid columns={2}>
             <EntityAttributeColumn>
-              <p>Rituals</p>
-              <EntityModalList<Ritual>
-                allValues={rituals}
-                selectedValues={advantages.rites || []}
-                propertyName='rites'
-                update={handleUpdate}
-              />
+              {Object.keys(renown).map((key: keyof IRenown) => (
+                <EntityInputGroupNumber
+                  key={key}
+                  maxDots={10}
+                  propertyName={key}
+                  propertyValue={renown[key]}
+                  update={handleUpdate}
+                />
+              ))}
             </EntityAttributeColumn>
             <EntityAttributeColumn>
-              <p>Gifts</p>
-              <EntityModalList<Gift>
-                allValues={gifts}
-                selectedValues={advantages.gifts || []}
-                propertyName='gifts'
-                update={handleUpdate}
-              />
+              {Object.keys(self).map((key: keyof ISelf) => (
+                <EntityInputGroupNumber
+                  key={key}
+                  maxDots={10}
+                  propertyName={key}
+                  propertyValue={self[key]}
+                  update={handleUpdate}
+                />
+              ))}
             </EntityAttributeColumn>
           </EntityGrid>
-          <EntityDelete
-            entityName={CHARACTER_ENTITY_NAME}
-            showConfirmation={confirmDelete}
-            deleteEntity={deleteEntity}
-            cancelDelete={cancelDeleteEntity}
-          />
-        </div>
+        </EntityAttributeColumn>
       </div>
-    </Main>
+      <EntityAttributeColumn>
+        <p>Backgrounds</p>
+        <CharacterBackgroundModal
+          backgrounds={advantages.backgrounds ?? []}
+          update={(e: Background[]) => handleUpdate('backgrounds', e)}
+        />
+      </EntityAttributeColumn>
+      <div>
+        <EntityGrid columns={2}>
+          <EntityAttributeColumn>
+            <p>Rituals</p>
+            <EntityModalList<Ritual>
+              allValues={rituals}
+              selectedValues={advantages.rites || []}
+              propertyName='rites'
+              update={handleUpdate}
+            />
+          </EntityAttributeColumn>
+          <EntityAttributeColumn>
+            <p>Gifts</p>
+            <EntityModalList<Gift>
+              allValues={gifts}
+              selectedValues={advantages.gifts || []}
+              propertyName='gifts'
+              update={handleUpdate}
+            />
+          </EntityAttributeColumn>
+        </EntityGrid>
+        <EntityDelete
+          entityName={CHARACTER_ENTITY_NAME}
+          showConfirmation={confirmDelete}
+          deleteEntity={deleteEntity}
+          cancelDelete={cancelDeleteEntity}
+        />
+      </div>
+    </div>
   );
 }

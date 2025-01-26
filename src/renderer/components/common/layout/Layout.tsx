@@ -5,6 +5,7 @@ import { useBackgroundPosition } from '@/renderer/hooks/common/useBackgroundPosi
 
 import BackgroundImage from '../ui/BackgroundImage';
 import Breadcrumbs from './Breadcrumbs';
+import Main from './Main';
 
 export default function Layout() {
   const { position } = useBackgroundPosition();
@@ -13,9 +14,11 @@ export default function Layout() {
       <BackgroundImage position={position} />
       <div className='min-h-screen h-full relative overflow-hidden max-h-screen'>
         <Breadcrumbs />
-        <main className='mx-auto min-h-screen flex'>
-          <Outlet />
-        </main>
+        <div className='mx-auto min-h-screen flex'>
+          <Main>
+            <Outlet />
+          </Main>
+        </div>
       </div>
     </div>
   );

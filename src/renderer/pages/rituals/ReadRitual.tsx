@@ -34,52 +34,50 @@ export default function ReadRitual() {
     updateEntity({ [propertyName]: propertyValue });
   };
   return (
-    <Main>
-      <div className='flex flex-col flex-1 w-full gap-8'>
-        <EntityTitle>{`Ritual #${id}`}</EntityTitle>
-        <EntityInputGroupText
-          propertyName='name'
-          propertyValue={ritual.name}
-          update={updateRitual}
-        />
-        <EntityLevel
-          propertyName='level'
-          propertyValue={ritual.level}
-          update={updateRitual}
-          type='number'
-          maxDots={10}
-        />
-        <EntityInputSelect
-          propertyName='type'
-          propertyValue={ritual.type}
-          list={Object.values(RitualType)}
-          update={updateRitual}
-        />
+    <div className='flex flex-col flex-1 w-full gap-8'>
+      <EntityTitle>{`Ritual #${id}`}</EntityTitle>
+      <EntityInputGroupText
+        propertyName='name'
+        propertyValue={ritual.name}
+        update={updateRitual}
+      />
+      <EntityLevel
+        propertyName='level'
+        propertyValue={ritual.level}
+        update={updateRitual}
+        type='number'
+        maxDots={10}
+      />
+      <EntityInputSelect
+        propertyName='type'
+        propertyValue={ritual.type}
+        list={Object.values(RitualType)}
+        update={updateRitual}
+      />
 
-        <EntityGrid columns={2}>
-          <EntityInputGroupTextArea
-            propertyName='description'
-            propertyValue={ritual.description}
-            update={updateRitual}
-          />
-          <EntityInputGroupTextArea
-            propertyName='system'
-            propertyValue={ritual.system}
-            update={updateRitual}
-          />
-        </EntityGrid>
-        <EntityInputGroupTextGroup
-          propertyName='dataSource'
-          propertyValue={ritual.dataSource}
+      <EntityGrid columns={2}>
+        <EntityInputGroupTextArea
+          propertyName='description'
+          propertyValue={ritual.description}
           update={updateRitual}
         />
-      </div>
+        <EntityInputGroupTextArea
+          propertyName='system'
+          propertyValue={ritual.system}
+          update={updateRitual}
+        />
+      </EntityGrid>
+      <EntityInputGroupTextGroup
+        propertyName='dataSource'
+        propertyValue={ritual.dataSource}
+        update={updateRitual}
+      />
       <EntityDelete
         entityName={RITUAL_ENTITY_NAME}
         showConfirmation={confirmDelete}
         deleteEntity={deleteEntity}
         cancelDelete={cancelDeleteEntity}
       />
-    </Main>
+    </div>
   );
 }
