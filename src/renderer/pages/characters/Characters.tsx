@@ -4,17 +4,17 @@ import { Character } from '@/main/modules/character/domain/character.entity';
 import { CHARACTER_ENTITY_NAME } from '@/main/modules/character/infrastructure/database/character.schema';
 import EntityDashboard from '@/renderer/components/common/entity/EntityDashboard';
 import { useReadAllCharacters } from '@/renderer/hooks/character/useReadAllCharacters';
+import { useBackgroundPosition } from '@/renderer/hooks/common/useBackgroundPosition';
 
 export default function Characters() {
   const { entities } = useReadAllCharacters();
+  useBackgroundPosition('top');
   return (
-    <div className='flex-column gap-2'>
-      <div className='flex-1'>
-        <EntityDashboard<Character>
-          entityName={CHARACTER_ENTITY_NAME}
-          entities={entities}
-        />
-      </div>
+    <div className='flex-1 p-16'>
+      <EntityDashboard<Character>
+        entityName={CHARACTER_ENTITY_NAME}
+        entities={entities}
+      />
     </div>
   );
 }

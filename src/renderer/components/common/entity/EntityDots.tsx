@@ -17,14 +17,14 @@ export default function EntityDots({ maxDots, currentValue }: Props) {
         .fill('')
         .map((_, index) => (
           <span key={`filled-${index}`}>
-            <EntityIcon src={dotFilled} />
+            <EntityIcon src={dotFilled} className='invert' />
           </span>
         ))}
       {Array(maxDots - currentValue)
         .fill('')
         .map((_, index) => (
           <span key={`empty-${index}`}>
-            <EntityIcon src={dotEmpty} />
+            <EntityIcon src={dotEmpty} className='invert ' />
           </span>
         ))}
     </p>

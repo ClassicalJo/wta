@@ -4,14 +4,18 @@ import { useParams } from 'react-router';
 import { GiftSource } from '@/main/modules/gift/domain/gift-source.enum';
 import { Gift } from '@/main/modules/gift/domain/gift.entity';
 import { GIFT_ENTITY_NAME } from '@/main/modules/gift/infrastructure/database/gift.schema';
+import EntityAttributeColumn from '@/renderer/components/common/entity/EntityAttributeColumn';
 import EntityDelete from '@/renderer/components/common/entity/EntityDelete';
 import EntityGrid from '@/renderer/components/common/entity/EntityGrid';
-import EntityInputNumber from '@/renderer/components/common/entity/EntityInputNumber';
-import EntityInputText from '@/renderer/components/common/entity/EntityInputText';
+import EntityInputGroupText from '@/renderer/components/common/entity/EntityInputGroupText';
 import EntityInputTextArea from '@/renderer/components/common/entity/EntityInputTextArea';
+import EntityLevel from '@/renderer/components/common/entity/EntityLevel';
 import EntityModalList from '@/renderer/components/common/entity/EntityModalList';
+import EntityTag from '@/renderer/components/common/entity/EntityTag';
 import EntityTitle from '@/renderer/components/common/entity/EntityTitle';
+import Main from '@/renderer/components/common/layout/Main';
 import { useGift } from '@/renderer/hooks/gift/useGift';
+import { capitalizeCamelCase } from '@/shared/utils/capitalize';
 
 export default function ReadGift() {
   const params = useParams<'giftId'>();
@@ -30,35 +34,40 @@ export default function ReadGift() {
     updateEntity({ [propertyName]: propertyValue });
   };
   return (
-    <div>
-      <div className='flex flex-col gap-4'>
+    <Main>
+      <div className='flex flex-col flex-1 w-full gap-8'>
         <EntityTitle>{`Gift #${id}`}</EntityTitle>
-        <EntityInputText
+        <EntityInputGroupText
           propertyName='name'
           propertyValue={gift.name}
           update={updateGift}
         />
-        <EntityInputNumber
+        <EntityLevel
           propertyName='level'
-          type='number'
-          fontSize='text-md'
-          maxDots={10}
           propertyValue={gift.level}
           update={updateGift}
         />
         <EntityGrid columns={2}>
-          <EntityInputTextArea
-            propertyName='description'
-            propertyValue={gift.description}
-            update={updateGift}
-          />
-          <EntityInputTextArea
-            propertyName='system'
-            propertyValue={gift.system}
-            update={updateGift}
-          />
+          <EntityAttributeColumn>
+            <EntityTag>{capitalizeCamelCase('description')}</EntityTag>
+
+            <EntityInputTextArea
+              propertyName='description'
+              propertyValue={gift.description}
+              update={updateGift}
+            />
+          </EntityAttributeColumn>
+          <EntityAttributeColumn>
+            <EntityTag>{capitalizeCamelCase('system')}</EntityTag>
+
+            <EntityInputTextArea
+              propertyName='system'
+              propertyValue={gift.system}
+              update={updateGift}
+            />
+          </EntityAttributeColumn>
         </EntityGrid>
-        <EntityInputText
+        <EntityInputGroupText
           propertyName='dataSource'
           propertyValue={gift.dataSource}
           update={updateGift}
@@ -79,6 +88,6 @@ export default function ReadGift() {
         deleteEntity={deleteEntity}
         cancelDelete={cancelDeleteEntity}
       />
-    </div>
+    </Main>
   );
 }

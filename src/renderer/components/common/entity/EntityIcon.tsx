@@ -5,5 +5,5 @@ type Props = {
   src: string;
 };
 export default function EntityIcon({ className, src }: Props) {
-  return <img src={src} alt='' className={className || 'w-3 h-3'} />;
+  return <img src={src} alt='' className={`w-3 h-3 ${className}`} />;
 }
