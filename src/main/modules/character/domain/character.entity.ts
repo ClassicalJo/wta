@@ -1,3 +1,4 @@
+import { Background } from '../../background/domain/background.entity';
 import { BaseEntity } from '../../common/domain/base.entity';
 import { Gift } from '../../gift/domain/gift.entity';
 import { Ritual } from '../../ritual/domain/ritual.entity';
@@ -78,6 +79,7 @@ export class Character extends BaseEntity {
   //Advantages
   gifts?: Gift[];
   rites?: Ritual[];
+  backgrounds?: Background[];
 
   constructor(data?: {
     id?: number;
