@@ -37,7 +37,7 @@ export default function CharacterBackgroundModal({
         .map((k, index) => (
           <div
             key={`background-${k.id}-${index}`}
-            className='flex gap-4 bg-slate-100 items-center h-12'
+            className='flex gap-4 items-center h-12 bg-white/25 rounded-md'
           >
             <button
               className='w-8 h-8 items-center'
@@ -56,7 +56,7 @@ export default function CharacterBackgroundModal({
               />
             </div>
 
-            <div className='flex items-center bg-slate-100'>
+            <div className='flex items-center h-full'>
               <EntityInputNumber
                 maxDots={10}
                 fontSize='text-md'

@@ -22,12 +22,9 @@ export default function EntityModal<T>({
   handleCloseModal,
 }: Props<T>) {
   return (
-    <dialog
-      ref={ref}
-      className='w-full max-w-xl max-h-[50%] relative bg-transparent'
-    >
-      <div className='m-4 bg-white rounded-md'>
-        <div className='flex justify-center border-b-black border-b-2 px-4 py-2 sticky top-0 left-0 w-full bg-white rounded-t-md'>
+    <dialog ref={ref} className='w-full max-w-xl max-h-[50%] bg-transparent '>
+      <div className='rounded-md'>
+        <div className='flex justify-center border-b-black border-b-2 px-4 py-2 sticky top-0 left-0 w-full bg-white/25  rounded-t-md'>
           <h1 className='flex-1 text-2xl'>
             {capitalizeCamelCase(propertyName)}
           </h1>

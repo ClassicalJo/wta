@@ -36,14 +36,18 @@ export default function EntityInputSelect({
   return (
     <div className='flex flex-col gap-2'>
       <EntityTag>{capitalizeCamelCase(propertyName)}</EntityTag>
-      <div className='flex bg-slate-100 rounded-sm p-2 items-center h-9'>
+      <div className='flex bg-white/25 rounded-sm p-2 items-center h-9'>
         <select
           className='flex-1 bg-transparent'
           onChange={onChange}
           value={value}
         >
           {list.map((item, index) => (
-            <option key={`entity-options-${index}`} value={item}>
+            <option
+              key={`entity-options-${index}`}
+              className='text-black'
+              value={item}
+            >
               {capitalizeEachWord(removeUnderline(item))}
             </option>
           ))}

@@ -6,11 +6,15 @@ import { Ritual } from '@/main/modules/ritual/domain/ritual.entity';
 import { RITUAL_ENTITY_NAME } from '@/main/modules/ritual/infrastructure/database/ritual.schema';
 import EntityDelete from '@/renderer/components/common/entity/EntityDelete';
 import EntityGrid from '@/renderer/components/common/entity/EntityGrid';
-import EntityInputNumber from '@/renderer/components/common/entity/EntityInputNumber';
+import {
+  default as EntityInputGroupText,
+  default as EntityInputGroupTextGroup,
+} from '@/renderer/components/common/entity/EntityInputGroupText';
+import EntityInputGroupTextArea from '@/renderer/components/common/entity/EntityInputGroupTextArea';
 import EntityInputSelect from '@/renderer/components/common/entity/EntityInputSelect';
-import EntityInputText from '@/renderer/components/common/entity/EntityInputText';
-import EntityInputTextArea from '@/renderer/components/common/entity/EntityInputTextArea';
+import EntityLevel from '@/renderer/components/common/entity/EntityLevel';
 import EntityTitle from '@/renderer/components/common/entity/EntityTitle';
+import Main from '@/renderer/components/common/layout/Main';
 import { useRitual } from '@/renderer/hooks/ritual/useRitual';
 
 export default function ReadRitual() {
@@ -30,21 +34,20 @@ export default function ReadRitual() {
     updateEntity({ [propertyName]: propertyValue });
   };
   return (
-    <div>
-      <div className='flex flex-col gap-4'>
+    <Main>
+      <div className='flex flex-col flex-1 w-full gap-8'>
         <EntityTitle>{`Ritual #${id}`}</EntityTitle>
-        <EntityInputText
+        <EntityInputGroupText
           propertyName='name'
           propertyValue={ritual.name}
           update={updateRitual}
         />
-        <EntityInputNumber
+        <EntityLevel
           propertyName='level'
-          type='number'
-          fontSize='text-md'
-          maxDots={10}
           propertyValue={ritual.level}
           update={updateRitual}
+          type='number'
+          maxDots={10}
         />
         <EntityInputSelect
           propertyName='type'
@@ -54,18 +57,18 @@ export default function ReadRitual() {
         />
 
         <EntityGrid columns={2}>
-          <EntityInputTextArea
+          <EntityInputGroupTextArea
             propertyName='description'
             propertyValue={ritual.description}
             update={updateRitual}
           />
-          <EntityInputTextArea
+          <EntityInputGroupTextArea
             propertyName='system'
             propertyValue={ritual.system}
             update={updateRitual}
           />
         </EntityGrid>
-        <EntityInputText
+        <EntityInputGroupTextGroup
           propertyName='dataSource'
           propertyValue={ritual.dataSource}
           update={updateRitual}
@@ -77,6 +80,6 @@ export default function ReadRitual() {
         deleteEntity={deleteEntity}
         cancelDelete={cancelDeleteEntity}
       />
-    </div>
+    </Main>
   );
 }

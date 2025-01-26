@@ -1,12 +1,15 @@
 import React from 'react';
 
 import EntityDashboard from '@/renderer/components/common/entity/EntityDashboard';
+import { useBackgroundPosition } from '@/renderer/hooks/common/useBackgroundPosition';
 import { useReadAllGifts } from '@/renderer/hooks/gift/useReadAllGifts';
 
 export default function Gifts() {
   const { entities } = useReadAllGifts();
+  useBackgroundPosition('left');
+
   return (
-    <div className='flex-column gap-2'>
+    <div className='flex-1 p-16'>
       <div className='flex-1'>
         <EntityDashboard entityName='gift' entities={entities} />
       </div>

@@ -21,10 +21,7 @@ export default function CharacterBackgroundDialog({
     handleCloseModal();
   };
   return (
-    <dialog
-      ref={ref}
-      className='w-full max-w-xl max-h-[50%] relative bg-transparent'
-    >
+    <dialog ref={ref} className='w-full max-w-xl max-h-[50%] bg-transparent'>
       <div className='bg-white rounded-md'>
         <div className='flex justify-center border-b-black border-b-2 px-4 py-2 sticky top-0 left-0 w-full bg-white rounded-t-md'>
           <h1 className='flex-1 text-2xl'>Add a new background</h1>
@@ -43,7 +40,7 @@ export default function CharacterBackgroundDialog({
             value={value}
             onChange={onChange}
             placeholder='Background name'
-            className='flex-1 h-8 border-b-2 border-black ml-2 bg-slate-100 focus:bg-white'
+            className='flex-1 h-8 border-b-2 border-black ml-2   focus:bg-white'
           />
 
           <button
