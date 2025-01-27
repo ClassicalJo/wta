@@ -24,6 +24,10 @@ class FightService implements IEntityService<Fight> {
   delete(id: number) {
     window.electron.db.fight.delete(id);
   }
+
+  begin(id: number) {
+    window.electron.db.fight.begin(id);
+  }
 }
 
 export const fightService = new FightService();

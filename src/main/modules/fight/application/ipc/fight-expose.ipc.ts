@@ -13,4 +13,5 @@ export const fightExpose: IFightExpose = {
   create: (fight: Fight) =>
     ipcRenderer.send(RendererMessages.FIGHT_CREATE, fight),
   delete: (id: number) => ipcRenderer.send(RendererMessages.FIGHT_DELETE, id),
+  begin: (id: number) => ipcRenderer.send(RendererMessages.FIGHT_BEGIN, id),
 };
