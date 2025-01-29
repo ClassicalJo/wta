@@ -3,7 +3,7 @@ import { IMessageService } from '@/main/modules/message/application/interfaces/m
 import { MainMessages } from '@/shared/messages/main-messages.enum';
 import { RendererMessages } from '@/shared/messages/renderer-messages.enum';
 
-import { Director } from '../../domain/director/director.domain';
+import { processQueue } from '../../domain/worker/fight.queue';
 import { IFightRepository } from '../repository/fight-repository.interface';
 
 export class FightBeginUseCase implements IUseCase {
@@ -19,7 +19,7 @@ export class FightBeginUseCase implements IUseCase {
 
   public async execute(id: number): Promise<void> {
     const fightEntity = await this.fightRepository.readOne(id);
-    new Director(fightEntity);
+    processQueue(fightEntity.times, fightEntity);
 
     this.messageService.sendMessage(
       MainMessages.FIGHT_BEGIN_RESPONSE,
