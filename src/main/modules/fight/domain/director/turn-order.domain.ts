@@ -5,13 +5,15 @@ export class TurnOrder {
   public turn: number;
 
   constructor(public readonly units: Unit[]) {
-    this.turns = this.setTurns(units);
-    this.turn = 0;
+    this.units.forEach((unit) => unit.rollInitiative());
+    this.turns = [];
+    this.turn = 1;
   }
 
-  public setTurns(units: Unit[]): Unit[] {
-    units.forEach((unit) => unit.rollInitiative());
-    return units.sort((a, b) => b.initiative - a.initiative);
+  public reset() {
+    this.turn = 1;
+    this.turns = [...this.units];
+    this.turns.sort((a, b) => b.initiative - a.initiative);
   }
 
   public getCurrentTurn(): Unit {

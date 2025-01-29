@@ -23,7 +23,7 @@ export class Unit {
     public readonly group: 'A' | 'B',
   ) {
     this.id = character.id;
-    this._initiative = this.rollInitiative();
+    this._initiative = 0;
     this._health = this.character.health;
     this._attributes = UnitStats.getAttributes(this.character);
     this._talents = UnitStats.getTalents(this.character);
