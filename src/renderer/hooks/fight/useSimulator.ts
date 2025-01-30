@@ -12,7 +12,14 @@ export function useSimulator() {
   useEffect(() => {
     const callback = window.electron.onMainMessage(
       MainMessages.FIGHT_BEGIN_RESPONSE,
-      (e: string) => notificationService.success(e),
+      (e: string) => {
+        const blob = new Blob([e], { type: 'text/plain' });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = 'results.txt';
+        link.click();
+        URL.revokeObjectURL(link.href);
+      },
     );
     return () => {
       window.electron.offMainMessage(

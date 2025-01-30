@@ -17,7 +17,7 @@ export function createWorker(scriptPath: string, workerData: unknown = {}) {
     });
 
     worker.on('message', (message) => {
-      console.log('Worker message:', message);
+      console.log('Response received from worker');
       resolve(message);
     });
 

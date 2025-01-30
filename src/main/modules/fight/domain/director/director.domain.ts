@@ -1,4 +1,5 @@
 import { Fight } from '../fight.entity';
+import { logger } from './logger.domain';
 import { TurnOrder } from './turn-order.domain';
 import { Unit } from './unit.domain';
 
@@ -32,36 +33,36 @@ export class Director {
 
     while (!victory) {
       this.round++;
-      console.log('This is round ' + this.round);
+      logger.log('This is round ' + this.round);
 
       if (this.round > 10) {
-        console.log('Round limit reached, game over!');
+        logger.log('Round limit reached, game over!');
         victory = true;
       }
 
       this.turnOrder.reset();
 
       currentUnit = this.turnOrder.getCurrentTurn();
-      console.log('Current Unit Group: ' + currentUnit.group);
+      logger.log('Current Unit Group: ' + currentUnit.group);
       target = this.getTarget(currentUnit?.group);
 
       while (currentUnit) {
-        console.log('Current unit is ' + currentUnit?.character.name);
+        logger.log('Current unit is ' + currentUnit?.character.name);
         if (!target) {
-          console.log('There are no more targets available!');
+          logger.log('There are no more targets available!');
           winner = currentUnit;
           victory = true;
           currentUnit = null;
         } else if (!currentUnit.isAlive) {
-          console.log('Current unit is not alive, skipping turn!');
+          logger.log('Current unit is not alive, skipping turn!');
           currentUnit = this.turnOrder.nextTurn();
           target = this.getTarget(currentUnit?.group);
         } else {
-          console.log('Current target is ' + target?.character.name);
-          console.log(
+          logger.log('Current target is ' + target?.character.name);
+          logger.log(
             'This is round ' + this.round + ' turn ' + this.turnOrder.turn,
           );
-          console.log(
+          logger.log(
             'It is now Group ' +
               currentUnit.group +
               "'s " +
@@ -69,19 +70,19 @@ export class Director {
               "'s turn",
           );
 
-          console.log('The target is ' + target.character.name);
+          logger.log('The target is ' + target.character.name);
           const damage = currentUnit.brawl(6, 6);
           const soak = target.soak(damage);
-          console.log('The damage after soaking is ' + soak);
+          logger.log('The damage after soaking is ' + soak);
           target.receiveDamage(soak);
-          console.log('The target health is now ' + target.health);
-          console.log("Current unit's turn finished, moving to next turn");
+          logger.log('The target health is now ' + target.health);
+          logger.log("Current unit's turn finished, moving to next turn");
           currentUnit = this.turnOrder.nextTurn();
           target = this.getTarget(currentUnit?.group);
         }
       }
     }
-    console.log('Team ' + winner.group + ' wins!');
+    logger.log('Team ' + winner.group + ' wins!');
   }
 
   public getTarget(unitGroup: GroupName): Unit | null {

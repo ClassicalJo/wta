@@ -2,10 +2,14 @@ import os from 'os';
 
 import { createWorker } from './fight.worker';
 
-export async function processQueue(tasks: number, data: unknown) {
+export async function processQueue(
+  tasks: number,
+  data: unknown,
+): Promise<string> {
   const MAX_CONCURRENT_WORKERS = os.cpus().length;
   const activeWorkers: Promise<unknown>[] = [];
   const taskQueue = Array.from({ length: tasks }, (_, i) => i + 1);
+  let reports = '';
   while (taskQueue.length > 0) {
     if (activeWorkers.length < MAX_CONCURRENT_WORKERS) {
       const task = taskQueue.shift();
@@ -14,8 +18,8 @@ export async function processQueue(tasks: number, data: unknown) {
       const workerPromise = createWorker(
         './src/main/modules/fight/domain/worker/fight.task.ts',
         data,
-      ).then((result) => {
-        console.log(`Worker result for task ${task}:`, result);
+      ).then((result: string) => {
+        reports += result;
         activeWorkers.splice(activeWorkers.indexOf(workerPromise), 1);
       });
 
@@ -24,4 +28,5 @@ export async function processQueue(tasks: number, data: unknown) {
 
     await Promise.race(activeWorkers);
   }
+  return reports;
 }

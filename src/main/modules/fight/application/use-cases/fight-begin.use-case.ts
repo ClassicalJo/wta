@@ -19,11 +19,8 @@ export class FightBeginUseCase implements IUseCase {
 
   public async execute(id: number): Promise<void> {
     const fightEntity = await this.fightRepository.readOne(id);
-    processQueue(fightEntity.times, fightEntity);
+    const data = await processQueue(fightEntity.times, fightEntity);
 
-    this.messageService.sendMessage(
-      MainMessages.FIGHT_BEGIN_RESPONSE,
-      'Fight started!',
-    );
+    this.messageService.sendMessage(MainMessages.FIGHT_BEGIN_RESPONSE, data);
   }
 }

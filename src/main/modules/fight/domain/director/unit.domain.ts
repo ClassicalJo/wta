@@ -7,6 +7,7 @@ import {
 import { IAttributes } from '@/main/modules/character/domain/interfaces/attributes.interface';
 import { D10 } from '@/shared/utils/dice';
 
+import { logger } from './logger.domain';
 import { UnitStats } from './unit-stats.domain';
 
 export class Unit {
@@ -33,7 +34,7 @@ export class Unit {
 
   rollInitiative() {
     const initiative = D10() + this.character.wits + this.character.dexterity;
-    console.log(
+    logger.log(
       'Group ' +
         this.group +
         "'s " +
@@ -83,19 +84,19 @@ export class Unit {
     const strength = this.getAttribute('strength');
     const dexterity = this.getAttribute('dexterity');
     const brawl = this.getTalent('brawl');
-    console.log(this.character.name + ' has strength ' + strength);
-    console.log(this.character.name + ' has dexterity ' + dexterity);
-    console.log(this.character.name + ' has brawl ' + brawl);
+    logger.log(this.character.name + ' has strength ' + strength);
+    logger.log(this.character.name + ' has dexterity ' + dexterity);
+    logger.log(this.character.name + ' has brawl ' + brawl);
     for (let i = 0; i < dexterity + brawl; i++) {
       const attackRoll = D10() >= attackRollDifficulty;
       attacks += attackRoll ? 1 : 0;
     }
-    console.log('Attacks: ' + attacks);
+    logger.log('Attacks: ' + attacks);
     for (let i = 0; i < strength + brawl; i++) {
       const damageRoll = D10() >= damageRollDifficulty;
       damage += damageRoll ? 1 : 0;
     }
-    console.log('Damage: ' + damage);
+    logger.log('Damage: ' + damage);
     return damage;
   }
 
