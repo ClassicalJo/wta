@@ -31,4 +31,6 @@ export interface IMainPayloads {
   [MainMessages.FIGHT_UPDATE_RESPONSE]: Ritual;
   [MainMessages.FIGHT_DELETE_RESPONSE]: Ritual;
   [MainMessages.FIGHT_READ_ALL_RESPONSE]: Ritual[];
+  [MainMessages.FIGHT_BEGIN_RESPONSE]: string;
+  [MainMessages.FIGHT_END_RESPONSE]: string;
 }

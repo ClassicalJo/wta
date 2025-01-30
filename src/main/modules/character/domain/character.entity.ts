@@ -75,6 +75,7 @@ export class Character extends BaseEntity {
   rage?: number;
   gnosis?: number;
   willpower?: number;
+  health?: number;
 
   //Advantages
   gifts?: Gift[];

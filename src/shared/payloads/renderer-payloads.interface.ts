@@ -1,5 +1,6 @@
 import { CreateCharacterDto } from '@/main/modules/character/application/dto/create-character.dto';
 import { UpdateCharacterDto } from '@/main/modules/character/application/dto/update-character.dto';
+import { BeginFightDto } from '@/main/modules/fight/application/dto/begin-fight.dto';
 import { CreateFightDto } from '@/main/modules/fight/application/dto/create-fight.dto';
 import { UpdateFightDto } from '@/main/modules/fight/application/dto/update-fight.dto';
 import { CreateGiftDto } from '@/main/modules/gift/application/dto/create-gift.dto';
@@ -34,4 +35,5 @@ export interface IRendererPayloads {
   [RendererMessages.FIGHT_UPDATE]: UpdateFightDto;
   [RendererMessages.FIGHT_READ]: number;
   [RendererMessages.FIGHT_READ_ALL]: void;
+  [RendererMessages.FIGHT_BEGIN]: BeginFightDto;
 }

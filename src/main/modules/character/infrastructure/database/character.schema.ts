@@ -297,5 +297,10 @@ export const CharacterSchema = new EntitySchema<Character>({
       default: 0,
       nullable: false,
     },
+    health: {
+      type: Number,
+      default: 7,
+      nullable: false,
+    },
   }),
 });

@@ -14,3 +14,7 @@ export type IMentalAttributes = Pick<
   Character,
   'perception' | 'intelligence' | 'wits'
 >;
+
+export type IAttributes = IPhysicalAttributes &
+  ISocialAttributes &
+  IMentalAttributes;
