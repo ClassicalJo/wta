@@ -12,6 +12,7 @@ type Props<T extends IEntity> = {
   entityService: IEntityService<T>;
   entityConstructor: new () => T;
   onRead: MainMessages;
+  onUpdate: MainMessages;
   onDelete: MainMessages;
 };
 
@@ -20,6 +21,7 @@ export function makeUseEntityHook<T extends IEntity>({
   entityService,
   entityConstructor,
   onRead,
+  onUpdate,
   onDelete,
 }: Props<T>) {
   return function useEntity(id: number) {
@@ -60,6 +62,13 @@ export function makeUseEntityHook<T extends IEntity>({
       [setEntity],
     );
 
+    const handleUpdateEntityResponse = useCallback(
+      (entity: T) => {
+        setEntity(entity);
+      },
+      [setEntity],
+    );
+
     const handleDeleteEntityResponse = useCallback(() => {
       notificationService.success('Entity deleted');
       navigate(`/${entityName}`);
@@ -73,6 +82,11 @@ export function makeUseEntityHook<T extends IEntity>({
         handleReadEntityResponse,
       );
 
+      const updateCallback = window.electron.onMainMessage(
+        onUpdate,
+        handleUpdateEntityResponse,
+      );
+
       const deleteCallback = window.electron.onMainMessage(
         onDelete,
         handleDeleteEntityResponse,
@@ -80,10 +94,16 @@ export function makeUseEntityHook<T extends IEntity>({
 
       return () => {
         window.electron.offMainMessage(onRead, readCallback);
-
+        window.electron.offMainMessage(onUpdate, updateCallback);
         window.electron.offMainMessage(onDelete, deleteCallback);
       };
-    }, [id, fetchEntity, handleReadEntityResponse, handleDeleteEntityResponse]);
+    }, [
+      id,
+      fetchEntity,
+      handleReadEntityResponse,
+      handleDeleteEntityResponse,
+      handleUpdateEntityResponse,
+    ]);
 
     return {
       entity,

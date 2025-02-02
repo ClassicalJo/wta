@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 
 import { Background } from '@/main/modules/background/domain/background.entity';
 import { Auspice } from '@/main/modules/character/domain/auspice.enum';
@@ -57,11 +57,51 @@ export default function CharacterForm({ formTitle, update, character }: Props) {
     self,
     advantages,
   } = useCharacterSections(character);
-
   const { entities: rituals } = useReadAllRituals();
   const { entities: gifts } = useReadAllGifts();
+
+  const updateStats = useCallback(
+    (e: React.MouseEvent<HTMLElement>) => {
+      if (e.target instanceof HTMLElement) {
+        const dataset = e.target.dataset;
+        const { name, value } = dataset;
+        if (!name || !value) return;
+        update(name, Number(value));
+      }
+    },
+    [update],
+  );
+
+  const addBackground = (background: Background) => {
+    if (!character.backgrounds) character.backgrounds = [];
+    update('backgrounds', [...character.backgrounds, background]);
+  };
+
+  const removeBackground = (background: Background) => {
+    update(
+      'backgrounds',
+      character.backgrounds.filter((k) => k.id !== background.id),
+    );
+  };
+
+  const updateBackground = (index: number, partial: Background) => {
+    const background = character.backgrounds.at(index);
+    const backgrounds = character.backgrounds.filter((k) => k !== background);
+    update('backgrounds', [...backgrounds, { ...background, ...partial }]);
+  };
+
+  const updateBackgroundData = (e: React.MouseEvent<HTMLElement>) => {
+    if (e.target instanceof HTMLElement && e.target.dataset) {
+      const dataset = e.target.dataset;
+      const { index, value } = dataset;
+      if (!index || !value) return;
+      const background = character.backgrounds.at(Number(index));
+      updateBackground(Number(index), { ...background, level: Number(value) });
+    }
+  };
+
   return (
-    <div className='flex flex-col flex-1 w-full gap-8'>
+    <div className='flex flex-col flex-1 w-full gap-8 select-none'>
       <div>
         <EntityTitle>{formTitle}</EntityTitle>
         <EntityGrid>
@@ -106,18 +146,17 @@ export default function CharacterForm({ formTitle, update, character }: Props) {
           </EntityAttributeColumn>
         </EntityGrid>
       </div>
-      <div>
+      <div onClick={updateStats}>
         <EntityTitle>Attributes</EntityTitle>
         <EntityGrid>
           <EntityAttributeColumn>
             <p>Physical</p>
             {Object.keys(physicalAttributes).map(
               (key: keyof IPhysicalAttributes) => (
-                <EntityInputGroupNumber
+                <EntityInputGroupNumber<Character>
                   key={key}
                   propertyName={key}
                   propertyValue={physicalAttributes[key]}
-                  update={(e: number) => update(key, e)}
                 />
               ),
             )}
@@ -126,11 +165,10 @@ export default function CharacterForm({ formTitle, update, character }: Props) {
             <p>Social</p>
             {Object.keys(socialAttributes).map(
               (key: keyof ISocialAttributes) => (
-                <EntityInputGroupNumber
+                <EntityInputGroupNumber<Character>
                   key={key}
                   propertyName={key}
                   propertyValue={socialAttributes[key]}
-                  update={(e: number) => update(key, e)}
                 />
               ),
             )}
@@ -139,90 +177,86 @@ export default function CharacterForm({ formTitle, update, character }: Props) {
             <p>Mental</p>
             {Object.keys(mentalAttributes).map(
               (key: keyof IMentalAttributes) => (
-                <EntityInputGroupNumber
+                <EntityInputGroupNumber<Character>
                   key={key}
                   propertyName={key}
                   propertyValue={mentalAttributes[key]}
-                  update={(e: number) => update(key, e)}
                 />
               ),
             )}
           </EntityAttributeColumn>
         </EntityGrid>
       </div>
-      <div>
+      <div onClick={updateStats}>
         <EntityTitle>Abilities:</EntityTitle>
         <EntityGrid>
           <EntityAttributeColumn>
             <p>Talents</p>
             {Object.keys(talents).map((key: keyof ITalents) => (
-              <EntityInputGroupNumber
+              <EntityInputGroupNumber<Character>
                 key={key}
                 propertyName={key}
                 propertyValue={talents[key]}
-                update={(e: number) => update(key, e)}
               />
             ))}
           </EntityAttributeColumn>
           <EntityAttributeColumn>
             <p>Skills</p>
             {Object.keys(skills).map((key: keyof ISkills) => (
-              <EntityInputGroupNumber
+              <EntityInputGroupNumber<Character>
                 key={key}
                 propertyName={key}
                 propertyValue={skills[key]}
-                update={(e: number) => update(key, e)}
               />
             ))}
           </EntityAttributeColumn>
           <EntityAttributeColumn>
             <p>Knowledges</p>
             {Object.keys(knowledges).map((key: keyof IKnowledges) => (
-              <EntityInputGroupNumber
+              <EntityInputGroupNumber<Character>
                 key={key}
                 propertyName={key}
                 propertyValue={knowledges[key]}
-                update={(e: number) => update(key, e)}
               />
             ))}
           </EntityAttributeColumn>
         </EntityGrid>
       </div>
-      <div>
+      <div onClick={updateStats}>
         <EntityTitle>Advantages</EntityTitle>
         <EntityAttributeColumn>
           <p>Renown</p>
           <EntityGrid columns={2}>
             <EntityAttributeColumn>
               {Object.keys(renown).map((key: keyof IRenown) => (
-                <EntityInputGroupNumber
+                <EntityInputGroupNumber<Character>
                   key={key}
                   maxDots={10}
                   propertyName={key}
                   propertyValue={renown[key]}
-                  update={(e: number) => update(key, e)}
                 />
               ))}
             </EntityAttributeColumn>
             <EntityAttributeColumn>
               {Object.keys(self).map((key: keyof ISelf) => (
-                <EntityInputGroupNumber
+                <EntityInputGroupNumber<Character>
                   key={key}
                   maxDots={10}
                   propertyName={key}
                   propertyValue={self[key]}
-                  update={(e: number) => update(key, e)}
                 />
               ))}
             </EntityAttributeColumn>
           </EntityGrid>
         </EntityAttributeColumn>
       </div>
-      <EntityAttributeColumn>
+      <EntityAttributeColumn onClick={updateBackgroundData}>
         <p>Backgrounds</p>
         <CharacterBackgroundModal
           backgrounds={advantages.backgrounds ?? []}
-          update={(e: Background[]) => update('backgrounds', e)}
+          addBackground={addBackground}
+          removeBackground={removeBackground}
+          updateBackground={updateBackground}
         />
       </EntityAttributeColumn>
       <div>

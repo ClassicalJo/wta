@@ -10,26 +10,17 @@ import CharacterBackgroundDialog from './CharacterBackgroundDialog';
 
 type Props = {
   backgrounds: Background[];
-  update: (backgrounds: Background[]) => void;
+  addBackground: (background: Background) => void;
+  removeBackground: (background: Background) => void;
+  updateBackground: (index: number, background: Background) => void;
 };
 export default function CharacterBackgroundModal({
   backgrounds,
-  update,
+  addBackground,
+  removeBackground,
+  updateBackground,
 }: Props) {
   const { ref, openModal, closeModal } = useModal();
-  const addBackground = (background: Background) => {
-    update([...backgrounds, background]);
-  };
-
-  const removeBackground = (background: Background) => {
-    update(backgrounds.filter((k) => k.id !== background.id));
-  };
-
-  const updateBackground = (background: Background) => {
-    const filtered = backgrounds.filter((k) => k.id !== background.id);
-    update([...filtered, background]);
-  };
-
   return (
     <div className='flex flex-col gap-2'>
       {backgrounds
@@ -47,25 +38,20 @@ export default function CharacterBackgroundModal({
             </button>
             <div className='flex-1 flex-col  items-center'>
               <EntityInputText
-                hide
-                propertyName='name'
                 propertyValue={k.name}
-                update={(propertyName: string, propertyValue: string) =>
-                  updateBackground({ ...k, [propertyName]: propertyValue })
+                update={(propertyValue: string) =>
+                  updateBackground(index, { ...k, name: propertyValue })
                 }
               />
             </div>
 
             <div className='flex items-center h-full'>
-              <EntityInputNumber
+              <EntityInputNumber<Background>
                 maxDots={10}
-                fontSize='text-md'
+                itemIndex={index}
+                itemId={k.id}
                 propertyName='level'
                 propertyValue={k.level}
-                hide
-                update={(propertyName: string, propertyValue: number) =>
-                  updateBackground({ ...k, [propertyName]: propertyValue })
-                }
               />
             </div>
           </div>

@@ -9,5 +9,6 @@ export const useCharacter = makeUseEntityHook({
   entityService: characterService,
   entityConstructor: Character,
   onRead: MainMessages.CHARACTER_READ_RESPONSE,
+  onUpdate: MainMessages.CHARACTER_UPDATE_RESPONSE,
   onDelete: MainMessages.CHARACTER_DELETE_RESPONSE,
 });

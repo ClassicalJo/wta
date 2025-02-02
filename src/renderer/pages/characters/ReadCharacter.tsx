@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useParams } from 'react-router';
 
 import { Character } from '@/main/modules/character/domain/character.entity';
@@ -17,14 +17,17 @@ export default function ReadCharacter() {
     confirmDelete,
   } = useCharacter(parseInt(params.characterId));
 
-  const handleUpdate = <T extends keyof Character>(
-    propertyName: string,
-    propertyValue: Character[T],
-  ) => {
-    updateEntity({
-      [propertyName]: propertyValue,
-    });
-  };
+  const handleUpdate = useCallback(
+    <T extends keyof Character>(
+      propertyName: string,
+      propertyValue: Character[T],
+    ) => {
+      updateEntity({
+        [propertyName]: propertyValue,
+      });
+    },
+    [updateEntity],
+  );
   return (
     <div className='flex flex-col flex-1 w-full gap-8'>
       <CharacterForm

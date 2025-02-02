@@ -1,49 +1,58 @@
 import React, { useEffect, useState } from 'react';
 
+import { IEntity } from '@/main/modules/common/application/interfaces/entity.interface';
 import less from '@/resources/icons/minus.svg';
 import more from '@/resources/icons/plus.svg';
 
+import EntityDots from './EntityDots';
 import EntityIcon from './EntityIcon';
-import EntityInputNumberSwitch from './EntityInputNumberSwitch';
 
-type Props = {
+type Props<T extends IEntity> = {
+  itemId?: number;
+  itemIndex?: number;
+  propertyName?: keyof T;
   propertyValue: number;
   maxDots?: number;
-  type?: 'dots' | 'number';
-  update: (propertyValue: number) => void;
 };
-export default function EntityInputNumber({
-  propertyValue,
+export default function EntityInputNumber<T extends IEntity>({
+  itemId,
+  itemIndex,
+  propertyName,
+  propertyValue = 0,
   maxDots = 5,
-  type = 'dots',
-  update,
-}: Props) {
+}: Props<T>) {
   const [value, setValue] = useState<number>(0);
-
-  const minDots = 0;
 
   useEffect(() => {
     setValue(propertyValue ?? 0);
   }, [propertyValue, setValue]);
 
-  const onUpdate = (dif: number) => {
-    const max = Math.min(maxDots, value + dif);
-    const min = Math.max(minDots, value + dif);
-    const newValue = value > 0 ? max : min;
-    if (newValue !== value) {
-      setValue(newValue);
-      update(newValue);
-    }
-  };
-
   return (
     <div className='flex p-2 items-center'>
-      <button className='px-2' onClick={() => onUpdate(-1)}>
-        <EntityIcon src={less} className='invert' />
+      <button
+        className='px-2'
+        data-id={itemId}
+        data-index={itemIndex}
+        data-value={Math.max(value - 1, 0)}
+        data-name={propertyName}
+      >
+        <EntityIcon src={less} className='pointer-events-none invert' />
       </button>
-      <EntityInputNumberSwitch maxDots={maxDots} value={value} type={type} />
-      <button className='px-2' onClick={() => onUpdate(1)}>
-        <EntityIcon src={more} className='invert' />
+      <EntityDots
+        itemId={itemId}
+        itemIndex={itemIndex}
+        maxDots={maxDots}
+        currentValue={value}
+        propertyName={propertyName}
+      />
+      <button
+        className='px-2'
+        data-id={itemId}
+        data-index={itemIndex}
+        data-value={Math.min(value + 1, maxDots)}
+        data-name={propertyName}
+      >
+        <EntityIcon src={more} className='pointer-events-none invert' />
       </button>
     </div>
   );
