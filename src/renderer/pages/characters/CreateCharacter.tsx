@@ -6,7 +6,6 @@ import { useCreateCharacter } from '@/renderer/hooks/character/useCreateCharacte
 
 export default function CreateCharacter() {
   const { handleUpdate, handleSubmit, state } = useCreateCharacter();
-
   return (
     <div className='flex flex-col flex-1 w-full gap-8'>
       <CharacterForm

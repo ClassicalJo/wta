@@ -2,12 +2,13 @@ import React from 'react';
 
 import { RitualType } from '@/main/modules/ritual/domain/ritual-type.enum';
 import { Ritual } from '@/main/modules/ritual/domain/ritual.entity';
+import { useStats } from '@/renderer/hooks/common/useStats';
 
 import EntityGrid from '../common/entity/EntityGrid';
+import EntityInputGroupNumber from '../common/entity/EntityInputGroupNumber';
 import EntityInputGroupText from '../common/entity/EntityInputGroupText';
 import EntityInputGroupTextArea from '../common/entity/EntityInputGroupTextArea';
 import EntityInputSelect from '../common/entity/EntityInputSelect';
-import EntityLevel from '../common/entity/EntityLevel';
 import EntityTitle from '../common/entity/EntityTitle';
 
 type Props = {
@@ -19,6 +20,7 @@ type Props = {
   ) => void;
 };
 export default function RitualForm({ formTitle, update, ritual }: Props) {
+  const { updateByPropertyName } = useStats(update);
   return (
     <div className='flex flex-col flex-1 w-full gap-8'>
       <EntityTitle>{formTitle}</EntityTitle>
@@ -27,11 +29,10 @@ export default function RitualForm({ formTitle, update, ritual }: Props) {
         propertyValue={ritual.name}
         update={(value: string) => update('name', value)}
       />
-      <EntityLevel
+      <EntityInputGroupNumber<Ritual>
+        onClick={updateByPropertyName}
         propertyName='level'
         propertyValue={ritual.level}
-        update={(value: number) => update('level', value)}
-        type='number'
         maxDots={10}
       />
       <EntityInputSelect

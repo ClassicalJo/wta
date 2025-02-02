@@ -36,15 +36,19 @@ export function makeCreateEntityHook<T extends IEntity>({
     }, [navigator]);
 
     const [state, dispatch] = useEntityReducer<T>();
-    const handleSubmit = () => onSubmit(state.entity);
-    const handleUpdate = <K extends keyof T>(
-      propertyName: string,
-      propertyValue: T[K],
-    ) =>
-      dispatch({
-        property: propertyName,
-        value: propertyValue,
-      });
+    const handleSubmit = useCallback(
+      () => onSubmit(state.entity),
+      [onSubmit, state.entity],
+    );
+
+    const handleUpdate = useCallback(
+      <K extends keyof T>(propertyName: string, propertyValue: T[K]) =>
+        dispatch({
+          property: propertyName,
+          value: propertyValue,
+        }),
+      [dispatch],
+    );
 
     useEffect(() => {
       const callback = window.electron.onMainMessage(

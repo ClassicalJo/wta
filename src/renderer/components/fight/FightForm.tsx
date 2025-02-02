@@ -3,12 +3,13 @@ import React from 'react';
 import { Character } from '@/main/modules/character/domain/character.entity';
 import { Fight } from '@/main/modules/fight/domain/fight.entity';
 import { useReadAllCharacters } from '@/renderer/hooks/character/useReadAllCharacters';
+import { useStats } from '@/renderer/hooks/common/useStats';
 
 import EntityAttributeColumn from '../common/entity/EntityAttributeColumn';
 import EntityGrid from '../common/entity/EntityGrid';
+import EntityInputGroupNumber from '../common/entity/EntityInputGroupNumber';
 import EntityInputGroupText from '../common/entity/EntityInputGroupText';
 import EntityInputGroupTextArea from '../common/entity/EntityInputGroupTextArea';
-import EntityLevel from '../common/entity/EntityLevel';
 import EntityModalList from '../common/entity/EntityModalList';
 import EntityTitle from '../common/entity/EntityTitle';
 
@@ -22,6 +23,7 @@ type Props = {
 };
 export default function FightForm({ formTitle, update, fight }: Props) {
   const { entities: characters } = useReadAllCharacters();
+  const { updateByPropertyName } = useStats(update);
   return (
     <div className='flex flex-col flex-1 w-full gap-8'>
       <EntityTitle>{formTitle}</EntityTitle>
@@ -36,11 +38,10 @@ export default function FightForm({ formTitle, update, fight }: Props) {
         propertyValue={fight.description}
         update={(value: string) => update('description', value)}
       />
-      <EntityLevel
+      <EntityInputGroupNumber<Fight>
+        onClick={updateByPropertyName}
         propertyName='times'
         propertyValue={fight.times}
-        update={(value: number) => update('times', value)}
-        type='number'
         maxDots={10}
       />
       <div className='flex flex-col gap-2'>
