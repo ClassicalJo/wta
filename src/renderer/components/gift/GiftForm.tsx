@@ -2,11 +2,12 @@ import React from 'react';
 
 import { GiftSource } from '@/main/modules/gift/domain/gift-source.enum';
 import { Gift } from '@/main/modules/gift/domain/gift.entity';
+import { useStats } from '@/renderer/hooks/common/useStats';
 
 import EntityGrid from '../common/entity/EntityGrid';
+import EntityInputGroupNumber from '../common/entity/EntityInputGroupNumber';
 import EntityInputGroupText from '../common/entity/EntityInputGroupText';
 import EntityInputGroupTextArea from '../common/entity/EntityInputGroupTextArea';
-import EntityLevel from '../common/entity/EntityLevel';
 import EntityModalList from '../common/entity/EntityModalList';
 import EntityTitle from '../common/entity/EntityTitle';
 
@@ -16,6 +17,7 @@ type Props = {
   update: <T extends Gift[keyof Gift]>(propertyName: string, value: T) => void;
 };
 export default function GiftForm({ formTitle, update, gift }: Props) {
+  const { updateByPropertyName } = useStats(update);
   return (
     <div className='flex flex-col flex-1 w-full gap-8'>
       <EntityTitle>{formTitle}</EntityTitle>
@@ -24,11 +26,11 @@ export default function GiftForm({ formTitle, update, gift }: Props) {
         propertyValue={gift.name}
         update={(e: string) => update('name', e)}
       />
-      <EntityLevel
+      <EntityInputGroupNumber<Gift>
+        onClick={updateByPropertyName}
         propertyName='level'
         propertyValue={gift.level}
-        type='number'
-        update={(e: number) => update('level', e)}
+        maxDots={10}
       />
       <EntityGrid columns={2}>
         <EntityInputGroupTextArea

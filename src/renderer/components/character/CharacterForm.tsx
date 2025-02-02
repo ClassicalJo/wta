@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 
 import { Background } from '@/main/modules/background/domain/background.entity';
 import { Auspice } from '@/main/modules/character/domain/auspice.enum';
@@ -26,6 +26,7 @@ import EntityInputGroupNumber from '@/renderer/components/common/entity/EntityIn
 import EntityInputSelect from '@/renderer/components/common/entity/EntityInputSelect';
 import EntityModalList from '@/renderer/components/common/entity/EntityModalList';
 import { useCharacterSections } from '@/renderer/hooks/character/useCharacterStats';
+import { useStats } from '@/renderer/hooks/common/useStats';
 import { useReadAllGifts } from '@/renderer/hooks/gift/useReadAllGifts';
 import { useReadAllRituals } from '@/renderer/hooks/ritual/useReadAllRituals';
 
@@ -60,17 +61,7 @@ export default function CharacterForm({ formTitle, update, character }: Props) {
   const { entities: rituals } = useReadAllRituals();
   const { entities: gifts } = useReadAllGifts();
 
-  const updateStats = useCallback(
-    (e: React.MouseEvent<HTMLElement>) => {
-      if (e.target instanceof HTMLElement) {
-        const dataset = e.target.dataset;
-        const { name, value } = dataset;
-        if (!name || !value) return;
-        update(name, Number(value));
-      }
-    },
-    [update],
-  );
+  const { updateByPropertyName } = useStats(update);
 
   const addBackground = (background: Background) => {
     if (!character.backgrounds) character.backgrounds = [];
@@ -146,7 +137,7 @@ export default function CharacterForm({ formTitle, update, character }: Props) {
           </EntityAttributeColumn>
         </EntityGrid>
       </div>
-      <div onClick={updateStats}>
+      <div onClick={updateByPropertyName}>
         <EntityTitle>Attributes</EntityTitle>
         <EntityGrid>
           <EntityAttributeColumn>
@@ -187,7 +178,7 @@ export default function CharacterForm({ formTitle, update, character }: Props) {
           </EntityAttributeColumn>
         </EntityGrid>
       </div>
-      <div onClick={updateStats}>
+      <div onClick={updateByPropertyName}>
         <EntityTitle>Abilities:</EntityTitle>
         <EntityGrid>
           <EntityAttributeColumn>
@@ -222,7 +213,7 @@ export default function CharacterForm({ formTitle, update, character }: Props) {
           </EntityAttributeColumn>
         </EntityGrid>
       </div>
-      <div onClick={updateStats}>
+      <div onClick={updateByPropertyName}>
         <EntityTitle>Advantages</EntityTitle>
         <EntityAttributeColumn>
           <p>Renown</p>
