@@ -34,34 +34,31 @@ export default function App() {
         ${initialOpacity} transition-opacity duration-300 flex flex-1 items-center justify-center ${startedOpacity} ${leavingOpacity}    `}
     >
       <MainBackground />
-      <div
-        className='relative p-8 flex flex-col gap-12 text-orange-100 text-6xl font-[Rock] 
-        '
-      >
+      <div className='relative flex flex-col text-orange-100 text-5xl font-[Rock] bg-black/70 border-2 border-orange-100 rounded-xl'>
         <DelayedLink
           {...linkProps}
-          className='hover:text-orange-400 transition-all duration-200 ease-in-out'
+          className='hover:text-orange-400 transition-all duration-200 ease-in-out px-12 py-10 [text-shadow:3px_3px_3px_rgba(255,255,255,.5)]'
           to={'/character'}
         >
           Characters
         </DelayedLink>
         <DelayedLink
           {...linkProps}
-          className='hover:text-orange-400 transition-all duration-200 ease-in-out'
+          className='hover:text-orange-400 transition-all duration-200 ease-in-out px-12 py-10 [text-shadow:3px_3px_3px_rgba(255,255,255,.5)]'
           to={'/gift'}
         >
           Gifts
         </DelayedLink>
         <DelayedLink
           {...linkProps}
-          className='hover:text-orange-400 transition-all duration-200 ease-in-out'
+          className='hover:text-orange-400 transition-all duration-200 ease-in-out px-12 py-10 [text-shadow:3px_3px_3px_rgba(255,255,255,.5)]'
           to={'/ritual'}
         >
           Rituals
         </DelayedLink>
         <DelayedLink
           {...linkProps}
-          className='hover:text-orange-400 transition-all duration-200 ease-in-out'
+          className='hover:text-orange-400 transition-all duration-200 ease-in-out px-12 py-10 [text-shadow:3px_3px_3px_rgba(255,255,255,.5)]'
           to={'/fight'}
         >
           Fight!
