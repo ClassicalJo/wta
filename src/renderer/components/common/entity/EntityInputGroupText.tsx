@@ -16,11 +16,11 @@ export default function EntityInputGroupText({
   update,
 }: Props) {
   return (
-    <div className='flex flex-col'>
+    <div className='flex flex-col my-4'>
       <EntityTag className='mb-2'>
         {capitalizeCamelCase(propertyName)}
       </EntityTag>
-      <div className='bg-white/25 rounded-sm'>
+      <div className='border-b-4 border-white'>
         <EntityInputText propertyValue={propertyValue} update={update} />
       </div>
     </div>

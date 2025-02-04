@@ -7,6 +7,21 @@
   src: url('../../resources/fonts/RockSalt-Regular.ttf');
 }
 
+@font-face {
+  font-family: 'Solitreo';
+  src: url('../../resources/fonts/Solitreo-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'Staatliches';
+  src: url('../../resources/fonts/Staatliches-Regular.ttf');
+}
+@theme {
+  --color-dark-primary: theme(colors.dark-primary);
+  --color-dark-secondary: theme(colors.dark-secondary);
+  --color-dark-accent: theme(colors.dark-accent);
+  --color-dark-text: theme(colors.dark-text);
+}
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
     Arial, sans-serif;

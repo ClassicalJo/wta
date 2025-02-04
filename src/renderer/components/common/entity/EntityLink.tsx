@@ -7,10 +7,16 @@ type Props = {
 };
 export default function EntityLink({ link, text }: Props) {
   return (
-    <Link to={link}>
-      <div className='aspect-square rounded-lg border-slate-500 border-2 flex justify-center items-center'>
-        <p className='font-bold text-purple-800 text-l text-center'>{text}</p>
-      </div>
+    <Link
+      to={link}
+      className='
+      hover:scale-110 transition-all hover:shadow-xl shadow-sm duration-100 ease-in-out 
+      justify-center items-center tracking-widest
+      '
+    >
+      <p className='font-[Solitreo] font-bold text-white hover:text-dark-text text-4xl text-center px-8 py-4'>
+        {text}
+      </p>
     </Link>
   );
 }

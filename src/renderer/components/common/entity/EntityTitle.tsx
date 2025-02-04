@@ -4,5 +4,9 @@ type Props = {
   children: React.ReactNode;
 };
 export default function EntityTitle({ children }: Props) {
-  return <h1 className='text-3xl font-bold mt-4 mb-2'>{children}</h1>;
+  return (
+    <h1 className='text-5xl font-bold mt-4 mb-2 font-[Staatliches]'>
+      {children}
+    </h1>
+  );
 }

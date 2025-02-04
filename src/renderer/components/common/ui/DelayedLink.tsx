@@ -1,7 +1,7 @@
 import React, { MouseEvent } from 'react';
 import { Link, useNavigate } from 'react-router';
 
-type Props = {
+export type DelayedLinkProps = React.AnchorHTMLAttributes<HTMLAnchorElement> & {
   to: string;
   delay?: number;
   children: React.ReactNode;
@@ -15,7 +15,7 @@ export default function DelayedLink({
   isNavigating,
   setIsNavigating,
   ...props
-}: Props & React.AnchorHTMLAttributes<HTMLAnchorElement>) {
+}: DelayedLinkProps) {
   const navigate = useNavigate();
 
   const handleClick = (e: MouseEvent<HTMLAnchorElement>) => {

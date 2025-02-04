@@ -3,8 +3,7 @@ import React, { useEffect } from 'react';
 import { MainMessages } from '@/shared/messages/main-messages.enum';
 
 import MainBackground from './components/common/backgrounds/MainBackground';
-import DelayedLink from './components/common/ui/DelayedLink';
-import { useBackgroundPosition } from './hooks/common/useBackgroundPosition';
+import MenuLink from './components/menu/MenuLink';
 import { useDelayedNavigation } from './hooks/common/useDelayedNavigation';
 import './index.css';
 
@@ -27,42 +26,25 @@ export default function App() {
       window.electron.offMainMessage(MainMessages.MAIN_MESSAGE, callback);
     };
   }, []);
-  useBackgroundPosition('middle');
   return (
     <div
       className={`
-        ${initialOpacity} transition-opacity duration-300 flex flex-1 items-center justify-center ${startedOpacity} ${leavingOpacity}    `}
+        ${initialOpacity} relative transition-opacity duration-300 h-screen w-screen max-w-[100vw] ${startedOpacity} ${leavingOpacity}    `}
     >
       <MainBackground />
-      <div className='relative flex flex-col text-orange-100 text-5xl font-[Rock] bg-black/70 border-2 border-orange-100 rounded-xl'>
-        <DelayedLink
-          {...linkProps}
-          className='hover:text-orange-400 transition-all duration-200 ease-in-out px-12 py-10 [text-shadow:3px_3px_3px_rgba(255,255,255,.5)]'
-          to={'/character'}
-        >
+      <div className='absolute flex flex-col font-[Solitreo] bottom-[5vh] right-[10vw] '>
+        <MenuLink {...linkProps} to={'/character'}>
           Characters
-        </DelayedLink>
-        <DelayedLink
-          {...linkProps}
-          className='hover:text-orange-400 transition-all duration-200 ease-in-out px-12 py-10 [text-shadow:3px_3px_3px_rgba(255,255,255,.5)]'
-          to={'/gift'}
-        >
+        </MenuLink>
+        <MenuLink {...linkProps} to={'/gift'}>
           Gifts
-        </DelayedLink>
-        <DelayedLink
-          {...linkProps}
-          className='hover:text-orange-400 transition-all duration-200 ease-in-out px-12 py-10 [text-shadow:3px_3px_3px_rgba(255,255,255,.5)]'
-          to={'/ritual'}
-        >
+        </MenuLink>
+        <MenuLink {...linkProps} to={'/ritual'}>
           Rituals
-        </DelayedLink>
-        <DelayedLink
-          {...linkProps}
-          className='hover:text-orange-400 transition-all duration-200 ease-in-out px-12 py-10 [text-shadow:3px_3px_3px_rgba(255,255,255,.5)]'
-          to={'/fight'}
-        >
+        </MenuLink>
+        <MenuLink {...linkProps} to={'/fight'}>
           Fight!
-        </DelayedLink>
+        </MenuLink>
       </div>
     </div>
   );

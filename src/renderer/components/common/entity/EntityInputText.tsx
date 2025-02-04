@@ -22,7 +22,7 @@ export default function EntityInputText({ propertyValue, update }: Props) {
         propertyValue={propertyValue}
         submit={handleSubmit}
       >
-        <p className='flex-1 px-2'>{propertyValue}</p>
+        <p className='flex-1 text-2xl font-[Solitreo]'>{propertyValue}</p>
         <button className='h-5 w-5 mr-2' onClick={() => setEdit(true)}>
           <img className='invert' src={icon} />
         </button>
