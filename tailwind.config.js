@@ -10,7 +10,12 @@ module.exports = {
         "dark-primary": "#1a314f",
         "dark-secondary": "#215751",
         "dark-accent": "#3d9a95",
-        "dark-text": "#a1e7f5"
+        "dark-text": "#a1e7f5",
+        "dark-warning": "#c83737"
+      },
+      animation: {
+        "fade-up-sm": "fade-up-sm 0.15s ease-in",
+        "fade-up-md": "fade-up-md 0.5s ease-in",
       },
       screens: {
         'h-sm': { 'raw': '(min-height: 480px)' },

@@ -1,7 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router';
 
 import { capitalize } from '@/shared/utils/capitalize';
+
+import DelayedLink from '../ui/DelayedLink';
 
 type Props = {
   isLast: boolean;
@@ -17,9 +18,9 @@ export default function Breadcrumb({ isLast, value, to }: Props) {
   else
     return (
       <>
-        <Link to={to} className={commonStyles + 'underline'}>
+        <DelayedLink to={to} className={commonStyles + 'underline'}>
           {capitalized}
-        </Link>
+        </DelayedLink>
         {!isLast && <p>&gt;</p>}
       </>
     );

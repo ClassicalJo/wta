@@ -13,7 +13,7 @@ export default function EntityDashboard<T extends IEntity>({
   entityName,
 }: Props<T>) {
   return (
-    <div className='flex flex-1 flex-col max-w-screen-md'>
+    <div className='flex flex-1 flex-col'>
       <div className='grid grid-cols-1 gap-8'>
         <EntityLink
           link={`/${entityName}/create`}

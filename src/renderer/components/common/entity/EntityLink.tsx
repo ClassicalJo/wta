@@ -1,5 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router';
+
+import DelayedLink from '../ui/DelayedLink';
 
 type Props = {
   link: string;
@@ -7,7 +8,7 @@ type Props = {
 };
 export default function EntityLink({ link, text }: Props) {
   return (
-    <Link
+    <DelayedLink
       to={link}
       className='
       hover:scale-110 transition-all hover:shadow-xl shadow-sm duration-100 ease-in-out 
@@ -17,6 +18,6 @@ export default function EntityLink({ link, text }: Props) {
       <p className='font-[Solitreo] font-bold text-white hover:text-dark-text text-4xl text-center px-8 py-4'>
         {text}
       </p>
-    </Link>
+    </DelayedLink>
   );
 }

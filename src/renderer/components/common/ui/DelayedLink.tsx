@@ -1,28 +1,26 @@
-import React, { MouseEvent } from 'react';
+import React, { MouseEvent, useContext, useRef } from 'react';
 import { Link, useNavigate } from 'react-router';
+import { CSSTransition } from 'react-transition-group';
+
+import { DelayedNavigationContext } from '@/renderer/context/DelayedNavigation';
 
 export type DelayedLinkProps = React.AnchorHTMLAttributes<HTMLAnchorElement> & {
   to: string;
   delay?: number;
   children: React.ReactNode;
-  isNavigating: boolean;
-  setIsNavigating: (value: boolean) => void;
 };
 export default function DelayedLink({
   to,
-  delay = 500,
+  delay = 300,
   children,
-  isNavigating,
-  setIsNavigating,
   ...props
 }: DelayedLinkProps) {
   const navigate = useNavigate();
-
+  const { active, setActive } = useContext(DelayedNavigationContext);
+  const ref = useRef<HTMLAnchorElement | null>(null);
   const handleClick = (e: MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
-
-    if (isNavigating) return;
-    setIsNavigating(true);
+    setActive(false);
 
     setTimeout(() => {
       navigate(to);
@@ -30,8 +28,21 @@ export default function DelayedLink({
   };
 
   return (
-    <Link to={to} onClick={handleClick} aria-disabled={isNavigating} {...props}>
-      {children}
-    </Link>
+    <CSSTransition
+      nodeRef={ref}
+      in={active}
+      timeout={delay}
+      classNames='appear'
+    >
+      <Link
+        ref={ref}
+        to={to}
+        onClick={handleClick}
+        aria-disabled={active}
+        {...props}
+      >
+        {children}
+      </Link>
+    </CSSTransition>
   );
 }

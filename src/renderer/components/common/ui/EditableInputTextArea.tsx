@@ -41,7 +41,7 @@ export default function EditableInputTextArea({
     return (
       <textarea
         ref={ref}
-        className={`flex flex-1 p-2 focus:bg-slate-50 min-h-32 text-black w-full h-full ${
+        className={`flex flex-1 w-full font-[Solitreo] min-h-32 bg-transparent h-full focus:text-[Rock] text-xl p-4 border-4 border-white rounded-sm ${
           className ? className : ''
         }`}
         onChange={onChange}
