@@ -1,8 +1,8 @@
 import React from 'react';
 import { Outlet } from 'react-router';
 
+import Breadcrumbs from '../breadcrumbs/Breadcrumbs';
 import Background from './Background';
-import Breadcrumbs from './Breadcrumbs';
 import FadeWrapper from './FadeWrapper';
 import Main from './Main';
 

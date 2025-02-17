@@ -1,6 +1,5 @@
 import React, { MouseEvent, useContext, useRef } from 'react';
 import { Link, useNavigate } from 'react-router';
-import { CSSTransition } from 'react-transition-group';
 
 import { DelayedNavigationContext } from '@/renderer/context/DelayedNavigation';
 
@@ -21,28 +20,20 @@ export default function DelayedLink({
   const handleClick = (e: MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     setActive(false);
-
     setTimeout(() => {
       navigate(to);
     }, delay);
   };
 
   return (
-    <CSSTransition
-      nodeRef={ref}
-      in={active}
-      timeout={delay}
-      classNames='appear'
+    <Link
+      ref={ref}
+      to={to}
+      onClick={handleClick}
+      aria-disabled={active}
+      {...props}
     >
-      <Link
-        ref={ref}
-        to={to}
-        onClick={handleClick}
-        aria-disabled={active}
-        {...props}
-      >
-        {children}
-      </Link>
-    </CSSTransition>
+      {children}
+    </Link>
   );
 }

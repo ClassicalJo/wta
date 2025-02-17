@@ -29,7 +29,7 @@ export default function ReadCharacter() {
     [updateEntity],
   );
   return (
-    <div className='flex min-w-min flex-1 flex-col gap-8 p-8'>
+    <div className='mt-8 flex min-w-min flex-1 flex-col gap-8 p-8'>
       <CharacterForm
         formTitle={`Character #${params.characterId}`}
         character={entity}
