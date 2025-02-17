@@ -34,13 +34,13 @@ export default function EntityInputSelect({
   }
 
   return (
-    <div className='flex flex-col my-4'>
+    <div className='my-4 flex flex-col'>
       <EntityTag className='mb-2'>
         {capitalizeCamelCase(propertyName)}
       </EntityTag>
-      <div className='flex items-center h-10 border-b-4 border-white font-[Solitreo] text-2xl'>
+      <div className='flex h-10 items-center border-b-4 border-white font-[Solitreo] text-2xl'>
         <select
-          className='flex-1 bg-transparent border-none outline-none'
+          className='flex-1 border-none bg-transparent outline-none'
           onChange={onChange}
           value={value}
         >

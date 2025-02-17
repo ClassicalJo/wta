@@ -19,7 +19,7 @@ export default function EntityFormField<T extends IEntity>({
       </label>
 
       <Field
-        className='flex-1 bg-white/25 rounded-sm px-5 py-1 focus:bg-slate-50 text-black'
+        className='flex-1 rounded-sm bg-white/25 px-5 py-1 text-black focus:bg-slate-50'
         id={propertyName}
         name={propertyName}
         placeholder={placeholder}

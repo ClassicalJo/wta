@@ -2,10 +2,12 @@ import React from 'react';
 
 type Props = {
   children: React.ReactNode;
+  className?: string;
 };
-export default function EntityTitle({ children }: Props) {
+export default function EntityTitle({ children, className }: Props) {
+  const styles = className ? className : '';
   return (
-    <h1 className='text-5xl font-bold mt-4 mb-2 font-[Staatliches]'>
+    <h1 className={styles + ' mb-2 mt-4 font-[Staatliches] text-5xl font-bold'}>
       {children}
     </h1>
   );

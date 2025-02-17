@@ -42,7 +42,7 @@ export default function EditableInputText({
       <input
         ref={ref}
         className={
-          'flex flex-1 h-full font-[Solitreo] text-2xl outline-dark-text bg-transparent text-white' +
+          'flex h-full flex-1 bg-transparent font-[Solitreo] text-2xl text-white outline-dark-text' +
           className
         }
         type='text'

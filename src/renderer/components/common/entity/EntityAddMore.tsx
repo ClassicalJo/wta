@@ -7,7 +7,7 @@ export default function EntityAddMore({ onClick }: Props) {
   return (
     <input
       type='button'
-      className='flex-1 bg-white hover:bg-dark-text transition-color duration-150 ease-in-out text-dark-primary rounded-b-lg rounded-t-sm cursor-pointer text-2xl'
+      className='transition-color flex-1 cursor-pointer rounded-b-lg rounded-t-sm bg-white text-2xl text-dark-primary duration-150 ease-in-out hover:bg-dark-text'
       onClick={onClick}
       value='+'
     />

@@ -28,7 +28,7 @@ export default function EntityInputNumber<T extends IEntity>({
   }, [propertyValue, setValue]);
 
   return (
-    <div className='flex p-2 items-center min-w-[148px]'>
+    <div className='flex min-w-[148px] items-center p-2'>
       <button
         className='px-2'
         data-id={itemId}

@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 
 import { MainMessages } from '@/shared/messages/main-messages.enum';
 
-import FadeWrapper from './components/common/layout/FadeWrapper';
 import MenuLink from './components/menu/MenuLink';
 import './index.css';
 

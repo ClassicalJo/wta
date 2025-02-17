@@ -15,7 +15,6 @@ export function DelayedNavigationProvider({
   children: ReactNode;
 }) {
   const [active, setActive] = useState<boolean>(false);
-  console.log(active);
   return (
     <DelayedNavigationContext.Provider value={{ active, setActive }}>
       {children}

@@ -21,8 +21,8 @@ export default function EntityInputTextArea({ propertyValue, update }: Props) {
       propertyValue={propertyValue}
       submit={handleUpdate}
     >
-      <div className='flex flex-col gap-2 flex-1 min-w-80 rounded-sm font-[Solitreo] text-xl'>
-        <div className='flex flex-1 focus:bg-slate-50 gap-2 min-h-32  border-4 border-white rounded-sm p-4'>
+      <div className='flex min-w-80 flex-1 flex-col gap-2 rounded-sm font-[Solitreo] text-xl'>
+        <div className='flex min-h-32 flex-1 gap-2 rounded-sm border-4 border-white p-4 focus:bg-slate-50'>
           <p className='flex-1'>{propertyValue}</p>
           <button className='h-5 w-5' onClick={() => setEdit(true)}>
             <img src={icon} className='invert' />

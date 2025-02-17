@@ -29,10 +29,10 @@ export default function CharacterBackgroundModal({
           .map((k, index) => (
             <div
               key={`background-${k.id}-${index}`}
-              className='flex items-center h-12 border-b-2 border-white last:border-none'
+              className='flex h-12 items-center border-b-2 border-white last:border-none'
             >
               <button
-                className='w-8 h-8 items-center'
+                className='h-8 w-8 items-center'
                 onClick={() => removeBackground(k)}
               >
                 ✖️
@@ -46,7 +46,7 @@ export default function CharacterBackgroundModal({
                 />
               </div>
 
-              <div className='flex items-center h-full'>
+              <div className='flex h-full items-center'>
                 <EntityInputNumber<Background>
                   maxDots={10}
                   itemIndex={index}

@@ -8,7 +8,7 @@ export default function EntityTag({ className, children }: Props) {
   return (
     <span
       className={
-        `font-[Rock] text-md md:text-sm lg:text-md whitespace-nowrap overflow-hidden text-ellipsis min-w-[40px] ` +
+        `text-md lg:text-md min-w-[40px] overflow-hidden text-ellipsis whitespace-nowrap font-[Rock] md:text-sm ` +
         className
       }
     >

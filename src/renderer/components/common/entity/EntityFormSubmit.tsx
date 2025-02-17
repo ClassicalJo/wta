@@ -6,9 +6,9 @@ type Props = {
 };
 export default function EntityFormSubmit({ children, onClick }: Props) {
   return (
-    <div className='flex mt-4'>
+    <div className='mt-4 flex'>
       <button
-        className='flex-1 rounded-md hover:bg-dark-text  font-bold transition-colors duration-150 ease-in-out bg-white text-dark-primary font-[Rock] h-12 text-lg px-5 py-1'
+        className='h-12 flex-1 rounded-md bg-white px-5 py-1 font-[Rock] text-lg font-bold text-dark-primary transition-colors duration-150 ease-in-out hover:bg-dark-text'
         onClick={onClick}
       >
         {children}
