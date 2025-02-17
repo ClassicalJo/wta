@@ -74,7 +74,7 @@ export function makeUseEntityHook<T extends IEntity>({
       notificationService.success('Entity deleted');
       setActive(false);
       navigate(`/${entityName}`);
-    }, [navigate]);
+    }, [navigate, setActive]);
 
     useEffect(() => {
       fetchEntity();
