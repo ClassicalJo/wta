@@ -6,7 +6,8 @@
     "printWidth": 80,
     "endOfLine": "lf",
     "plugins": [
-        "@trivago/prettier-plugin-sort-imports"
+        "@trivago/prettier-plugin-sort-imports",
+        "prettier-plugin-tailwindcss"
     ],
     "importOrder": [
         "<THIRD_PARTY_MODULES>",

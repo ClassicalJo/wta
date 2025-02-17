@@ -15,15 +15,17 @@ export default function EntityInputText({ propertyValue, update }: Props) {
     update(value);
   };
   return (
-    <div className='flex h-9 rounded-sm items-center'>
+    <div className='flex h-9 items-center rounded-sm'>
       <EditableInputText
         edit={edit}
         setEdit={setEdit}
         propertyValue={propertyValue}
         submit={handleSubmit}
       >
-        <p className='flex-1 px-2'>{propertyValue}</p>
-        <button className='h-5 w-5 mr-2' onClick={() => setEdit(true)}>
+        <p className='flex-1 overflow-hidden text-ellipsis whitespace-nowrap font-[Solitreo] text-2xl'>
+          {propertyValue}
+        </p>
+        <button className='mr-2 h-5 w-5' onClick={() => setEdit(true)}>
           <img className='invert' src={icon} />
         </button>
       </EditableInputText>

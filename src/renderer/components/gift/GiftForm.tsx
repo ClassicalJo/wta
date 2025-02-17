@@ -19,7 +19,7 @@ type Props = {
 export default function GiftForm({ formTitle, update, gift }: Props) {
   const { updateByPropertyName } = useStats(update);
   return (
-    <div className='flex flex-col flex-1 w-full gap-8'>
+    <div className='flex w-full flex-1 flex-col gap-8'>
       <EntityTitle>{formTitle}</EntityTitle>
       <EntityInputGroupText
         propertyName='name'

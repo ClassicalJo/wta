@@ -33,6 +33,7 @@ import { useReadAllRituals } from '@/renderer/hooks/ritual/useReadAllRituals';
 import EntityAttributeColumn from '../common/entity/EntityAttributeColumn';
 import EntityGrid from '../common/entity/EntityGrid';
 import EntityInputGroupText from '../common/entity/EntityInputGroupText';
+import EntitySubtitle from '../common/entity/EntitySubtitle';
 import EntityTitle from '../common/entity/EntityTitle';
 
 type Props = {
@@ -92,7 +93,7 @@ export default function CharacterForm({ formTitle, update, character }: Props) {
   };
 
   return (
-    <div className='flex flex-col flex-1 w-full gap-8 select-none'>
+    <div className='flex w-full flex-1 select-none flex-col gap-8'>
       <div>
         <EntityTitle>{formTitle}</EntityTitle>
         <EntityGrid>
@@ -117,7 +118,7 @@ export default function CharacterForm({ formTitle, update, character }: Props) {
               list={Object.values(Auspice)}
               propertyName='auspice'
               propertyValue={wolfDetails.auspice}
-              update={(value: Auspice) => update('breed', value)}
+              update={(value: Auspice) => update('auspice', value)}
             />
             <EntityInputGroupText
               propertyName='tribe'
@@ -141,7 +142,7 @@ export default function CharacterForm({ formTitle, update, character }: Props) {
         <EntityTitle>Attributes</EntityTitle>
         <EntityGrid>
           <EntityAttributeColumn>
-            <p>Physical</p>
+            <EntitySubtitle>Physical</EntitySubtitle>
             {Object.keys(physicalAttributes).map(
               (key: keyof IPhysicalAttributes) => (
                 <EntityInputGroupNumber<Character>
@@ -153,7 +154,7 @@ export default function CharacterForm({ formTitle, update, character }: Props) {
             )}
           </EntityAttributeColumn>
           <EntityAttributeColumn>
-            <p>Social</p>
+            <EntitySubtitle>Social</EntitySubtitle>
             {Object.keys(socialAttributes).map(
               (key: keyof ISocialAttributes) => (
                 <EntityInputGroupNumber<Character>
@@ -165,7 +166,7 @@ export default function CharacterForm({ formTitle, update, character }: Props) {
             )}
           </EntityAttributeColumn>
           <EntityAttributeColumn>
-            <p>Mental</p>
+            <EntitySubtitle>Mental</EntitySubtitle>
             {Object.keys(mentalAttributes).map(
               (key: keyof IMentalAttributes) => (
                 <EntityInputGroupNumber<Character>
@@ -179,10 +180,10 @@ export default function CharacterForm({ formTitle, update, character }: Props) {
         </EntityGrid>
       </div>
       <div onClick={updateByPropertyName}>
-        <EntityTitle>Abilities:</EntityTitle>
+        <EntityTitle>Abilities</EntityTitle>
         <EntityGrid>
           <EntityAttributeColumn>
-            <p>Talents</p>
+            <EntitySubtitle>Talents</EntitySubtitle>
             {Object.keys(talents).map((key: keyof ITalents) => (
               <EntityInputGroupNumber<Character>
                 key={key}
@@ -192,7 +193,7 @@ export default function CharacterForm({ formTitle, update, character }: Props) {
             ))}
           </EntityAttributeColumn>
           <EntityAttributeColumn>
-            <p>Skills</p>
+            <EntitySubtitle>Skills</EntitySubtitle>
             {Object.keys(skills).map((key: keyof ISkills) => (
               <EntityInputGroupNumber<Character>
                 key={key}
@@ -202,7 +203,7 @@ export default function CharacterForm({ formTitle, update, character }: Props) {
             ))}
           </EntityAttributeColumn>
           <EntityAttributeColumn>
-            <p>Knowledges</p>
+            <EntitySubtitle>Knowledges</EntitySubtitle>
             {Object.keys(knowledges).map((key: keyof IKnowledges) => (
               <EntityInputGroupNumber<Character>
                 key={key}
@@ -216,9 +217,9 @@ export default function CharacterForm({ formTitle, update, character }: Props) {
       <div onClick={updateByPropertyName}>
         <EntityTitle>Advantages</EntityTitle>
         <EntityAttributeColumn>
-          <p>Renown</p>
           <EntityGrid columns={2}>
             <EntityAttributeColumn>
+              <EntitySubtitle>Renown</EntitySubtitle>
               {Object.keys(renown).map((key: keyof IRenown) => (
                 <EntityInputGroupNumber<Character>
                   key={key}
@@ -229,6 +230,7 @@ export default function CharacterForm({ formTitle, update, character }: Props) {
               ))}
             </EntityAttributeColumn>
             <EntityAttributeColumn>
+              <EntitySubtitle>Self</EntitySubtitle>
               {Object.keys(self).map((key: keyof ISelf) => (
                 <EntityInputGroupNumber<Character>
                   key={key}
@@ -241,19 +243,11 @@ export default function CharacterForm({ formTitle, update, character }: Props) {
           </EntityGrid>
         </EntityAttributeColumn>
       </div>
-      <EntityAttributeColumn onClick={updateBackgroundData}>
-        <p>Backgrounds</p>
-        <CharacterBackgroundModal
-          backgrounds={advantages.backgrounds ?? []}
-          addBackground={addBackground}
-          removeBackground={removeBackground}
-          updateBackground={updateBackground}
-        />
-      </EntityAttributeColumn>
+
       <div>
         <EntityGrid columns={2}>
           <EntityAttributeColumn>
-            <p>Rituals</p>
+            <EntitySubtitle>Rituals</EntitySubtitle>
             <EntityModalList<Ritual>
               allValues={rituals}
               selectedValues={advantages.rites || []}
@@ -262,7 +256,7 @@ export default function CharacterForm({ formTitle, update, character }: Props) {
             />
           </EntityAttributeColumn>
           <EntityAttributeColumn>
-            <p>Gifts</p>
+            <EntitySubtitle>Gifts</EntitySubtitle>
             <EntityModalList<Gift>
               allValues={gifts}
               selectedValues={advantages.gifts || []}
@@ -272,6 +266,15 @@ export default function CharacterForm({ formTitle, update, character }: Props) {
           </EntityAttributeColumn>
         </EntityGrid>
       </div>
+      <EntityAttributeColumn onClick={updateBackgroundData}>
+        <EntityTitle>Backgrounds</EntityTitle>
+        <CharacterBackgroundModal
+          backgrounds={advantages.backgrounds ?? []}
+          addBackground={addBackground}
+          removeBackground={removeBackground}
+          updateBackground={updateBackground}
+        />
+      </EntityAttributeColumn>
     </div>
   );
 }

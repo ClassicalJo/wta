@@ -18,12 +18,9 @@ export default function EntityInputGroupNumber<T extends IEntity>({
   ...rest
 }: Props<T> & HTMLAttributes<HTMLDivElement>) {
   return (
-    <div
-      {...rest}
-      className='flex flex-col gap-2 bg-white/25 rounded-full px-2'
-    >
+    <div {...rest} className='flex flex-col gap-2'>
       <div className='flex h-9 items-center'>
-        <EntityTag className='px-2 flex-1'>
+        <EntityTag className='flex-1'>
           {capitalizeCamelCase(propertyName.toString())}
         </EntityTag>
         <div className='rounded-sm'>

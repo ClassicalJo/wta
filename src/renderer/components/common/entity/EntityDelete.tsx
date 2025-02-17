@@ -14,9 +14,9 @@ export default function EntityDelete({
 }: Props) {
   if (!showConfirmation)
     return (
-      <div className='flex h-20 items-end mt-4'>
+      <div className='flex min-h-36 items-end pt-4 font-[Rock]'>
         <input
-          className='flex-1 bg-red-500 border-2 border-red-500 hover:bg-red-400 hover:border-red-400 text-white rounded-full px-5 py-1 font-bold cursor-pointer'
+          className='h-12 flex-1 cursor-pointer rounded-b-md border-2 border-dark-warning bg-dark-warning p-2 font-[Rock] font-bold text-white hover:border-dark-warning hover:bg-dark-warning'
           type='button'
           value='Delete'
           onClick={deleteEntity}
@@ -25,21 +25,21 @@ export default function EntityDelete({
     );
   else
     return (
-      <div className='flex flex-col h-20 mt-4'>
-        <div className='flex-1 flex-col content-end'>
-          <p className=' text-red-500 flex-1 my-2'>
+      <div className='flex min-h-36 flex-col pt-4 font-[Rock]'>
+        <div className='my-4 flex flex-1 items-end'>
+          <p className='text-md animate-fade-up-sm text-white [text-shadow:1px_1px_3px_rgba(255,255,255,0.8)] sm:text-lg'>
             {`Are you sure you want to delete this ${entityName}?`}
           </p>
         </div>
         <div className='flex gap-4'>
           <input
-            className='flex-1 bg-red-500 border-2 border-red-500 hover:bg-red-400 hover:border-red-400 text-white rounded-full px-5 py-1 font-bold cursor-pointer'
+            className='h-12 flex-1 cursor-pointer rounded-b-md border-2 border-dark-warning bg-dark-warning p-2 align-middle font-bold text-white hover:border-red-400 hover:bg-red-400'
             type='button'
             value='Delete'
             onClick={deleteEntity}
           />
           <input
-            className='flex-1 border-red-500 border-2 rounded-full px-5 py-1 text-red-500 hover:text-red-400 hover:border-red-400 font-bold cursor-pointer'
+            className='h-12 flex-1 cursor-pointer rounded-b-md border-2 border-dark-warning p-2 font-bold text-dark-warning hover:border-red-400 hover:text-red-400'
             type='button'
             value='Cancel'
             onClick={cancelDelete}

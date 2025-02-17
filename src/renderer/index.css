@@ -2,6 +2,69 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'Rock';
+  src: url('../../resources/fonts/RockSalt-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'Solitreo';
+  src: url('../../resources/fonts/Solitreo-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'Staatliches';
+  src: url('../../resources/fonts/Staatliches-Regular.ttf');
+}
+
+@theme {
+  --color-dark-primary: theme(colors.dark-primary);
+  --color-dark-secondary: theme(colors.dark-secondary);
+  --color-dark-accent: theme(colors.dark-accent);
+  --color-dark-text: theme(colors.dark-text);
+}
+
+@keyframes fade-up-sm {
+  0% {
+    opacity: 0;
+    position: relative;
+    top: 3px;
+  }
+  100% {
+    opacity: 1;
+    top: 0px;
+  }
+}
+@keyframes fade-up-md {
+  0% {
+    opacity: 0;
+    position: relative;
+    top: 10px;
+  }
+  100% {
+    opacity: 1;
+    top: 0px;
+  }
+}
+.appear-enter {
+  opacity: 0;
+}
+.appear-enter-active {
+  opacity: 1;
+  transition: opacity 300ms;
+}
+
+.appear-enter-done {
+  opacity: 1;
+}
+.appear-exit {
+  opacity: 1;
+}
+.appear-exit-active {
+  opacity: 0;
+  transition: opacity 300ms;
+}
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
     Arial, sans-serif;

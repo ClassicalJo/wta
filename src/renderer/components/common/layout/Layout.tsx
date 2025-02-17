@@ -1,24 +1,22 @@
 import React from 'react';
 import { Outlet } from 'react-router';
 
-import { useBackgroundPosition } from '@/renderer/hooks/common/useBackgroundPosition';
-
-import BackgroundImage from '../ui/BackgroundImage';
+import Background from './Background';
 import Breadcrumbs from './Breadcrumbs';
+import FadeWrapper from './FadeWrapper';
 import Main from './Main';
 
 export default function Layout() {
-  const { position } = useBackgroundPosition();
   return (
-    <div className='min-h-screen h-full relative overflow-hidden max-h-screen'>
-      <BackgroundImage position={position} />
-      <div className='min-h-screen h-full relative overflow-hidden max-h-screen'>
+    <div className='relative min-h-screen'>
+      <div className='relative min-h-screen bg-dark-primary'>
         <Breadcrumbs />
-        <div className='mx-auto min-h-screen flex'>
-          <Main>
+        <Background />
+        <Main>
+          <FadeWrapper className='opacity-0'>
             <Outlet />
-          </Main>
-        </div>
+          </FadeWrapper>
+        </Main>
       </div>
     </div>
   );

@@ -22,7 +22,7 @@ type Props = {
 export default function RitualForm({ formTitle, update, ritual }: Props) {
   const { updateByPropertyName } = useStats(update);
   return (
-    <div className='flex flex-col flex-1 w-full gap-8'>
+    <div className='flex w-full flex-1 flex-col gap-8'>
       <EntityTitle>{formTitle}</EntityTitle>
       <EntityInputGroupText
         propertyName='name'
@@ -39,7 +39,7 @@ export default function RitualForm({ formTitle, update, ritual }: Props) {
         propertyName='type'
         propertyValue={ritual.type}
         list={Object.values(RitualType)}
-        update={update}
+        update={(value: string) => update('type', value)}
       />
 
       <EntityGrid columns={2}>

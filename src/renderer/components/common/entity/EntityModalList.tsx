@@ -38,7 +38,7 @@ export default function EntityModalList<T>({
   };
 
   return (
-    <div className='flex flex-col gap-2'>
+    <div className='mt-2 flex flex-col gap-4'>
       {selectedValues.map((value, index) => (
         <EntityModalListItem
           key={`entity-modal-${index}`}

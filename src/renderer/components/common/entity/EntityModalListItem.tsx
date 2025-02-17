@@ -6,8 +6,8 @@ type Props = {
 };
 export default function EntityModalListItem({ text, onClick }: Props) {
   return (
-    <div className='flex gap-4 bg-white/25  rounded-sm p-2 items-center'>
-      <p className='flex-1 overflow-hidden whitespace-nowrap text-ellipsis'>
+    <div className='flex items-center gap-4 font-[Solitreo] text-xl'>
+      <p className='flex-1 overflow-hidden text-ellipsis whitespace-nowrap'>
         {text}
       </p>
       <button className='px-2 text-xs' onClick={onClick}>

@@ -27,21 +27,23 @@ export default function ReadFight() {
 
   const { beginFight } = useSimulator();
   return (
-    <div className='flex flex-col gap-8'>
+    <div className='flex flex-1 flex-col gap-8 p-8'>
       <FightForm
         formTitle={`Fight #${params.fightId}`}
         fight={entity}
         update={updateFight}
       />
+
+      <EntityFormSubmit onClick={() => beginFight(entity.id)}>
+        Begin simulation
+      </EntityFormSubmit>
+
       <EntityDelete
         entityName={FIGHT_ENTITY_NAME}
         showConfirmation={confirmDelete}
         deleteEntity={deleteEntity}
         cancelDelete={cancelDeleteEntity}
       />
-      <EntityFormSubmit onClick={() => beginFight(entity.id)}>
-        Begin simulation
-      </EntityFormSubmit>
     </div>
   );
 }

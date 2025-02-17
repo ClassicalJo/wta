@@ -13,19 +13,24 @@ export default function EntityDashboard<T extends IEntity>({
   entityName,
 }: Props<T>) {
   return (
-    <div className='flex-1 grid grid-flow-row-dense grid-cols-3 grid-rows-3 gap-8'>
-      <EntityLink link={`/${entityName}/create`} text={`New ${entityName}`} />
-      {entities.map((entity: T) => (
+    <div className='flex flex-1 flex-col'>
+      <div className='grid grid-cols-1 gap-8'>
         <EntityLink
-          key={entity.id}
-          link={`/${entityName}/${entity.id}`}
-          text={
-            'name' in entity && typeof entity['name'] === 'string'
-              ? entity.name
-              : entity.id.toString()
-          }
+          link={`/${entityName}/create`}
+          text={`+ New ${entityName}`}
         />
-      ))}
+        {entities.map((entity: T) => (
+          <EntityLink
+            key={entity.id}
+            link={`/${entityName}/${entity.id}`}
+            text={
+              'name' in entity && typeof entity['name'] === 'string'
+                ? entity.name
+                : entity.id.toString()
+            }
+          />
+        ))}
+      </div>
     </div>
   );
 }

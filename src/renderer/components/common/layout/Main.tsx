@@ -5,10 +5,8 @@ type Props = {
 };
 export default function Main({ children }: Props) {
   return (
-    <main className='flex flex-col flex-1 text-white overflow-y-scroll p-8 max-h-screen items-center'>
-      <div className='flex flex-col flex-1 w-full max-w-screen-lg'>
-        {children}
-      </div>
+    <main className='flex flex-1 flex-col text-white'>
+      <div className='z-10 mx-auto w-full max-w-screen-lg'>{children}</div>
     </main>
   );
 }
