@@ -23,7 +23,7 @@ export default function ReadGift() {
     updateEntity({ [propertyName]: propertyValue });
   };
   return (
-    <div className='flex flex-col flex-1 w-full gap-8 p-8'>
+    <div className='flex w-full flex-1 flex-col gap-8 p-8'>
       <GiftForm
         formTitle={`Gift #${params.giftId}`}
         gift={entity}

@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 
 import { MainMessages } from '@/shared/messages/main-messages.enum';
 
+import FadeWrapper from './components/common/layout/FadeWrapper';
 import MenuLink from './components/menu/MenuLink';
 import './index.css';
 
@@ -17,14 +18,15 @@ export default function App() {
   }, []);
   return (
     <div
-      className={`flex flex-col gap-8 p-8 min-h-screen items-center justify-end`}
+      className={`flex min-h-screen flex-col items-center justify-end gap-8 p-8`}
     >
-      <div className='flex flex-col font-[Solitreo] aspect-square mb-16'>
+      <div className='mb-16 flex aspect-square flex-col font-[Solitreo]'>
         <MenuLink to={'/character'}>Characters</MenuLink>
         <MenuLink to={'/gift'}>Gifts</MenuLink>
         <MenuLink to={'/ritual'}>Rituals</MenuLink>
         <MenuLink to={'/fight'}>Fight!</MenuLink>
       </div>
     </div>
+    // </FadeWrapper>
   );
 }

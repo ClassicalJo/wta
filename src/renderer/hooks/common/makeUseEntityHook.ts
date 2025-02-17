@@ -1,8 +1,9 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 
 import { UpdateDto } from '@/main/modules/common/application/dto/update.dto';
 import { IEntity } from '@/main/modules/common/application/interfaces/entity.interface';
+import { DelayedNavigationContext } from '@/renderer/context/DelayedNavigation';
 import { IEntityService } from '@/renderer/interfaces/entity-service.interface';
 import { notificationService } from '@/renderer/services/notification.service';
 import { MainMessages } from '@/shared/messages/main-messages.enum';
@@ -28,7 +29,7 @@ export function makeUseEntityHook<T extends IEntity>({
     const navigate = useNavigate();
     const [entity, setEntity] = useState(new entityConstructor());
     const [confirmDelete, setConfirmDelete] = useState<boolean>(false);
-
+    const { setActive } = useContext(DelayedNavigationContext);
     const fetchEntity = useCallback(() => {
       entityService.read(id);
     }, [id]);
@@ -71,6 +72,7 @@ export function makeUseEntityHook<T extends IEntity>({
 
     const handleDeleteEntityResponse = useCallback(() => {
       notificationService.success('Entity deleted');
+      setActive(false);
       navigate(`/${entityName}`);
     }, [navigate]);
 

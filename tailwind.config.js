@@ -25,6 +25,16 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    function ({ addComponents }) {
+      addComponents({
+        "dialog.backdrop-blur-sm::backdrop": {
+          backdropFilter: "blur(3px)", // Apply blur effect to the backdrop
+          backgroundColor: "rgba(0, 0, 0, 0.5)", // Semi-transparent dark overlay
+          transition: "backdrop-filter 0.3s ease-in-out",
+        },
+      });
+    },
+  ],
 }
 

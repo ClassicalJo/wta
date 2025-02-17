@@ -4,10 +4,10 @@ import FadeWrapper from '../layout/FadeWrapper';
 
 export default function MainBackground() {
   return (
-    <FadeWrapper className='absolute top-0 left-0 w-full h-full opacity-0'>
-      <div className={'absolute top-0 left-0 w-full h-full bg-dark-primary'}>
+    <FadeWrapper className='absolute left-0 top-0 h-full w-full opacity-0'>
+      <div className={'absolute left-0 top-0 h-full w-full bg-dark-primary'}>
         <svg
-          className='absolute top-0 left-0 w-full h-full'
+          className='absolute left-0 top-0 h-full w-full'
           width='420mm'
           height='297mm'
           viewBox='0 0 420 297'
@@ -23,7 +23,7 @@ export default function MainBackground() {
           />
         </svg>
         <svg
-          className='absolute top-0 left-0 w-full h-full'
+          className='absolute left-0 top-0 h-full w-full'
           width='420mm'
           height='297mm'
           viewBox='0 0 420 297'

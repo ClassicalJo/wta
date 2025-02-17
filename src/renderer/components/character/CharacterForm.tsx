@@ -93,7 +93,7 @@ export default function CharacterForm({ formTitle, update, character }: Props) {
   };
 
   return (
-    <div className='flex flex-col flex-1 w-full gap-8 select-none'>
+    <div className='flex w-full flex-1 select-none flex-col gap-8'>
       <div>
         <EntityTitle>{formTitle}</EntityTitle>
         <EntityGrid>

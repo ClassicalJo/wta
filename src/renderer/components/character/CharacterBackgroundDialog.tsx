@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 
 import { Background } from '@/main/modules/background/domain/background.entity';
 
+import EntityTitle from '../common/entity/EntityTitle';
+
 type Props = {
   ref: React.Ref<HTMLDialogElement>;
   handleCloseModal: () => void;
@@ -21,30 +23,35 @@ export default function CharacterBackgroundDialog({
     handleCloseModal();
   };
   return (
-    <dialog ref={ref} className='w-full max-w-xl max-h-[50%] bg-transparent'>
-      <div className='bg-white rounded-md'>
-        <div className='flex justify-center border-b-black border-b-2 px-4 py-2 sticky top-0 left-0 w-full bg-white rounded-t-md'>
-          <h1 className='flex-1 text-2xl'>Add a new background</h1>
+    <dialog
+      ref={ref}
+      className='backdrop-blur-sm max-h-[50%] w-full max-w-xl bg-black/50'
+    >
+      <div className='rounded-md bg-dark-primary'>
+        <div className='w-fullrounded-t-md sticky left-0 top-0 flex justify-center px-4 py-2'>
+          <EntityTitle className={'flex-1 text-white'}>
+            Add a new background
+          </EntityTitle>
           <button
-            className='px-2 text-xl justify-center'
+            className='justify-center px-2 text-xl invert'
             onClick={handleCloseModal}
           >
             ✖️
           </button>
         </div>
 
-        <div className='flex gap-4 p-4'>
+        <div className='flex flex-col gap-4 p-4'>
           <input
-            autoFocus
+            autoFocus={true}
             type='text'
             value={value}
             onChange={onChange}
             placeholder='Background name'
-            className='flex-1 h-8 border-b-2 border-black ml-2   focus:bg-white'
+            className='h-8 flex-1 border-b-4 border-white bg-transparent font-[Solitreo] text-2xl text-white placeholder-white/50 focus:bg-transparent'
           />
 
           <button
-            className='rounded-full bg-purple-500 text-white text-lg px-4'
+            className='h-12 rounded-b-md bg-white font-[Staatliches] text-2xl text-dark-primary transition-colors duration-150 ease-in-out hover:bg-dark-text'
             onClick={onSubmit}
           >
             Add

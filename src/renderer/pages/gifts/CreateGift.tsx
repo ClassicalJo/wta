@@ -7,7 +7,7 @@ import { useCreateGift } from '@/renderer/hooks/gift/useCreateGift';
 export default function CreateGift() {
   const { handleSubmit, handleUpdate, state } = useCreateGift();
   return (
-    <div className='flex flex-col flex-1 w-full gap-8'>
+    <div className='flex w-full flex-1 flex-col gap-8'>
       <GiftForm
         formTitle='Create gift'
         gift={state.entity}

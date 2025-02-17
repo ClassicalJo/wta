@@ -22,7 +22,7 @@ export default function EntityDots<T extends IEntity>({
   propertyName,
 }: Props<T>) {
   return (
-    <p className='flex gap-1 items-center '>
+    <p className='flex items-center gap-1'>
       {Array(currentValue)
         .fill('')
         .map((_, index) => (
@@ -36,7 +36,7 @@ export default function EntityDots<T extends IEntity>({
           >
             <EntityIcon
               src={dotFilled}
-              className='invert pointer-events-none '
+              className='pointer-events-none invert'
             />
           </span>
         ))}
@@ -49,12 +49,9 @@ export default function EntityDots<T extends IEntity>({
             data-index={itemIndex}
             data-name={propertyName}
             data-value={currentValue + index + 1}
-            className='cursor-pointer z-10'
+            className='z-10 cursor-pointer'
           >
-            <EntityIcon
-              src={dotEmpty}
-              className='invert pointer-events-none '
-            />
+            <EntityIcon src={dotEmpty} className='pointer-events-none invert' />
           </span>
         ))}
     </p>
