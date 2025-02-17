@@ -27,7 +27,7 @@ export default function ReadFight() {
 
   const { beginFight } = useSimulator();
   return (
-    <div className='flex flex-1 flex-col gap-8 p-8'>
+    <div className='mt-8 flex flex-1 flex-col gap-8 p-8'>
       <FightForm
         formTitle={`Fight #${params.fightId}`}
         fight={entity}

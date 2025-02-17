@@ -7,10 +7,8 @@ export default function useNavBar() {
     { to: '/', value: 'Home', isLast: location.pathname.length === 1 },
     ...pathnames.map((value, index) => {
       const to = `/${pathnames.slice(0, index + 1).join('/')}`;
-      const isLast = index === pathnames.length - 1;
       return {
         to,
-        isLast,
         value,
       };
     }),

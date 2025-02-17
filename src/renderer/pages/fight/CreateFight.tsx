@@ -8,7 +8,7 @@ export default function CreateFight() {
   const { handleUpdate, handleSubmit, state } = useCreateFight();
 
   return (
-    <div className='flex flex-col gap-8 p-8'>
+    <div className='mt-8 flex flex-col gap-8 p-8'>
       <FightForm
         formTitle='Create Fight'
         fight={state.entity}

@@ -8,7 +8,7 @@ import { useReadAllCharacters } from '@/renderer/hooks/character/useReadAllChara
 export default function Characters() {
   const { entities } = useReadAllCharacters();
   return (
-    <div className='p-16'>
+    <div className='mt-8 p-16'>
       <EntityDashboard<Character>
         entityName={CHARACTER_ENTITY_NAME}
         entities={entities}

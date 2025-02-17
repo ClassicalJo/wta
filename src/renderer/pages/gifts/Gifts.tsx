@@ -6,7 +6,7 @@ import { useReadAllGifts } from '@/renderer/hooks/gift/useReadAllGifts';
 export default function Gifts() {
   const { entities } = useReadAllGifts();
   return (
-    <div className='flex-1 p-8'>
+    <div className='mt-8 flex-1 p-8'>
       <EntityDashboard entityName='gift' entities={entities} />
     </div>
   );
