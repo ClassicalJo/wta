@@ -2,7 +2,8 @@ import React from 'react';
 
 import { IEntity } from '@/main/modules/common/application/interfaces/entity.interface';
 
-import EntityLink from './EntityLink';
+import DashboardLink from '../ui/DashboardLink';
+import EntityDashboardLink from './EntityDashboardLink';
 
 type Props<T extends IEntity> = {
   entities: T[];
@@ -13,21 +14,16 @@ export default function EntityDashboard<T extends IEntity>({
   entityName,
 }: Props<T>) {
   return (
-    <div className='flex flex-1 flex-col'>
-      <div className='grid grid-cols-1 gap-8'>
-        <EntityLink
-          link={`/${entityName}/create`}
-          text={`+ New ${entityName}`}
-        />
+    <div className='bg-red-50 font-[Staatliches] text-3xl text-dark-secondary *:p-8'>
+      <div className='float-right grid max-w-screen-sm grid-flow-row-dense grid-cols-1 gap-8 [&>*:nth-child(even):hover]:[transform:perspective(1000px)_rotateY(0deg);] [&>*:nth-child(even)]:[transform:perspective(1000px)_rotateY(-10deg);] [&>*:nth-child(odd):hover]:[transform:perspective(1000px)_rotateY(0deg);] [&>*:nth-child(odd)]:[transform:perspective(1000px)_rotateY(10deg);] [&>*]:[transition:all_0.15s_ease-in-out;]'>
+        <DashboardLink to={`/${entityName}/create`}>
+          {`+ New ${entityName}`}
+        </DashboardLink>
         {entities.map((entity: T) => (
-          <EntityLink
+          <EntityDashboardLink
             key={entity.id}
-            link={`/${entityName}/${entity.id}`}
-            text={
-              'name' in entity && typeof entity['name'] === 'string'
-                ? entity.name
-                : entity.id.toString()
-            }
+            entity={entity}
+            entityName={entityName}
           />
         ))}
       </div>
