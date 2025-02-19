@@ -16,6 +16,7 @@ module.exports = {
       animation: {
         "fade-up-sm": "fade-up-sm 0.15s ease-in",
         "fade-up-md": "fade-up-md 0.5s ease-in",
+        "float": "float 5s ease-in-out infinite",
       },
       screens: {
         'h-sm': { 'raw': '(min-height: 480px)' },
