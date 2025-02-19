@@ -3,7 +3,11 @@ import { useLocation } from 'react-router';
 
 import { DelayedNavigationContext } from '@/renderer/context/DelayedNavigation';
 
+import CharacterBackground from '../backgrounds/CharacterBackground';
+import FightBackground from '../backgrounds/FightBackground';
+import GiftBackground from '../backgrounds/GiftBackground';
 import MainBackground from '../backgrounds/MainBackground';
+import RitualBackground from '../backgrounds/RitualBackground';
 
 export default function Background() {
   const location = useLocation();
@@ -22,6 +26,14 @@ export default function Background() {
   switch (path) {
     case '/':
       return <MainBackground />;
+    case '/character':
+      return <CharacterBackground />;
+    case '/ritual':
+      return <RitualBackground />;
+    case '/gift':
+      return <GiftBackground />;
+    case '/fight':
+      return <FightBackground />;
     default:
       return <MainBackground />;
   }
