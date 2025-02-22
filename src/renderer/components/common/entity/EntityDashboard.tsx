@@ -14,7 +14,7 @@ export default function EntityDashboard<T extends IEntity>({
   entityName,
 }: Props<T>) {
   return (
-    <div className='bg-red-50 font-[Staatliches] text-3xl text-dark-secondary *:p-8'>
+    <div className='bg-red-50 font-[Staatliches] text-3xl text-dark-primary *:p-8'>
       <div className='float-right grid max-w-screen-sm grid-flow-row-dense grid-cols-1 gap-8 [&>*:nth-child(even):hover]:[transform:perspective(1000px)_rotateY(0deg);] [&>*:nth-child(even)]:[transform:perspective(1000px)_rotateY(-10deg);] [&>*:nth-child(odd):hover]:[transform:perspective(1000px)_rotateY(0deg);] [&>*:nth-child(odd)]:[transform:perspective(1000px)_rotateY(10deg);] [&>*]:[transition:all_0.15s_ease-in-out;]'>
         <DashboardLink to={`/${entityName}/create`}>
           {`+ New ${entityName}`}
