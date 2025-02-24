@@ -159,7 +159,7 @@ export default function RitualBackground() {
           y='75'
           transform='scale(1.25)'
           xlinkHref='#path2'
-          className='hidden md:block'
+          className='hidden xl:block'
         />
       </svg>
     </div>
