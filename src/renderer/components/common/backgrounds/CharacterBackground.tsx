@@ -10,24 +10,49 @@ export default function CharacterBackground() {
         fill='currentColor'
       >
         <defs>
+          <filter
+            colorInterpolationFilters='sRGB'
+            id='filter18'
+            x='-0.038375145'
+            y='-0.17702632'
+            width='1.0767503'
+            height='1.3540526'
+          >
+            <feGaussianBlur stdDeviation='4.7616856' id='feGaussianBlur18' />
+          </filter>
           <g id='layer2'>
             <path
-              fill='#ffffff'
-              opacity='0.05'
+              opacity='0.1'
+              filter='url(#filter18)'
               d='m 0,12.026996 c 174.72553,49.444318 297,7.683915 297,7.683915 0,0 -253.925564,32.875063 -297,-7.683915 z'
               id='path966'
             />
             <path
               fill='#ffffff'
-              opacity='0.05'
+              opacity='0.1'
+              filter='url(#filter18)'
               d='M 0,65.858916 C 88.867897,62.40877 142.08894,101.03546 276.62092,88.158973 247.19529,83.481813 167.14685,90.414036 0,65.858916 Z'
               id='path967-0'
             />
             <path
-              fill='#ffffff'
-              opacity='0.05'
+              opacity='0.1'
+              filter='url(#filter18)'
               d='M 297,79.222247 C 127.6198,24.432596 0,65.858916 0,65.858916 c 0,0 268.937,-34.744655 297,13.363331 z'
               id='path969'
+            />
+            <path
+              opacity='0.1'
+              filter='url(#filter18)'
+              d='M 297,79.222247 C 127.6198,24.432596 0,65.858916 0,65.858916 c 0,0 268.937,-34.744655 297,13.363331 z'
+              id='path969'
+              transform='translate(0 50)'
+            />
+            <path
+              opacity='0.2'
+              filter='url(#filter18)'
+              d='M 297,79.222247 C 127.6198,24.432596 0,65.858916 0,65.858916 c 0,0 268.937,-34.744655 297,13.363331 z'
+              id='path969'
+              transform='translate(50 100)'
             />
             <path
               id='path2'
