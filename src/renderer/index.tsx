@@ -1,6 +1,6 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import { BrowserRouter, Route, Routes } from 'react-router';
+import { HashRouter, Route, Routes } from 'react-router';
 import { ToastContainer } from 'react-toastify';
 
 import App from './App';
@@ -28,7 +28,7 @@ root.render(
     <BackgroundProvider>
       <DelayedNavigationProvider>
         <ToastContainer limit={2} />
-        <BrowserRouter>
+        <HashRouter>
           <Routes>
             <Route path='/' element={<Layout />}>
               <Route index element={<App />} />
@@ -54,7 +54,7 @@ root.render(
               </Route>
             </Route>
           </Routes>
-        </BrowserRouter>
+        </HashRouter>
       </DelayedNavigationProvider>
     </BackgroundProvider>
   </>,

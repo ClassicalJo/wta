@@ -1,18 +1,22 @@
 {
   "name": "wta",
   "productName": "wta",
+  "engines": {
+    "node": ">=20.18.1"
+  },
   "version": "1.0.0",
-  "description": "My Electron application description",
+  "description": "Werewolf the Apocalypse Battle Simulator",
   "main": ".vite/build/main.js",
   "scripts": {
     "start": "electron-forge start",
     "package": "electron-forge package",
     "format": "prettier --write \"src/**/*.{ts,tsx}\"",
-    "rebuild": "electron-rebuild -f -w better-sqlite3",
+    "rebuild": "electron-rebuild -f -w sqlite3",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
     "prepare": "husky",
-    "lint": "eslint --fix --max-warnings=0 --ext .ts,.tsx ."
+    "lint": "eslint --fix --max-warnings=0 --ext .ts,.tsx .",
+    "wdio": "wdio run ./wdio.conf.ts"
   },
   "devDependencies": {
     "@electron-forge/cli": "^7.6.0",
@@ -20,11 +24,14 @@
     "@electron-forge/maker-rpm": "^7.6.0",
     "@electron-forge/maker-squirrel": "^7.6.0",
     "@electron-forge/maker-zip": "^7.6.0",
-    "@electron-forge/plugin-auto-unpack-natives": "^7.6.0",
+    "@electron-forge/plugin-auto-unpack-natives": "^7.7.0",
     "@electron-forge/plugin-fuses": "^7.6.0",
     "@electron-forge/plugin-vite": "^7.6.0",
     "@electron-toolkit/eslint-config-prettier": "^2.0.0",
     "@electron/fuses": "^1.8.0",
+    "@rollup/plugin-commonjs": "^28.0.3",
+    "@rollup/plugin-node-resolve": "^16.0.0",
+    "@testing-library/webdriverio": "^3.2.1",
     "@trivago/prettier-plugin-sort-imports": "^5.2.0",
     "@types/better-sqlite3": "^7.6.12",
     "@types/electron-squirrel-startup": "^1.0.2",
@@ -32,6 +39,10 @@
     "@types/react-transition-group": "^4.4.12",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.0.0",
+    "@wdio/cli": "^9.11.0",
+    "@wdio/local-runner": "^9.11.0",
+    "@wdio/mocha-framework": "^9.11.0",
+    "@wdio/spec-reporter": "^9.11.0",
     "autoprefixer": "^10.4.20",
     "electron": "33.2.1",
     "electron-rebuild": "^3.2.9",
@@ -49,7 +60,9 @@
     "ts-node": "^10.0.0",
     "typeorm-naming-strategies": "^4.1.0",
     "typescript": "~4.5.4",
-    "vite": "^5.0.12"
+    "vite": "^5.0.12",
+    "wdio-electron-service": "^8.0.1",
+    "wdio-wait-for": "^3.1.0"
   },
   "keywords": [],
   "author": {
@@ -68,7 +81,7 @@
     "react-transition-group": "^4.4.5",
     "reflect-metadata": "^0.2.2",
     "sqlite3": "^5.1.7",
-    "typeorm": "^0.3.20"
+    "typeorm": "^0.3.21"
   },
   "lint-staged": {
     "src/**/*.ts": [

@@ -15,7 +15,7 @@ export class OrmConfig {
         return new DataSource({
           type: 'sqlite',
           namingStrategy: new SnakeNamingStrategy(),
-          database: 'resources/wta.db',
+          database: 'wta.db',
           synchronize: false,
           logging: false,
           subscribers: [],
