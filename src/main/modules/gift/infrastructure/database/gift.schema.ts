@@ -8,7 +8,6 @@ import { Gift } from '../../domain/gift.entity';
 export const GIFT_ENTITY_NAME = 'gift';
 export const GiftSchema = new EntitySchema<Gift>({
   name: capitalize(GIFT_ENTITY_NAME),
-  target: Gift,
   tableName: GIFT_ENTITY_NAME,
   columns: withBaseSchemaColumns({
     name: {

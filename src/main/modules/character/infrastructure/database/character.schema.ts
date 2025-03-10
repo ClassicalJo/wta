@@ -10,7 +10,6 @@ import { Character } from '../../domain/character.entity';
 export const CHARACTER_ENTITY_NAME = 'character';
 export const CharacterSchema = new EntitySchema<Character>({
   name: capitalize(CHARACTER_ENTITY_NAME),
-  target: Character,
   tableName: CHARACTER_ENTITY_NAME,
   relations: {
     gifts: {

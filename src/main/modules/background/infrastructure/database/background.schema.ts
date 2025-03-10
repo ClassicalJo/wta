@@ -8,7 +8,6 @@ import { Background } from '../../domain/background.entity';
 export const BACKGROUND_ENTITY_NAME = 'background';
 export const BackgroundSchema = new EntitySchema<Background>({
   name: capitalize(BACKGROUND_ENTITY_NAME),
-  target: Background,
   tableName: BACKGROUND_ENTITY_NAME,
   relations: {
     character: {

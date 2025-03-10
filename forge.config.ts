@@ -7,9 +7,8 @@ import { VitePlugin } from '@electron-forge/plugin-vite';
 import type { ForgeConfig } from '@electron-forge/shared-types';
 import { FuseV1Options, FuseVersion } from '@electron/fuses';
 import fs from 'fs';
-import path from 'path';
-
 import { spawn } from 'node:child_process';
+import path from 'path';
 
 const config: ForgeConfig = {
   packagerConfig: {

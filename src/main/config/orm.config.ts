@@ -1,38 +1,34 @@
-import { DataSource, EntitySchema } from 'typeorm';
+import { DataSource } from 'typeorm';
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 
+import { schemas as entities } from '../modules/app.schema';
 import { environment } from './environment.config';
 import { ENVIRONMENT } from './environment.enum';
 
-export class OrmConfig {
-  dataSource: DataSource;
-  constructor(public entities: EntitySchema[]) {
-    this.dataSource = this.setDataSource(environment);
+const dataSource = (() => {
+  switch (environment) {
+    case ENVIRONMENT.PRODUCTION:
+      return new DataSource({
+        type: 'sqlite',
+        namingStrategy: new SnakeNamingStrategy(),
+        database: 'resources/wta.db',
+        synchronize: true,
+        logging: false,
+        subscribers: [],
+        entities,
+      });
+    case ENVIRONMENT.DEVELOPMENT:
+    default:
+      return new DataSource({
+        type: 'sqlite',
+        namingStrategy: new SnakeNamingStrategy(),
+        database: 'wta.db',
+        synchronize: true,
+        logging: true,
+        subscribers: [],
+        entities,
+      });
   }
-  setDataSource(environment: ENVIRONMENT) {
-    switch (environment) {
-      case ENVIRONMENT.PRODUCTION: {
-        return new DataSource({
-          type: 'sqlite',
-          namingStrategy: new SnakeNamingStrategy(),
-          database: 'wta.db',
-          synchronize: false,
-          logging: false,
-          subscribers: [],
-          entities: this.entities,
-        });
-      }
-      case ENVIRONMENT.DEVELOPMENT:
-      default:
-        return new DataSource({
-          type: 'sqlite',
-          namingStrategy: new SnakeNamingStrategy(),
-          database: 'wta.db',
-          synchronize: true,
-          logging: true,
-          subscribers: [],
-          entities: this.entities,
-        });
-    }
-  }
-}
+})();
+
+export default dataSource;
