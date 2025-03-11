@@ -16,7 +16,9 @@
     "publish": "electron-forge publish",
     "prepare": "husky",
     "lint": "eslint --fix --max-warnings=0 --ext .ts,.tsx .",
-    "wdio": "wdio run ./wdio.conf.ts"
+    "wdio": "wdio run ./wdio.conf.ts",
+    "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli",
+    "migration:generate": "cross-var npm run typeorm -- migration:generate -d ./src/main/config/orm.config.ts -o ./data/migrations/$npm_package_name"
   },
   "devDependencies": {
     "@electron-forge/cli": "^7.6.0",
@@ -44,6 +46,7 @@
     "@wdio/mocha-framework": "^9.11.0",
     "@wdio/spec-reporter": "^9.11.0",
     "autoprefixer": "^10.4.20",
+    "cross-var": "^1.1.0",
     "electron": "33.2.1",
     "electron-rebuild": "^3.2.9",
     "eslint": "^8.0.1",

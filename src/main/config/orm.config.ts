@@ -1,3 +1,4 @@
+import path from 'path';
 import { DataSource } from 'typeorm';
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 
@@ -11,11 +12,14 @@ const dataSource = (() => {
       return new DataSource({
         type: 'sqlite',
         namingStrategy: new SnakeNamingStrategy(),
-        database: 'resources/wta.db',
-        synchronize: true,
+        database: path.join(process.resourcesPath, '/resources/wta.db'),
+        synchronize: false,
         logging: false,
         subscribers: [],
         entities,
+        migrations: [
+          path.join(process.resourcesPath, '/resources/data/migrations/*.js'),
+        ],
       });
     case ENVIRONMENT.DEVELOPMENT:
     default:

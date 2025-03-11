@@ -1,11 +1,14 @@
+import dotenv from 'dotenv';
 import { app } from 'electron';
 
 import { ENVIRONMENT } from './environment.enum';
 
+dotenv.config();
+
 function setEnvironment(): ENVIRONMENT {
   if (process.env.NODE_ENV === 'automated_testing') {
     return ENVIRONMENT.TESTING;
-  } else if (app.isPackaged || process.env.NODE_ENV === 'production') {
+  } else if (app?.isPackaged || process.env.NODE_ENV === 'production') {
     return ENVIRONMENT.PRODUCTION;
   } else if (process.env.NODE_ENV === 'development') {
     return ENVIRONMENT.DEVELOPMENT;
