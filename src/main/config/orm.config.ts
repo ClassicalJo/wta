@@ -8,6 +8,16 @@ import { ENVIRONMENT } from './environment.enum';
 
 const dataSource = (() => {
   switch (environment) {
+    case ENVIRONMENT.TESTING:
+      return new DataSource({
+        type: 'sqlite',
+        database: path.join(
+          process.resourcesPath,
+          `resources/data/tests/test-${Date.now()}-${Math.random().toString(36).slice(0, 8)}.db`,
+        ),
+        synchronize: true,
+        entities,
+      });
     case ENVIRONMENT.PRODUCTION:
       return new DataSource({
         type: 'sqlite',

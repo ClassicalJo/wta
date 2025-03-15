@@ -58,8 +58,7 @@ typings/
 .yarn-integrity
 
 # dotenv environment variables file
-.env
-.env.test
+resources/data/.env
 
 # parcel-bundler cache (https://parceljs.org/)
 .cache
@@ -93,4 +92,4 @@ out/
 
 #Databases
 wta.db
-reources/wta.db
+resources/wta.db

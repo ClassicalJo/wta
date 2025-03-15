@@ -40,6 +40,7 @@ export default function CharacterBackgroundModal({
               <div className='flex-1 flex-col items-center'>
                 <EntityInputText
                   propertyValue={k.name}
+                  propertyName={k.name}
                   update={(propertyValue: string) =>
                     updateBackground(index, { ...k, name: propertyValue })
                   }
