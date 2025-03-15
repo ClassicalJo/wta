@@ -1,17 +1,17 @@
+import { config } from 'dotenv';
+import { app } from 'electron';
+import path from 'path';
+
 import { ENVIRONMENT } from './environment.enum';
 
-function setEnvironment(): ENVIRONMENT {
-  switch (process.env.NODE_ENV) {
-    case 'production': {
-      return ENVIRONMENT.PRODUCTION;
-    }
-    case 'development': {
-      return ENVIRONMENT.DEVELOPMENT;
-    }
-    default: {
-      throw new Error('No environment found for ' + process.env.NODE_ENV);
-    }
-  }
-}
+config({ path: path.join(process.resourcesPath, '/resources/data/.env') });
 
-export const environment = setEnvironment();
+export const environment = (function setEnvironment(): ENVIRONMENT {
+  if (process.env.APP_MODE === 'automated_testing') {
+    return ENVIRONMENT.TESTING;
+  } else if (app?.isPackaged || process.env.APP_MODE === 'production') {
+    return ENVIRONMENT.PRODUCTION;
+  } else {
+    return ENVIRONMENT.DEVELOPMENT;
+  }
+})();

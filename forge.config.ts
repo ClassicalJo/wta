@@ -6,10 +6,14 @@ import { FusesPlugin } from '@electron-forge/plugin-fuses';
 import { VitePlugin } from '@electron-forge/plugin-vite';
 import type { ForgeConfig } from '@electron-forge/shared-types';
 import { FuseV1Options, FuseVersion } from '@electron/fuses';
+import fs from 'fs';
+import { spawn } from 'node:child_process';
+import path from 'path';
 
 const config: ForgeConfig = {
   packagerConfig: {
-    asar: true,
+    asar: false,
+    extraResource: './resources',
   },
   rebuildConfig: {},
   makers: [
@@ -51,9 +55,74 @@ const config: ForgeConfig = {
       [FuseV1Options.EnableNodeOptionsEnvironmentVariable]: false,
       [FuseV1Options.EnableNodeCliInspectArguments]: false,
       [FuseV1Options.EnableEmbeddedAsarIntegrityValidation]: true,
-      [FuseV1Options.OnlyLoadAppFromAsar]: true,
+      [FuseV1Options.OnlyLoadAppFromAsar]: false,
     }),
   ],
+  hooks: {
+    packageAfterPrune: async (config, buildPath) => {
+      const commands = [
+        'install',
+        '--no-package-lock',
+        '--no-save',
+        'typeorm',
+        'sqlite3',
+      ];
+
+      return new Promise((resolve, reject) => {
+        const oldPckgJson = path.join(buildPath, 'package.json');
+        const newPckgJson = path.join(buildPath, '_package.json');
+
+        fs.renameSync(oldPckgJson, newPckgJson);
+
+        const npmInstall = spawn('npm', commands, {
+          cwd: buildPath,
+          stdio: 'inherit',
+          shell: true,
+        });
+
+        npmInstall.on('close', (code: number) => {
+          if (code === 0) {
+            fs.renameSync(newPckgJson, oldPckgJson);
+
+            /**
+             * On windows code signing fails for ARM binaries etc.,
+             * we remove them here
+             */
+            const problematicPaths = [
+              'android-arm',
+              'android-arm64',
+              'darwin-x64+arm64',
+              'linux-arm',
+              'linux-arm64',
+              'linux-x64',
+            ];
+
+            problematicPaths.forEach((binaryFolder) => {
+              fs.rmSync(
+                path.join(
+                  buildPath,
+                  'node_modules',
+                  '@serialport',
+                  'bindings-cpp',
+                  'prebuilds',
+                  binaryFolder,
+                ),
+                { recursive: true, force: true },
+              );
+            });
+
+            resolve();
+          } else {
+            reject(new Error('process finished with error code ' + code));
+          }
+        });
+
+        npmInstall.on('error', (error: unknown) => {
+          reject(error);
+        });
+      });
+    },
+  },
 };
 
 export default config;

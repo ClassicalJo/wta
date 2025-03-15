@@ -8,7 +8,6 @@ import { Fight } from '../../domain/fight.entity';
 export const FIGHT_ENTITY_NAME = 'fight';
 export const FightSchema = new EntitySchema<Fight>({
   name: capitalize(FIGHT_ENTITY_NAME),
-  target: Fight,
   tableName: FIGHT_ENTITY_NAME,
   relations: {
     groupA: {

@@ -9,7 +9,6 @@ import { Ritual } from '../../domain/ritual.entity';
 export const RITUAL_ENTITY_NAME = 'ritual';
 export const RitualSchema = new EntitySchema<Ritual>({
   name: capitalize(RITUAL_ENTITY_NAME),
-  target: Ritual,
   tableName: RITUAL_ENTITY_NAME,
   columns: withBaseSchemaColumns({
     name: {

@@ -15,12 +15,13 @@ export default function EntityDelete({
   if (!showConfirmation)
     return (
       <div className='flex min-h-36 items-end pt-4 font-[Rock]'>
-        <input
+        <button
           className='h-12 flex-1 cursor-pointer rounded-b-md border-2 border-dark-warning bg-dark-warning p-2 font-[Rock] font-bold text-white hover:border-dark-warning hover:bg-dark-warning'
-          type='button'
-          value='Delete'
+          role='button'
           onClick={deleteEntity}
-        />
+        >
+          <p>Delete</p>
+        </button>
       </div>
     );
   else
@@ -32,18 +33,20 @@ export default function EntityDelete({
           </p>
         </div>
         <div className='flex gap-4'>
-          <input
+          <button
             className='h-12 flex-1 cursor-pointer rounded-b-md border-2 border-dark-warning bg-dark-warning p-2 align-middle font-bold text-white hover:border-red-400 hover:bg-red-400'
-            type='button'
-            value='Delete'
+            role='button'
             onClick={deleteEntity}
-          />
-          <input
+          >
+            <p>Delete</p>
+          </button>
+          <button
             className='h-12 flex-1 cursor-pointer rounded-b-md border-2 border-dark-warning p-2 font-bold text-dark-warning hover:border-red-400 hover:text-red-400'
-            type='button'
-            value='Cancel'
+            role='button'
             onClick={cancelDelete}
-          />
+          >
+            <p>Cancel</p>
+          </button>
         </div>
       </div>
     );

@@ -2,6 +2,12 @@ import { DataSource } from 'typeorm';
 
 export class DatabaseModule {
   constructor(public dataSource: DataSource) {
-    this.dataSource.initialize().then(() => console.log('Database connected!'));
+    this.initialize();
+  }
+  async initialize() {
+    await this.dataSource.initialize();
+    console.log('Database connected');
+    await this.dataSource.runMigrations();
+    console.log('Migrations applied successfully');
   }
 }

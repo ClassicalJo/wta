@@ -10,18 +10,26 @@ type Props = {
   propertyValue: string;
   update: (propertyValue: string) => void;
 };
+
 export default function EntityInputGroupTextArea({
   propertyName,
   propertyValue,
   update,
 }: Props) {
   return (
-    <div className='flex flex-col'>
+    <div
+      className='flex flex-col'
+      data-testid={`entity-input-group-textarea-${propertyName}`}
+    >
       <EntityTag className='mb-2'>
         {capitalizeCamelCase(propertyName)}
       </EntityTag>
 
-      <EntityInputTextArea propertyValue={propertyValue} update={update} />
+      <EntityInputTextArea
+        propertyValue={propertyValue}
+        propertyName={propertyName}
+        update={update}
+      />
     </div>
   );
 }

@@ -31,6 +31,8 @@ export default function DelayedLink({
       to={to}
       onClick={handleClick}
       aria-disabled={active}
+      role='link'
+      aria-label={to}
       {...props}
     >
       {children}
