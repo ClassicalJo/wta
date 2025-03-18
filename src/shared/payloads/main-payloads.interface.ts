@@ -33,4 +33,5 @@ export interface IMainPayloads {
   [MainMessages.FIGHT_READ_ALL_RESPONSE]: Ritual[];
   [MainMessages.FIGHT_BEGIN_RESPONSE]: string;
   [MainMessages.FIGHT_END_RESPONSE]: string;
+  [MainMessages.FIGHT_WORKER_RESPONSE]: number;
 }
