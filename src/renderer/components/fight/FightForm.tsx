@@ -3,6 +3,7 @@ import React from 'react';
 import { Character } from '@/main/modules/character/domain/character.entity';
 import { Fight } from '@/main/modules/fight/domain/fight.entity';
 import { useReadAllCharacters } from '@/renderer/hooks/character/useReadAllCharacters';
+import { useStats } from '@/renderer/hooks/common/useStats';
 
 import EntityAttributeColumn from '../common/entity/EntityAttributeColumn';
 import EntityGrid from '../common/entity/EntityGrid';
@@ -22,6 +23,7 @@ type Props = {
 };
 export default function FightForm({ formTitle, update, fight }: Props) {
   const { entities: characters } = useReadAllCharacters();
+  const { updateByPropertyName } = useStats(update);
   return (
     <div className='flex w-full flex-1 flex-col gap-8'>
       <EntityTitle>{formTitle}</EntityTitle>
@@ -37,6 +39,7 @@ export default function FightForm({ formTitle, update, fight }: Props) {
         update={(value: string) => update('description', value)}
       />
       <EntityInputGroupNumber
+        onClick={updateByPropertyName}
         propertyName='times'
         propertyValue={fight.times}
         maxDots={10}

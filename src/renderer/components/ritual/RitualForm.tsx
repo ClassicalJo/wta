@@ -29,7 +29,7 @@ export default function RitualForm({ formTitle, update, ritual }: Props) {
         propertyValue={ritual.name}
         update={(value: string) => update('name', value)}
       />
-      <EntityInputGroupNumber<Ritual>
+      <EntityInputGroupNumber
         onClick={updateByPropertyName}
         propertyName='level'
         propertyValue={ritual.level}
