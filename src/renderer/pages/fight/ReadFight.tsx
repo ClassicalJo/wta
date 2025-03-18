@@ -9,6 +9,8 @@ import FightForm from '@/renderer/components/fight/FightForm';
 import { useFight } from '@/renderer/hooks/fight/useFight';
 import { useSimulator } from '@/renderer/hooks/fight/useSimulator';
 
+import FightDialog from './FightDialog';
+
 export default function ReadFight() {
   const params = useParams<'fightId'>();
   const {
@@ -25,7 +27,7 @@ export default function ReadFight() {
     updateEntity({ [propertyName]: propertyValue });
   };
 
-  const { beginFight } = useSimulator();
+  const { beginFight, isLoading, completedWorkers } = useSimulator();
   return (
     <div className='mt-8 flex flex-1 flex-col gap-8 p-8'>
       <FightForm
@@ -34,7 +36,10 @@ export default function ReadFight() {
         update={updateFight}
       />
 
-      <EntityFormSubmit onClick={() => beginFight(entity.id)}>
+      <EntityFormSubmit
+        disabled={isLoading}
+        onClick={() => beginFight(entity.id)}
+      >
         Begin simulation
       </EntityFormSubmit>
 
@@ -43,6 +48,11 @@ export default function ReadFight() {
         showConfirmation={confirmDelete}
         deleteEntity={deleteEntity}
         cancelDelete={cancelDeleteEntity}
+      />
+      <FightDialog
+        isLoading={isLoading}
+        progress={completedWorkers}
+        maxProgress={entity.times}
       />
     </div>
   );

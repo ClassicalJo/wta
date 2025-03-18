@@ -17,9 +17,17 @@ export class FightBeginUseCase implements IUseCase {
     );
   }
 
+  private sendFightUpdate(total: number) {
+    this.messageService.sendMessage(MainMessages.FIGHT_WORKER_RESPONSE, total);
+  }
+
   public async execute(id: number): Promise<void> {
     const fightEntity = await this.fightRepository.readOne(id);
-    const data = await processQueue(fightEntity.times, fightEntity);
+    const data = await processQueue(
+      fightEntity.times,
+      fightEntity,
+      this.sendFightUpdate.bind(this),
+    );
 
     this.messageService.sendMessage(MainMessages.FIGHT_BEGIN_RESPONSE, data);
   }
