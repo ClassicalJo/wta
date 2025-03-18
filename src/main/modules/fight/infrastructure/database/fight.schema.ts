@@ -34,7 +34,7 @@ export const FightSchema = new EntitySchema<Fight>({
     },
     times: {
       type: Number,
-      default: 0,
+      default: 1,
       nullable: true,
     },
   }),
