@@ -145,7 +145,7 @@ export default function CharacterForm({ formTitle, update, character }: Props) {
             <EntitySubtitle>Physical</EntitySubtitle>
             {Object.keys(physicalAttributes).map(
               (key: keyof IPhysicalAttributes) => (
-                <EntityInputGroupNumber<Character>
+                <EntityInputGroupNumber
                   key={key}
                   propertyName={key}
                   propertyValue={physicalAttributes[key]}
@@ -157,7 +157,7 @@ export default function CharacterForm({ formTitle, update, character }: Props) {
             <EntitySubtitle>Social</EntitySubtitle>
             {Object.keys(socialAttributes).map(
               (key: keyof ISocialAttributes) => (
-                <EntityInputGroupNumber<Character>
+                <EntityInputGroupNumber
                   key={key}
                   propertyName={key}
                   propertyValue={socialAttributes[key]}
@@ -169,7 +169,7 @@ export default function CharacterForm({ formTitle, update, character }: Props) {
             <EntitySubtitle>Mental</EntitySubtitle>
             {Object.keys(mentalAttributes).map(
               (key: keyof IMentalAttributes) => (
-                <EntityInputGroupNumber<Character>
+                <EntityInputGroupNumber
                   key={key}
                   propertyName={key}
                   propertyValue={mentalAttributes[key]}
@@ -185,7 +185,7 @@ export default function CharacterForm({ formTitle, update, character }: Props) {
           <EntityAttributeColumn>
             <EntitySubtitle>Talents</EntitySubtitle>
             {Object.keys(talents).map((key: keyof ITalents) => (
-              <EntityInputGroupNumber<Character>
+              <EntityInputGroupNumber
                 key={key}
                 propertyName={key}
                 propertyValue={talents[key]}
@@ -195,7 +195,7 @@ export default function CharacterForm({ formTitle, update, character }: Props) {
           <EntityAttributeColumn>
             <EntitySubtitle>Skills</EntitySubtitle>
             {Object.keys(skills).map((key: keyof ISkills) => (
-              <EntityInputGroupNumber<Character>
+              <EntityInputGroupNumber
                 key={key}
                 propertyName={key}
                 propertyValue={skills[key]}
@@ -205,7 +205,7 @@ export default function CharacterForm({ formTitle, update, character }: Props) {
           <EntityAttributeColumn>
             <EntitySubtitle>Knowledges</EntitySubtitle>
             {Object.keys(knowledges).map((key: keyof IKnowledges) => (
-              <EntityInputGroupNumber<Character>
+              <EntityInputGroupNumber
                 key={key}
                 propertyName={key}
                 propertyValue={knowledges[key]}
@@ -221,7 +221,7 @@ export default function CharacterForm({ formTitle, update, character }: Props) {
             <EntityAttributeColumn>
               <EntitySubtitle>Renown</EntitySubtitle>
               {Object.keys(renown).map((key: keyof IRenown) => (
-                <EntityInputGroupNumber<Character>
+                <EntityInputGroupNumber
                   key={key}
                   maxDots={10}
                   propertyName={key}
@@ -232,7 +232,7 @@ export default function CharacterForm({ formTitle, update, character }: Props) {
             <EntityAttributeColumn>
               <EntitySubtitle>Self</EntitySubtitle>
               {Object.keys(self).map((key: keyof ISelf) => (
-                <EntityInputGroupNumber<Character>
+                <EntityInputGroupNumber
                   key={key}
                   maxDots={10}
                   propertyName={key}

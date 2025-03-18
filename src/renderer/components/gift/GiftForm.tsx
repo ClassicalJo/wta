@@ -26,7 +26,7 @@ export default function GiftForm({ formTitle, update, gift }: Props) {
         propertyValue={gift.name}
         update={(e: string) => update('name', e)}
       />
-      <EntityInputGroupNumber<Gift>
+      <EntityInputGroupNumber
         onClick={updateByPropertyName}
         propertyName='level'
         propertyValue={gift.level}

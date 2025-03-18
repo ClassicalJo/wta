@@ -9,17 +9,18 @@ type Props = {
   propertyName: string;
   propertyValue: number;
   maxDots?: number;
+  onClick?: (e: React.MouseEvent<HTMLElement>) => void;
 };
 
 export default function EntityInputGroupNumber({
   propertyName,
   propertyValue,
   maxDots = 5,
-  ...rest
+  onClick,
 }: Props) {
   return (
     <div
-      {...rest}
+      onClick={onClick}
       className='flex flex-col gap-2'
       data-testid={`entity-input-group-number-${propertyName}`}
     >
