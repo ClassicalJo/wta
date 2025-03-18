@@ -92,4 +92,5 @@ out/
 
 #Databases
 wta.db
-resources/wta.db
+wta.dev.db
+data/tests

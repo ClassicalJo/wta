@@ -4,11 +4,13 @@ import { Director } from '../director/director.domain';
 import { logger } from '../director/logger.domain';
 import { validateFight } from './validate-fight.task';
 
-// Example worker script (worker.ts)
 if (!isMainThread) {
-  const fight = validateFight(workerData);
-  if (!fight) {
-    parentPort.postMessage('error');
+  const [fight, error] = validateFight(workerData);
+  if (error) {
+    Object.values(error).forEach((value) => {
+      logger.log(value);
+    });
+    parentPort.postMessage(logger.logs);
   } else {
     logger.log('Starting fight!');
     logger.log('///////////////');

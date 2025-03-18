@@ -9,10 +9,14 @@
   "main": ".vite/build/main.js",
   "scripts": {
     "start": "electron-forge start",
+    "start:dev": "npm run prepackage:dev && electron-forge start",
+    "start:prod": "npm run prepackage:prod && electron-forge start",
+    "start:test": "npm run prepackage:test && electron-forge start",
+    "prepackage:dev": "cross-env ENV_FILE=.env.development ts-node data/scripts/copy-env.ts",
     "prepackage:test": "cross-env ENV_FILE=.env.test ts-node data/scripts/copy-env.ts",
     "package:test": "electron-forge package",
-    "prepackage": "cross-env ENV_FILE=.env ts-node data/scripts/copy-env.ts",
-    "package": "electron-forge package",
+    "prepackage:prod": "cross-env ENV_FILE=.env.production ts-node data/scripts/copy-env.ts",
+    "package:prod": "electron-forge package",
     "format": "prettier --write \"src/**/*.{ts,tsx}\"",
     "rebuild": "electron-rebuild -f -w sqlite3",
     "make": "electron-forge make",
@@ -21,7 +25,7 @@
     "lint": "eslint --fix --max-warnings=0 --ext .ts,.tsx .",
     "wdio": "wdio run ./wdio.conf.ts",
     "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli",
-    "migration:generate": "cross-var npm run typeorm -- migration:generate -d ./src/main/config/orm.config.ts -o ./data/migrations/$npm_package_name"
+    "migration:generate": "cross-env NODE_ENV=development cross-var npm run typeorm -- migration:generate -d ./src/main/config/orm.config.ts -o ./resources/data/migrations/$npm_package_name"
   },
   "devDependencies": {
     "@electron-forge/cli": "^7.6.0",

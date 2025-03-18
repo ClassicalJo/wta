@@ -1,24 +1,18 @@
 import { Fight } from '../fight.entity';
 
-export function validateFight(data: Record<string, unknown>): Fight | null {
+export function validateFight(
+  data: Record<string, unknown>,
+): [Fight | null, string[] | null] {
+  const response: string[] = [];
   if (data == null || typeof data !== 'object') {
-    return null;
+    response.push('Data must be an object.');
   }
-
   if (
     'name' in data &&
     data['name'] !== undefined &&
     typeof data['name'] !== 'string'
   ) {
-    return null;
-  }
-
-  if (
-    'description' in data &&
-    data['description'] !== undefined &&
-    typeof data['description'] !== 'string'
-  ) {
-    return null;
+    response.push('Name must have at least one character.');
   }
 
   if (
@@ -26,7 +20,16 @@ export function validateFight(data: Record<string, unknown>): Fight | null {
     data['groupA'] !== undefined &&
     !Array.isArray(data['groupA'])
   ) {
-    return null;
+    response.push('Group A must be an array.');
+  }
+
+  if (
+    'groupA' in data &&
+    data['groupA'] !== undefined &&
+    Array.isArray(data['groupA']) &&
+    data['groupA'].length < 1
+  ) {
+    response.push('Group A must have at least one character.');
   }
 
   if (
@@ -34,7 +37,16 @@ export function validateFight(data: Record<string, unknown>): Fight | null {
     data['groupB'] !== undefined &&
     !Array.isArray(data['groupB'])
   ) {
-    return null;
+    response.push('Group B must be an array.');
+  }
+
+  if (
+    'groupB' in data &&
+    data['groupB'] !== undefined &&
+    Array.isArray(data['groupB']) &&
+    data['groupB'].length < 1
+  ) {
+    response.push('Group B must have at least one character.');
   }
 
   if (
@@ -42,8 +54,12 @@ export function validateFight(data: Record<string, unknown>): Fight | null {
     data['times'] !== undefined &&
     typeof data['times'] !== 'number'
   ) {
-    return null;
+    response.push('Times must be a number.');
   }
 
-  return data as Fight;
+  if (response.length > 0) {
+    return [null, response];
+  } else {
+    return [data as Fight, null];
+  }
 }

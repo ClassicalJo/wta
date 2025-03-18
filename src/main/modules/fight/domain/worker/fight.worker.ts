@@ -12,7 +12,7 @@ export function createWorker(scriptPath: string, workerData: unknown = {}) {
         'tsconfig-paths/register',
       ],
       env: {
-        TS_NODE_PROJECT: path.resolve(__dirname, '../../tsconfig.json'), // Set a specific tsconfig
+        TS_NODE_PROJECT: path.resolve(__dirname, '../../tsconfig.json'),
       },
     });
 

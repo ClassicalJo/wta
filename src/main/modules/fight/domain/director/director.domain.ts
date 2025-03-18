@@ -31,14 +31,9 @@ export class Director {
     let currentUnit: Unit;
     let target: Unit;
 
-    while (!victory) {
+    while (!victory && this.round < 10) {
       this.round++;
       logger.log('This is round ' + this.round);
-
-      if (this.round > 10) {
-        logger.log('Round limit reached, game over!');
-        victory = true;
-      }
 
       this.turnOrder.reset();
 
@@ -82,7 +77,11 @@ export class Director {
         }
       }
     }
-    logger.log('Team ' + winner.group + ' wins!');
+    if (this.round > 9) {
+      logger.log('Round limit reached, the match is a tie!');
+    } else {
+      logger.log('Team ' + winner?.group + ' wins!');
+    }
   }
 
   public getTarget(unitGroup: GroupName): Unit | null {
