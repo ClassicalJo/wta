@@ -1,8 +1,13 @@
+import { config } from 'dotenv';
 import path from 'path';
 import { defineConfig } from 'vite';
 
-// https://vitejs.dev/config
+config({ path: 'resources/data/.env' });
+
 export default defineConfig({
+  define: {
+    'process.env.APP_MODE': JSON.stringify(process.env.APP_MODE),
+  },
   resolve: {
     alias: {
       '@/main': path.resolve(__dirname, './src/main'),
