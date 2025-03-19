@@ -1,5 +1,3 @@
-const { MigrationInterface, QueryRunner } = require("typeorm");
-
 module.exports = class Wta1742249720106 {
     name = 'Wta1742249720106'
 

@@ -8,9 +8,9 @@ import { ENVIRONMENT } from './environment.enum';
 
 const isDevelopment = process.env.NODE_ENV === 'development';
 
-const dataPath = isDevelopment
-  ? 'resources/data'
-  : path.join(process.resourcesPath, 'resources', 'data');
+const resourcesPath = isDevelopment
+  ? 'resources'
+  : path.join(process.resourcesPath, 'resources');
 
 const testId = `test-${Date.now()}-${Math.random().toString(36).slice(0, 8)}.db`;
 const testPath = isDevelopment
@@ -30,12 +30,12 @@ const DEVELOPMENT: DataSourceOptions = {
 const PRODUCTION: DataSourceOptions = {
   type: 'sqlite',
   namingStrategy: new SnakeNamingStrategy(),
-  database: 'wta.db',
+  database: path.join(resourcesPath, 'wta.db'),
   synchronize: false,
-  logging: ['query'],
+  logging: false,
   subscribers: [],
   entities,
-  migrations: [path.join(dataPath, 'migrations/*.js')],
+  migrations: [path.join(resourcesPath, 'data', 'migrations/*.js')],
 };
 
 const TESTING: DataSourceOptions = {
