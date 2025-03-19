@@ -7,11 +7,11 @@ export class ReactToastifyAdapter
 {
   success(message: string, config?: ToastOptions) {
     toast.dismiss();
-    toast.success(message, { position: 'top-right', ...config });
+    // toast.success(message, { position: 'top-right', ...config });
   }
 
   error(message: string, config?: ToastOptions) {
     toast.dismiss();
-    toast.error(message, { position: 'top-right', ...config });
+    // toast.error(message, { position: 'top-right', ...config });
   }
 }
