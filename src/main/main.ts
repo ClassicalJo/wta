@@ -1,4 +1,4 @@
-import { BrowserWindow, app } from 'electron';
+import { BrowserWindow, app, screen } from 'electron';
 import started from 'electron-squirrel-startup';
 import path from 'path';
 
@@ -16,8 +16,13 @@ const createWindow = () => {
     height: 600,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
+      zoomFactor: 1.0 / screen.getPrimaryDisplay().scaleFactor,
     },
   });
+
+  app.commandLine.appendSwitch('high-dpi-support', '1');
+  app.commandLine.appendSwitch('force-device-scale-factor', '1');
+  mainWindow.maximize();
 
   // and load the index.html of the app.
   if (MAIN_WINDOW_VITE_DEV_SERVER_URL) {
@@ -29,9 +34,6 @@ const createWindow = () => {
   }
 
   new AppModule(mainWindow.webContents);
-
-  // Open the DevTools.
-  mainWindow.webContents.openDevTools();
 };
 
 // This method will be called when Electron has finished
