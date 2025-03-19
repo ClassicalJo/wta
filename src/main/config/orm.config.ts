@@ -30,7 +30,7 @@ const DEVELOPMENT: DataSourceOptions = {
 const PRODUCTION: DataSourceOptions = {
   type: 'sqlite',
   namingStrategy: new SnakeNamingStrategy(),
-  database: path.join(resourcesPath, 'wta.db'),
+  database: 'wta.db',
   synchronize: false,
   logging: false,
   subscribers: [],
