@@ -59,7 +59,16 @@ export const config: WebdriverIO.Config = {
       // see https://webdriver.io/docs/desktop-testing/electron/configuration/#service-options
       'wdio:electronServiceOptions': {
         // custom application args
-        appArgs: ["--remote-debugging-pipe", "--headless", "--no-sandbox", "--disable-dev-shm-usage", "--disable-browser-side-navigation", "--disable-gpu", "start-maximized", "enable-automation"],
+        appArgs: [
+          '--remote-debugging-pipe',
+          '--headless',
+          '--no-sandbox',
+          '--disable-dev-shm-usage',
+          '--disable-browser-side-navigation',
+          '--disable-gpu',
+          'start-maximized',
+          'enable-automation',
+        ],
       },
     },
   ],
