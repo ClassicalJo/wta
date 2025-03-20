@@ -1,0 +1,2 @@
+npm run package:test
+npx wdio wdio.conf.ts -- $@
