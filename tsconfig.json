@@ -22,5 +22,5 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true
   },
-  "include": ["src", "src/custom.d.ts", "test"]
+  "include": ["src", "src/custom.d.ts", "test", "vite-env.d.ts"]
 }
