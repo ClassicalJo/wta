@@ -2,6 +2,8 @@ import { BrowserWindow, app, screen } from 'electron';
 import started from 'electron-squirrel-startup';
 import path from 'path';
 
+import { environment } from './config/environment.config';
+import { ENVIRONMENT } from './config/environment.enum';
 import { AppModule } from './modules/app.module';
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
@@ -10,13 +12,18 @@ if (started) {
 }
 
 const createWindow = () => {
+  const zoomFactor =
+    environment === ENVIRONMENT.TESTING
+      ? 1.0
+      : screen.getPrimaryDisplay().scaleFactor;
+
   // Create the browser window.
   const mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
-      zoomFactor: 1.0 / screen.getPrimaryDisplay().scaleFactor,
+      zoomFactor,
     },
   });
 
