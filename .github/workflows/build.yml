@@ -3,8 +3,6 @@ env:
   app-name: wta-win32-x64
 on:
   push:
-    branches:
-      - main
     tags:
       - 'v*'
 jobs:
@@ -26,8 +24,8 @@ jobs:
         run: npm run package:prod
       - name: Zip application
         run: |
-          cd out/{{ env.app-name }}
-          7z a ../../{{ env.app-name }}.zip .\*
+          cd out/$env:app-name
+          7z a ../../$env:app-name.zip .\*
       - uses: ncipollo/release-action@v1
         with:
           artifacts: '{{ env.app-name }}.zip'
