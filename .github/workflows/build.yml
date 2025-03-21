@@ -1,6 +1,4 @@
 name: 🪟 Build the application for Windows
-env:
-  app-name: wta-win32-x64
 on:
   push:
     tags:
@@ -24,8 +22,8 @@ jobs:
         run: npm run package:prod
       - name: Zip application
         run: |
-          cd out/$env:app-name
-          7z a ../../$env:app-name.zip .\*
+          cd out/wta-win32-x64
+          7z a ../../wta-win32-x64.zip .\*
       - uses: ncipollo/release-action@v1
         with:
-          artifacts: '{{ env.app-name }}.zip'
+          artifacts: 'wta-win32-x64.zip'
