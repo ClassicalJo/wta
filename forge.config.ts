@@ -73,6 +73,23 @@ const config: ForgeConfig = {
         const newPckgJson = path.join(buildPath, '_package.json');
 
         fs.renameSync(oldPckgJson, newPckgJson);
+        const workerPath = path.resolve(
+          buildPath,
+          '..',
+          'resources',
+          'data',
+          'worker.js',
+        );
+        const npmRunWorker = spawn('node', [
+          '--experimental-strip-types',
+          'data/scripts/copy-worker.ts',
+          workerPath,
+        ]);
+
+        npmRunWorker.on('error', (error: unknown) => {
+          console.log(error);
+          reject(error);
+        });
 
         const npmInstall = spawn('npm', commands, {
           cwd: buildPath,

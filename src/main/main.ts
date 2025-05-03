@@ -15,7 +15,7 @@ const createWindow = () => {
   const zoomFactor =
     environment === ENVIRONMENT.TESTING
       ? 1.0
-      : screen.getPrimaryDisplay().scaleFactor;
+      : 1.0 / screen.getPrimaryDisplay().scaleFactor;
 
   // Create the browser window.
   const mainWindow = new BrowserWindow({
@@ -23,7 +23,7 @@ const createWindow = () => {
     height: 600,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
-      zoomFactor: 1.0 / screen.getPrimaryDisplay().scaleFactor,
+      zoomFactor,
     },
   });
 

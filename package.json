@@ -2,7 +2,7 @@
   "name": "wta",
   "productName": "wta",
   "engines": {
-    "node": ">=20.18.1"
+    "node": ">=23.11.0"
   },
   "version": "1.0.0",
   "description": "Werewolf the Apocalypse Battle Simulator",
